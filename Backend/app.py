@@ -1,5 +1,5 @@
 from os import name
-from flask import Flask, request
+from flask import Flask
 from flask_restful import Api
 from apispec import APISpec
 from apispec.ext.marshmallow import MarshmallowPlugin
