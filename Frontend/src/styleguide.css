@@ -39,6 +39,14 @@
   font-weight: 600;
 }
 
+.montserrat-semi-bold-white-28px {
+  color: var(--white);
+  font-family: var(--font-family-montserrat);
+  font-size: var(--font-size-xxl);
+  font-style: normal;
+  font-weight: 600;
+}
+
 .montserrat-normal-black-25px {
   color: var(--black);
   font-family: var(--font-family-montserrat);

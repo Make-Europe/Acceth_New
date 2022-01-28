@@ -1,6 +1,8 @@
 import "./App.css";
 import React from "react";
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserView, MobileView } from 'react-device-detect';
+
 import Landing from "./components/Landing";
 import LandingMobile from "./components/LandingMobile";
 
@@ -14,10 +16,12 @@ function App() {
     <Router>
       <Switch>
         <Route path="/:path(|landing)">
-          <Landing {...landingData} />
-        </Route>
-        <Route path="/landing-mobile">
-          <LandingMobile {...landingMobileData} />
+          <BrowserView>
+            <Landing {...landingData} />
+          </BrowserView>
+          <MobileView>
+            <LandingMobile {...landingMobileData} />
+          </MobileView>
         </Route>
       </Switch>
     </Router>
@@ -42,14 +46,10 @@ const landingData = {
 
 const landingMobileData = {
     banner_Text: "Test the Project NOW (click here)",
-    heart: "/img/heart@1x.png",
-    logo: "/img/logo@1x.png",
+    logo: logo,
     reclaimingCulture: <>Reclaiming<br />Culture</>,
     about_Text: "Who we are",
-    pfad5: "/img/pfad-5@1x.png",
-    pfad6: "/img/pfad-6@1x.png",
-    pfad7: "/img/pfad-7@1x.png",
-    pfad8: "/img/pfad-8@1x.png",
+    pfad5: about_icon,
     abouttext_Text: "Developing software Made in Germany since 2015, the Make Europe GmbH is among the leading pioneers in the fields DLT, Blockchain, EVM, Metaverse-Technology, Web3 as well as Online Payments and Online Brokerage.",
     pfad4: "/img/pfad-4@1x.png",
     project_Text: "The Project",
