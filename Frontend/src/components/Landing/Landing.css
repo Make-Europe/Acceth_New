@@ -7,7 +7,7 @@
   width: 1280px;
 }
 
-.overlap-group4 {
+.overlap-group-logo {
   height: 860px;
   position: relative;
   width: 1280px;
@@ -26,7 +26,7 @@
   top: 0;
 }
 
-.banner_-text {
+.banner-text {
   color: var(--white);
   font-family: var(--font-family-montserrat);
   font-size: var(--font-size-xl);
@@ -39,7 +39,7 @@
   white-space: nowrap;
 }
 
-.overlap-group {
+.overlap-group-image {
   height: 827px;
   left: 0;
   position: absolute;
@@ -47,7 +47,7 @@
   width: 1280px;
 }
 
-.background_-image {
+.background-image {
   background-color: var(--white);
   height: 800px;
   left: 0;
@@ -71,7 +71,7 @@
   width: 1280px;
 }
 
-.overlap-group3 {
+.overlap-group-content {
   height: 1278px;
   left: 0;
   position: absolute;
@@ -92,7 +92,7 @@
   top: 0;
 }
 
-.about_-text {
+.about-titel {
   letter-spacing: 0;
   line-height: 50px;
   min-height: 63px;
@@ -111,37 +111,18 @@
   top: 0;
 }
 
-.about_-icon {
+.about-icon {
   display: flex;
-  height: 17px;
   margin-top: 74.76px;
-  width: 89px;
-}
-
-.ebene-1 {
-  align-items: flex-start;
-  display: flex;
-  flex: 1;
-  justify-content: flex-end;
-  min-width: 89.11px;
-}
-
-.pfad-container {
-  height: 19px;
-  margin-top: -1.0px;
-  position: relative;
   width: 91px;
-}
-
-.pfad-5 {
   height: 19px;
   left: 0;
   object-fit: cover;
-  position: absolute;
+  position: relative;
   top: 1px;
 }
 
-.overlap-group1 {
+.overlap-group-about {
   align-items: flex-end;
   background-color: var(--water-leaf);
   display: flex;
@@ -152,7 +133,7 @@
   padding: 228px 61.5px;
 }
 
-.about-text_-text {
+.about-text-text {
   height: 182px;
   letter-spacing: 0;
   line-height: 25px;
@@ -171,22 +152,17 @@
   top: 638px;
 }
 
-.project_-icon {
+.project-icon {
   display: flex;
   height: 43px;
   margin-left: -22px;
   margin-top: 5.04px;
   transform: rotate(90deg);
   width: 87px;
+  
 }
 
-.ebene-1-1 {
-  display: flex;
-  flex: 1;
-  width: 87.04px;
-}
-
-.pfad-4 {
+.project-icon-icon {
   flex: 1;
   margin-bottom: -22.7px;
   margin-left: 20.8px;
@@ -197,7 +173,7 @@
   width: 45.39px;
 }
 
-.project_-text {
+.project-titel {
   align-self: flex-end;
   letter-spacing: 0;
   line-height: 50px;
@@ -208,7 +184,7 @@
   white-space: nowrap;
 }
 
-.overlap-group5 {
+.overlap-group-project {
   height: 1210px;
   left: 0;
   position: absolute;
@@ -226,7 +202,7 @@
   width: 640px;
 }
 
-.project-text_-text {
+.project-text-text {
   flex: 1;
   letter-spacing: 0;
   line-height: 25px;
@@ -250,7 +226,7 @@
   width: 1280px;
 }
 
-.cta_-text1 {
+.cta-titel {
   align-self: flex-end;
   letter-spacing: 0;
   line-height: 35px;
@@ -260,7 +236,7 @@
   white-space: nowrap;
 }
 
-.cta_-button {
+.cta-button {
   background-color: var(--cerise);
   display: flex;
   height: 83px;
@@ -268,7 +244,7 @@
   width: 200px;
 }
 
-.cta_-button_-text {
+.cta-button-text {
   color: var(--white);
   flex: 1;
   font-family: var(--font-family-montserrat);
@@ -284,7 +260,7 @@
   width: 162px;
 }
 
-.cta_-container {
+.cta-container {
   height: 45px;
   margin-left: 3.0px;
   margin-top: 74px;
@@ -292,7 +268,7 @@
   width: 773px;
 }
 
-.cta_-text2 {
+.cta-text {
   left: 0;
   letter-spacing: 0;
   line-height: 35px;
@@ -301,7 +277,7 @@
   white-space: nowrap;
 }
 
-.cta_mail {
+.cta-mail {
   left: 268px;
   letter-spacing: 0;
   line-height: 35px;
