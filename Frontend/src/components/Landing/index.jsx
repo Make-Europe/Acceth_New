@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Landing.css";
 
 function Landing(props) {
@@ -21,9 +22,11 @@ function Landing(props) {
     <div className="container-center-horizontal">
       <div className="landing screen">
         <div className="overlap-group-logo">
-          <div className="banner">
-            <div className="banner-text">{banner_Text}</div>
-          </div>
+          <Link to="/selection">
+            <div className="banner">
+              <div className="banner-text">{banner_Text}</div>
+            </div>
+          </Link>
           <div className="overlap-group-image">
             <div className="background-image"></div>
             <img className="logo" src={logo} />
@@ -53,9 +56,11 @@ function Landing(props) {
             </div>
             <div className="cta">
               <div className="cta-titel montserrat-normal-black-35px">{cta_Text1}</div>
-              <div className="cta-button">
-                <div className="cta-button-text">{cta_Button_Text}</div>
-              </div>
+              <Link to="/selection">
+                <div className="cta-button">
+                  <div className="cta-button-text">{cta_Button_Text}</div>
+                </div>
+              </Link>
               <div className="cta-container montserrat-normal-black-35px">
                 <div className="cta-text">{cta_Text2}</div>
                 <div className="cta-mail">{cta_Mail}</div>

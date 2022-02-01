@@ -1,0 +1,46 @@
+.host-name {
+  background-color: var(--white);
+  display: flex;
+  flex: 1;
+  max-height: 64px;
+}
+
+.t-name_-placeholder {
+  background-color: transparent;
+  border: 0;
+  flex: 1;
+  letter-spacing: 0;
+  line-height: 30px;
+  margin-bottom: 11px;
+  margin-left: 20px;
+  margin-right: 18px;
+  margin-top: 14px;
+  padding: 0;
+  width: 785px;
+}
+
+.t-name_-placeholder::placeholder {
+  color: #a9bcc699;
+}
+
+.host-name.event-name,
+.host-name.street-name,
+.host-name.price {
+  margin-top: 20px;
+}
+
+.host-name.event,
+.host-name.event-2 {
+  margin-top: 20px;
+  max-height: 134px;
+}
+
+.host-name.event-2 .t-name_-placeholder,
+.host-name.event .t-name_-placeholder {
+  margin-bottom: 12px;
+}
+
+.host-name.capacity {
+  margin-top: 40px;
+}
+

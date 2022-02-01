@@ -1,0 +1,57 @@
+.createevent-generalinformation {
+  background-color: var(--gallery);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 800px;
+  min-width: 1280px;
+  width: 100%;
+}
+
+.page-titel_-general {
+  flex: 1;
+  letter-spacing: 0;
+  line-height: 40px;
+  margin-left: 435px;
+  margin-right: 433px;
+  margin-top: 54.5px;
+  max-height: 51px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.inputfields_-general {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-left: 229px;
+  margin-right: 228px;
+  margin-top: 66.5px;
+  max-height: 456px;
+  position: relative;
+}
+
+.next-button {
+  background-color: var(--cerise);
+  cursor: pointer;
+  display: flex;
+  flex: 1;
+  margin-left: 584px;
+  margin-right: 584px;
+  margin-top: 20px;
+  max-height: 77px;
+}
+
+.next-button_-text {
+  flex: 1;
+  letter-spacing: 0;
+  line-height: 30px;
+  margin-bottom: 14.5px;
+  margin-left: 20px;
+  margin-right: 18px;
+  margin-top: 23.5px;
+  text-align: center;
+  white-space: nowrap;
+  width: 74px;
+}
+

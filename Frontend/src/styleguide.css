@@ -1,5 +1,8 @@
 :root { 
   --black: #000000;
+  --dove-gray: #707070;
+  --gallery: #f0f0f0;
+  --tower-gray: #a9bcc6;
   --cerise: #d83d98;
   --firefly: #0a2535;
   --water-leaf: #a0fcdb;
@@ -69,4 +72,48 @@
   font-size: var(--font-size-s);
   font-style: normal;
   font-weight: 400;
+}
+
+.montserrat-medium-black-40px {
+  color: var(--black);
+  font-family: var(--font-family-montserrat);
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.montserrat-medium-white-30px {
+  color: var(--white);
+  font-family: var(--font-family-montserrat);
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.montserrat-medium-black-30px {
+  color: var(--black);
+  font-family: var(--font-family-montserrat);
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.montserrat-medium-white-40px {
+  color: var(--white);
+  font-family: var(--font-family-montserrat);
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.montserrat-medium-tower-gray-30px {
+  color: var(--tower-gray);
+  font-family: var(--font-family-montserrat);
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.border-1px-dove-gray {
+  border: 1px solid var(--dove-gray);
 }

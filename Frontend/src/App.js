@@ -5,6 +5,11 @@ import { BrowserView, MobileView } from 'react-device-detect';
 
 import Landing from "./components/Landing";
 import LandingMobile from "./components/LandingMobile";
+import Selection from "./components/Selection";
+import CreateEventGeneralInformation from "./components/CreateEventGeneralInformation"
+import CreateEventLocation from "./components/CreateEventLocation";
+import CreateEventDetails from "./components/CreateEventDetails";
+import CreateEventImage from "./components/CreateEventImage";
 
 import logo from "./static/img/logo.png"
 import about_icon from "./static/img/About_Icon.png"
@@ -22,6 +27,39 @@ function App() {
           <MobileView>
             <LandingMobile {...landingMobileData} />
           </MobileView>
+        </Route>
+        <Route path="/selection">
+          <Selection host_Text="I’m a" place="HOST" guest_Text="I’m a" guestbutton_Text="GUEST" />
+        </Route>
+        <Route path="/createevent-generalinformation">
+          <CreateEventGeneralInformation
+            pagetitel_General="General Information"
+            nextbutton_Text="Next"
+            hostName1Props={createEventGeneralInformationData.hostName1Props}
+            hostName2Props={createEventGeneralInformationData.hostName2Props}
+            hostName3Props={createEventGeneralInformationData.hostName3Props}
+            hostName4Props={createEventGeneralInformationData.hostName4Props}
+          />
+        </Route>
+        <Route path="/createevent-location">
+          <CreateEventLocation {...createEventLocationData} />
+        </Route>
+        <Route path="/createevent-details">
+          <CreateEventDetails {...createEventDetailsData} />
+        </Route>
+        <Route path="/createevent-image">
+          <CreateEventImage
+            pagetitel_Image="Image"
+            dropimage_Text={
+              <>
+                Drop image here
+                <br />
+                Or
+              </>
+            }
+            uploadbutton_Text="Upload"
+            donebutton_Text="DONE"
+          />
         </Route>
       </Switch>
     </Router>
@@ -60,3 +98,74 @@ const landingMobileData = {
     cta_Mail: "roman (ä) make-europe.com",
 };
 
+const hostName1Data = {
+  inputPlaceholder: "Host Name",
+};
+
+const hostName2Data = {
+  inputPlaceholder: "Event Name",
+  className: "event-name",
+};
+
+const hostName3Data = {
+  inputPlaceholder: "Event Description",
+  className: "event-2",
+};
+
+const hostName4Data = {
+  inputPlaceholder: "Event Lineup",
+  className: "event",
+};
+
+const createEventGeneralInformationData = {
+  hostName1Props: hostName1Data,
+  hostName2Props: hostName2Data,
+  hostName3Props: hostName3Data,
+  hostName4Props: hostName4Data,
+};
+
+const hostName5Data = {
+  inputPlaceholder: "Location Name",
+};
+
+const hostName6Data = {
+  inputPlaceholder: "Street",
+  className: "street-name",
+};
+
+const createEventLocationData = {
+  pagetitel_Location: "Location Information",
+  inputType1: "text",
+  inputPlaceholder1: "ZIP",
+  inputType2: "text",
+  inputPlaceholder2: "City",
+  nextbutton2_Text: "Next",
+  hostName1Props: hostName5Data,
+  hostName2Props: hostName6Data,
+};
+
+const hostName7Data = {
+  inputPlaceholder: "Event Date",
+};
+
+const hostName8Data = {
+  inputPlaceholder: "Capacity",
+  className: "capacity",
+};
+
+const hostName9Data = {
+  inputPlaceholder: "Price",
+  className: "price",
+};
+
+const createEventDetailsData = {
+  pagetitel_Detail: "Detail Information",
+  inputType1: "text",
+  inputPlaceholder1: "Start Time",
+  inputType2: "text",
+  inputPlaceholder2: "End Time",
+  nextbutton3_Text: "Next",
+  hostName1Props: hostName7Data,
+  hostName2Props: hostName8Data,
+  hostName3Props: hostName9Data,
+};
