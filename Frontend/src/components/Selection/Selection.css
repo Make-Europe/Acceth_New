@@ -1,0 +1,93 @@
+.selection {
+  background-color: var(--white);
+  display: flex;
+  height: 100vh;
+  justify-content: space-between;
+  min-height: 800px;
+  min-width: 1280px;
+  width: 100%;
+}
+
+.host {
+  align-items: center;
+  background-color: var(--water-leaf);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 25% 0;
+  width: 50%;
+}
+
+.host_-text {
+  letter-spacing: 0;
+  line-height: 40px;
+  margin-left: 2.0px;
+  min-height: 51px;
+  min-width: 100px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.host-button {
+  background-color: var(--cerise);
+  cursor: pointer;
+  display: flex;
+  height: 77px;
+  margin-top: 22px;
+  width: 126px;
+}
+
+.place {
+  flex: 1;
+  letter-spacing: 0;
+  line-height: 30px;
+  margin-bottom: 14.5px;
+  margin-left: 20px;
+  margin-right: 18px;
+  margin-top: 23.5px;
+  text-align: center;
+  white-space: nowrap;
+  width: 88px;
+}
+
+.guest {
+  align-items: center;
+  background-color: var(--cerise);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 25% 0;
+  width: 50%;
+}
+
+.guest_-text {
+  letter-spacing: 0;
+  line-height: 40px;
+  margin-left: 2.0px;
+  min-height: 51px;
+  min-width: 100px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.guest-button {
+  background-color: var(--water-leaf);
+  display: flex;
+  height: 77px;
+  margin-top: 22px;
+  width: 142px;
+}
+
+.guest-button_-text {
+  flex: 1;
+  letter-spacing: 0;
+  line-height: 30px;
+  margin-bottom: 14.5px;
+  margin-left: 20px;
+  margin-right: 18px;
+  margin-top: 23.5px;
+  text-align: center;
+  white-space: nowrap;
+  width: 104px;
+}
+

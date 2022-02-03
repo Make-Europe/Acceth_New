@@ -1,0 +1,267 @@
+.landing-mobile {
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 2475px;
+  min-width: 360px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.banner_mobile {
+  align-items: flex-end;
+  background-color: var(--cerise);
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  max-height: 60px;
+  min-width: 100%;
+  padding: 12px 10px;
+}
+
+.banner_-text_mobile {
+  color: var(--white);
+  font-family: var(--font-family-montserrat);
+  font-size: var(--font-size-l);
+  font-weight: 500;
+  line-height: 20px;
+  min-height: 26px;
+  min-width: 338px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.image_mobile {
+  align-items: flex-start;
+  justify-content: center;
+  background-color: var(--white);
+  display: flex;
+  flex: 1;
+  margin-left: 0;
+  margin-right: 0;
+  max-height: 694px;
+  min-width: 100%;
+  padding: 129px 0;
+}
+
+.logo_mobile {
+  height: 360px;
+  width: 380px;
+}
+
+.about_mobile {
+  align-items: flex-start;
+  justify-content: center;
+  background-color: var(--firefly);
+  display: flex;
+  flex: 1;
+  max-height: 360px;
+  min-width: 100%;
+  padding: 52.1px 35.7px;
+}
+
+.about_-icon_mobile {
+  display: flex;
+  height: 10px;
+  width: 50px;
+}
+
+.ebene-1_mobile {
+  align-items: flex-start;
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  min-width: 50.12px;
+}
+
+.pfad-container_mobile {
+  height: 12px;
+  margin-top: -1.0px;
+  position: relative;
+  width: 52px;
+}
+
+.pfad-5_mobile {
+  height: 11px;
+  left: 0;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+}
+
+.about_-text_mobile {
+  align-self: center;
+  position:absolute;
+  letter-spacing: 0;
+  line-height: 28px;
+  margin-top: 8.0px;
+  min-height: 36px;
+  min-width: 176px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.about-text_mobile {
+  align-items: center;
+  background-color: var(--water-leaf);
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  max-height: 360px;
+  min-width: 100%;
+  padding: 110.4px 33.7px;
+}
+
+.about-text_-text_mobile {
+  align-self: center;
+  justify-self: center;
+  flex: 1;
+  letter-spacing: 0;
+  line-height: 15px;
+  margin-bottom: 72px;
+  margin-left: 37px;
+  margin-right: 34px;
+  margin-top: 75px;
+  width: 289px;
+}
+
+.project_mobile {
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cerise);
+  display: flex;
+  flex: 1;
+  max-height: 360px;
+  min-width: 100%;
+  padding: 158px 0;
+}
+
+.project_-icon_mobile {
+  display: flex;
+  height: 24px;
+  margin-left: -12px;
+  margin-top: 2.84px;
+  transform: rotate(90deg);
+  width: 49px;
+}
+
+.ebene-1-1_mobile {
+  display: flex;
+  flex: 1;
+  width: 48.96px;
+}
+
+.pfad-4_mobile {
+  flex: 1;
+  margin-bottom: -13.2px;
+  margin-left: 11.3px;
+  margin-right: 11.3px;
+  margin-top: -12.7px;
+  object-fit: cover;
+  transform: rotate(-90deg);
+  width: 26.31px;
+}
+
+.project_-text_mobile {
+  align-self: flex-end;
+  position: absolute;
+  letter-spacing: 0;
+  line-height: 28px;
+  min-height: 36px;
+  min-width: 166px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.project-text_mobile {
+  background-color: var(--water-leaf);
+  display: flex;
+  flex: 1;
+  max-height: 360px;
+}
+
+.project-text_-text_mobile {
+  align-self: center;
+  justify-self: center;
+  flex: 1;
+  letter-spacing: 0;
+  line-height: 15px;
+  margin-bottom: 72px;
+  margin-left: 37px;
+  margin-right: 34px;
+  margin-top: 75px;
+  width: 289px;
+}
+
+.cta_mobile {
+  align-items: center;
+  background-color: var(--white);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  max-height: 234px;
+  min-height: 234px;
+  padding: 35px 47px;
+}
+
+.cta_-text1_mobile {
+  align-self: center;
+  letter-spacing: 0;
+  line-height: 15px;
+  min-height: 40px;
+  min-width: 264px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.cta_-button_mobile {
+  background-color: var(--cerise);
+  display: flex;
+  height: 39px;
+  margin-left: 1.0px;
+  margin-top: 23px;
+  width: 89px;
+}
+
+.cta_-button_-text_mobile {
+  color: var(--water-leaf);
+  flex: 1;
+  font-family: var(--font-family-montserrat);
+  font-size: var(--font-size-m);
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 15px;
+  margin-bottom: 6px;
+  margin-left: 10px;
+  margin-right: 8px;
+  margin-top: 12px;
+  white-space: nowrap;
+  width: 71px;
+}
+
+.cta_-container_mobile {
+  align-items: flex-start;
+  display: flex;
+  height: 13px;
+  margin-right: 10.0px;
+  margin-top: 29px;
+  min-width: 206px;
+}
+
+.cta_-text2_mobile {
+  letter-spacing: 0;
+  line-height: 9px;
+  min-height: 13px;
+  min-width: 71px;
+  white-space: nowrap;
+}
+
+.cta_mail_mobile {
+  letter-spacing: 0;
+  line-height: 9px;
+  margin-left: 4px;
+  min-height: 13px;
+  white-space: nowrap;
+}
+

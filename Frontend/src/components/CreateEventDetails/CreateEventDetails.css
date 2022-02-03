@@ -1,0 +1,112 @@
+.createevent-details {
+  background-color: var(--gallery);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 800px;
+  min-width: 1280px;
+  width: 100%;
+}
+
+.page-titel_-detail {
+  flex: 1;
+  letter-spacing: 0;
+  line-height: 40px;
+  margin-left: 454px;
+  margin-right: 452px;
+  margin-top: 54.5px;
+  max-height: 51px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.inputfields_-details {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-left: 229px;
+  margin-right: 228px;
+  margin-top: 126.5px;
+  max-height: 336px;
+  position: relative;
+}
+
+.gruppe2 {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  margin-top: 20px;
+  max-height: 64px;
+}
+
+.start-time {
+  background-color: var(--white);
+  display: flex;
+  height: 64px;
+  width: 401px;
+}
+
+.start-time_-placeholder {
+  background-color: transparent;
+  border: 0;
+  flex: 1;
+  letter-spacing: 0;
+  line-height: 30px;
+  margin-bottom: 11px;
+  margin-left: 20px;
+  margin-right: 18px;
+  margin-top: 14px;
+  padding: 0;
+  width: 363px;
+}
+
+.start-time_-placeholder::placeholder,
+.end-time_-placeholder::placeholder {
+  color: #a9bcc699;
+}
+
+.end-time {
+  background-color: var(--white);
+  display: flex;
+  height: 64px;
+  width: 402px;
+}
+
+.end-time_-placeholder {
+  background-color: transparent;
+  border: 0;
+  flex: 1;
+  letter-spacing: 0;
+  line-height: 30px;
+  margin-bottom: 11px;
+  margin-left: 20px;
+  margin-right: 18px;
+  margin-top: 14px;
+  padding: 0;
+  width: 364px;
+}
+
+.next-button3 {
+  background-color: var(--cerise);
+  cursor: pointer;
+  display: flex;
+  flex: 1;
+  margin-left: 584px;
+  margin-right: 584px;
+  margin-top: 80px;
+  max-height: 77px;
+}
+
+.next-button3_-text {
+  flex: 1;
+  letter-spacing: 0;
+  line-height: 30px;
+  margin-bottom: 14.5px;
+  margin-left: 20px;
+  margin-right: 18px;
+  margin-top: 23.5px;
+  text-align: center;
+  white-space: nowrap;
+  width: 74px;
+}
+
