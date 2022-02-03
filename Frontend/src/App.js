@@ -1,5 +1,6 @@
 import "./App.css";
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 import { BrowserView, MobileView } from 'react-device-detect';
 
@@ -17,6 +18,44 @@ import project_icon from "./static/img/Project_Icon.png"
 
 
 function App() {
+  const [hostName, setHostName] = useState('')
+  const [eventName, setEventName] = useState('')
+  const [eventDescription, setEventDescription] = useState('')
+  const [eventLineup, setEventLineup] = useState('')
+  const [eventLocation, setEventLocation] = useState('')
+  const [eventStreet, setEventStreet] = useState('')
+  const [eventZip, setEventZip] = useState('')
+  const [eventCity, setEventCity] = useState('')
+
+  const handleHostName = (childdata) => {
+    setHostName({childdata});
+  }
+  const handleEventName = (childdata) => {
+    setEventName({childdata});
+  }
+  const handleEventDescription = (childdata) => {
+    setEventDescription({childdata});
+  }
+  const handleEventLineup = (childdata) => {
+    setEventLineup({childdata});
+  }
+  const handleEventLocation = (childdata) => {
+    setEventLocation({childdata});
+  }
+  const handleEventStreet = (childdata) => {
+    setEventStreet({childdata});
+  }
+  const handleEventZip = (childdata) => {
+    setEventZip({childdata});
+  }
+  const handleEventCity = (childdata) => {
+    setEventCity({childdata});
+  }
+
+  useEffect(() => {
+    console.log(hostName.childdata + eventName.childdata + eventDescription.childdata + eventLineup.childdata + eventLocation.childdata + eventStreet.childdata + eventZip.childdata + eventCity.childdata)
+  }, [hostName, eventName, eventDescription, eventLineup, eventLocation, eventStreet, eventZip, eventCity])
+
   return (
     <Router>
       <Switch>
@@ -39,10 +78,20 @@ function App() {
             hostName2Props={createEventGeneralInformationData.hostName2Props}
             hostName3Props={createEventGeneralInformationData.hostName3Props}
             hostName4Props={createEventGeneralInformationData.hostName4Props}
+            handleHostName={handleHostName}
+            handleEventName={handleEventName}
+            handleEventDescription={handleEventDescription}
+            handleEventLineup={handleEventLineup}
           />
         </Route>
         <Route path="/createevent-location">
-          <CreateEventLocation {...createEventLocationData} />
+          <CreateEventLocation 
+          {...createEventLocationData}
+          handleEventLocation={handleEventLocation}
+          handleEventStreet={handleEventStreet}
+          handleEventZip={handleEventZip}
+          handleEventCity={handleEventCity}
+          />
         </Route>
         <Route path="/createevent-details">
           <CreateEventDetails {...createEventDetailsData} />
