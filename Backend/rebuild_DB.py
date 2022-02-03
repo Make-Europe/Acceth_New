@@ -1,7 +1,7 @@
 import os, requests, json, tqdm
 from config import db
 from termcolor import colored
-from models import User
+from models import User, Event, Host, Relation_EventHost, Relation_EventTicket, Relation_UserHost
 
 def RebuildDatabase():
     if os.path.exists('acceth.db'):

@@ -6,7 +6,7 @@ from apispec.ext.marshmallow import MarshmallowPlugin
 from flask_apispec.extension import FlaskApiSpec
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
-from services import UserService, UserListService
+from services import UserService, UserListService, HostService, EventService, HostListService, EventListService, Relation_UserHost_Service
 
 #*______________ App Setup ______________
 app = Flask(__name__)
@@ -39,8 +39,23 @@ docs = FlaskApiSpec(app)
 #*______________ Service Registration ______________
 api.add_resource(UserService, '/user/<user_id>')
 docs.register(UserService)
-api.add_resource(UserListService, '/user')
+api.add_resource(UserListService, '/list/user')
 docs.register(UserListService)
+
+api.add_resource(EventService, '/event')
+docs.register(EventService)
+api.add_resource(EventListService, '/list/event')
+docs.register(EventListService)
+
+api.add_resource(HostService, '/host')
+docs.register(HostService)
+api.add_resource(HostListService, '/list/host')
+docs.register(HostListService)
+
+
+api.add_resource(Relation_UserHost_Service, '/relation/userhost/<userhost_id>')
+docs.register(Relation_UserHost_Service)
+
 
 #*______________ Application Creation ______________
 if __name__ == '__main__':
