@@ -22,7 +22,7 @@ class Event(db.Model):
     description = db.Column(db.String())
     lineup = db.Column(db.String())
     capacity = db.Column(db.Integer)
-    image = db.Column(db.String(50))
+    image = db.Column(db.String())
     city = db.Column(db.String(50))
     street = db.Column(db.String(50))
     zipCode = db.Column(db.String(50))
