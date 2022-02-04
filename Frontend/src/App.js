@@ -73,14 +73,21 @@ function App() {
     setEventPrice({childdata});
   }
   const handleEventImage = (childdata) => {
-    setEventImage(URL.createObjectURL(childdata))
+    let reader = new FileReader()
+    reader.readAsDataURL(childdata)
+
+    reader.onload = () => {
+      setEventImage(reader.result)
+    }
+    
   }
   const handleSaveData = () => {
+    console.log(eventImage)
     saveEvent();
   }
 
   function saveEvent(){
-    fetch('/event/', {
+    fetch('/event/5', {
       method: "POST",
       headers: {
         'Content-type': 'application/json'
@@ -98,12 +105,15 @@ function App() {
         start: eventStartTime.childdata,
         end: eventEndTime.childdata,
         capacity: eventCapacity.childdata,
-        price: eventPrice.childdata
+        price: eventPrice.childdata,
+        image: eventImage
       })
     })
     .then((response) => response.json()
     )
     .then((result) => {
+      console.log(eventImage)
+      console.log(result)
     })
   }
   
