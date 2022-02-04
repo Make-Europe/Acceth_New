@@ -26,6 +26,12 @@ function App() {
   const [eventStreet, setEventStreet] = useState('')
   const [eventZip, setEventZip] = useState('')
   const [eventCity, setEventCity] = useState('')
+  const [eventDate, setEventDate] = useState('')
+  const [eventStartTime, setEventStartTime] = useState('')
+  const [eventEndTime, setEventEndTime] = useState('')
+  const [eventCapacity, setEventCapacity] = useState('')
+  const [eventPrice, setEventPrice] = useState('')
+  const [eventImage, setEventImage] = useState(null)
 
   const handleHostName = (childdata) => {
     setHostName({childdata});
@@ -51,10 +57,56 @@ function App() {
   const handleEventCity = (childdata) => {
     setEventCity({childdata});
   }
+  const handleEventDate = (childdata) => {
+    setEventDate({childdata});
+  }
+  const handleEventStartTime = (childdata) => {
+    setEventStartTime({childdata});
+  }
+  const handleEventEndTime = (childdata) => {
+    setEventEndTime({childdata});
+  }
+  const handleEventCapacity = (childdata) => {
+    setEventCapacity({childdata});
+  }
+  const handleEventPrice = (childdata) => {
+    setEventPrice({childdata});
+  }
+  const handleEventImage = (childdata) => {
+    setEventImage(URL.createObjectURL(childdata))
+  }
+  const handleSaveData = () => {
+    saveEvent();
+  }
 
-  useEffect(() => {
-    console.log(hostName.childdata + eventName.childdata + eventDescription.childdata + eventLineup.childdata + eventLocation.childdata + eventStreet.childdata + eventZip.childdata + eventCity.childdata)
-  }, [hostName, eventName, eventDescription, eventLineup, eventLocation, eventStreet, eventZip, eventCity])
+  function saveEvent(){
+    fetch('/event/', {
+      method: "POST",
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({ 
+        hostName: hostName.childdata,
+        name: eventName.childdata,
+        description: eventDescription.childdata,
+        lineup: eventLineup.childdata,
+        locationName: eventLocation.childdata,
+        street: eventStreet.childdata,
+        zipCode: eventZip.childdata,
+        city: eventCity.childdata,
+        date: eventDate.childdata,
+        start: eventStartTime.childdata,
+        end: eventEndTime.childdata,
+        capacity: eventCapacity.childdata,
+        price: eventPrice.childdata
+      })
+    })
+    .then((response) => response.json()
+    )
+    .then((result) => {
+    })
+  }
+  
 
   return (
     <Router>
@@ -82,19 +134,39 @@ function App() {
             handleEventName={handleEventName}
             handleEventDescription={handleEventDescription}
             handleEventLineup={handleEventLineup}
+            hostName={hostName}
+            eventName={eventName}
+            eventDescription={eventDescription}
+            eventLineup={eventLineup}
           />
         </Route>
         <Route path="/createevent-location">
           <CreateEventLocation 
-          {...createEventLocationData}
-          handleEventLocation={handleEventLocation}
-          handleEventStreet={handleEventStreet}
-          handleEventZip={handleEventZip}
-          handleEventCity={handleEventCity}
+            {...createEventLocationData}
+            handleEventLocation={handleEventLocation}
+            handleEventStreet={handleEventStreet}
+            handleEventZip={handleEventZip}
+            handleEventCity={handleEventCity}
+            eventLocation={eventLocation}
+            eventStreet={eventStreet}
+            eventZip={eventZip}
+            eventCity={eventCity}
           />
         </Route>
         <Route path="/createevent-details">
-          <CreateEventDetails {...createEventDetailsData} />
+          <CreateEventDetails 
+            {...createEventDetailsData} 
+            handleEventDate={handleEventDate}
+            handleEventStartTime={handleEventStartTime}
+            handleEventEndTime={handleEventEndTime}
+            handleEventCapacity={handleEventCapacity}
+            handleEventPrice={handleEventPrice}
+            eventDate={eventDate}
+            eventStartTime={eventStartTime}
+            eventEndTime={eventEndTime}
+            eventCapacity={eventCapacity}
+            eventPrice={eventPrice}
+            />
         </Route>
         <Route path="/createevent-image">
           <CreateEventImage
@@ -108,6 +180,9 @@ function App() {
             }
             uploadbutton_Text="Upload"
             donebutton_Text="DONE"
+            handleEventImage={handleEventImage}
+            eventImage={eventImage}
+            handleSaveData={handleSaveData}
           />
         </Route>
       </Switch>
