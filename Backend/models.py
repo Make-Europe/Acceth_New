@@ -25,9 +25,11 @@ class Event(db.Model):
     image = db.Column(db.String(50))
     city = db.Column(db.String(50))
     street = db.Column(db.String(50))
-    houseNumber = db.Column(db.String(50))
     zipCode = db.Column(db.String(50))
     price = db.Column(db.String(50))
+    hostName = db.Column(db.String(50))
+    locationName = db.Column(db.String(50))
+    date = db.Column(db.String(50))
 
 class Host(db.Model):
     id = db.Column(db.Integer, primary_key=True)
