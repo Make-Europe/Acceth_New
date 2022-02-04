@@ -6,7 +6,7 @@ from apispec.ext.marshmallow import MarshmallowPlugin
 from flask_apispec.extension import FlaskApiSpec
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
-from services import UserService, UserListService, HostService, EventService, HostListService, EventListService, Relation_UserHost_Service
+from services import Relation_EventHost_Service, Relation_EventTicket_Service, UserService, UserListService, HostService, EventService, HostListService, EventListService, Relation_UserHost_Service
 
 #*______________ App Setup ______________
 app = Flask(__name__)
@@ -42,12 +42,12 @@ docs.register(UserService)
 api.add_resource(UserListService, '/list/user')
 docs.register(UserListService)
 
-api.add_resource(EventService, '/event')
+api.add_resource(EventService, '/event/<event_id>')
 docs.register(EventService)
 api.add_resource(EventListService, '/list/event')
 docs.register(EventListService)
 
-api.add_resource(HostService, '/host')
+api.add_resource(HostService, '/host/<host_id>')
 docs.register(HostService)
 api.add_resource(HostListService, '/list/host')
 docs.register(HostListService)
@@ -56,6 +56,11 @@ docs.register(HostListService)
 api.add_resource(Relation_UserHost_Service, '/relation/userhost/<userhost_id>')
 docs.register(Relation_UserHost_Service)
 
+api.add_resource(Relation_EventHost_Service, '/relation/eventhost/<eventhost_id>')
+docs.register(Relation_EventHost_Service)
+
+api.add_resource(Relation_EventTicket_Service, '/relation/eventticket/<eventticket_id>')
+docs.register(Relation_EventTicket_Service)
 
 #*______________ Application Creation ______________
 if __name__ == '__main__':

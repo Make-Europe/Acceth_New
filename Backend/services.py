@@ -193,3 +193,35 @@ class Relation_EventHost_Service(MethodResource, Resource):
         db.session.delete(relation)
         db.session.commit()
         return Relation_EventHost_Schema().dump(relation)
+
+#*______________ Relation Event-Ticket Service ______________
+class Relation_EventTicket_Service(MethodResource, Resource):
+    @doc(description='Get Event-Ticket Relation by id', tags=['Event-Ticket'])
+    @marshal_with(Relation_EventTicket_ResponseSchema())
+    def get(self, event_ticket_id):
+        relation = db.session.query(Relation_EventTicket).get(event_ticket_id)
+        return Relation_EventTicket_Schema().dump(relation)
+
+    @doc(description='Add new relation', tags=['Event-Ticket'])
+    @use_kwargs(Relation_EventTicket_Schema, location=('json'))
+    @marshal_with(Relation_EventTicket_ResponseSchema())
+    def post(self, event_ticket, event_ticket_id):
+        db.session.add(event_ticket)
+        db.session.commit()
+        return Relation_EventTicket_Schema().dump(event_ticket)
+    
+    @doc(description='Update Relation with PUT', tags=['Event-Ticket'])
+    @use_kwargs(Relation_EventTicket_Schema, location=('json'))
+    @marshal_with(Relation_EventTicket_ResponseSchema())
+    def put(self, event_ticket, event_ticket_id):
+        db.session.add(event_ticket)
+        db.session.commit()
+        return Relation_EventTicket_Schema().dump(event_ticket)
+
+    @doc(description='Delete existing User', tags=['Event-Ticket'])
+    @marshal_with(Relation_EventTicket_ResponseSchema())
+    def delete(self, event_ticket_id):
+        relation = db.session.query(Relation_EventTicket).get(event_ticket_id)
+        db.session.delete(relation)
+        db.session.commit()
+        return Relation_EventTicket_Schema().dump(relation)

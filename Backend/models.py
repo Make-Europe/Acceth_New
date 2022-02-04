@@ -21,7 +21,6 @@ class Event(db.Model):
     end = db.Column(db.String())
     description = db.Column(db.String())
     lineup = db.Column(db.String())
-    eventHost = db.Column(db.Integer, db.ForeignKey("user.id"), nullable = False)
     capacity = db.Column(db.Integer)
     image = db.Column(db.String(50))
     city = db.Column(db.String(50))
