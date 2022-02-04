@@ -52,7 +52,6 @@ Um das Entwickeln für Acceth zu optimieren, muss sich jeder Entwickler eine eig
 
 
 ## Am Projekt teilnehmen
-Wenn Du es bis hier geschafft hast, heißt es ab jetzt aktiv Entwickeln oder Codebase lesen. Nimm dir gerne alle Zeit die du brauchst um dich einzulesen. Behalte aber bitte die [Git-Issues](), vorallem die Dir zugewiesenen, im Auge. Sobald Du dich bereit fühlst kannst du gerne nach belieben entwickeln, solange Du dich an die [Git-Konvenzionen]() und [Code Konvenzionen]() hällst. 
 
 # Happy Coding
 
