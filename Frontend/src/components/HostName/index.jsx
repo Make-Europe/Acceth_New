@@ -3,7 +3,7 @@ import "./HostName.css";
 import app from "../../App.js"
 
 function HostName(props) {
-  const { inputPlaceholder, className, childToParent } = props;
+  const { inputPlaceholder, className, childToParent, currentValue , fieldType} = props;
   
   return (
     <div className={`host-name border-1px-dove-gray ${className || ""}`}>
@@ -11,7 +11,8 @@ function HostName(props) {
         className="t-name_-placeholder montserrat-medium-tower-gray-30px"
         name="hostname_placeholder1"
         placeholder={inputPlaceholder}
-        type="text"
+        type={fieldType}
+        value={currentValue.childdata ? currentValue.childdata : ""}
         onInput={e => childToParent(e.target.value)}
         required
       />

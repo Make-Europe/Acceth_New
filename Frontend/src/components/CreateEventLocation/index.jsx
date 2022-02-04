@@ -16,22 +16,27 @@ function CreateEventLocation(props) {
     handleEventLocation,
     handleEventStreet,
     handleEventZip,
-    handleEventCity
+    handleEventCity,
+    eventLocation,
+    eventStreet,
+    eventZip,
+    eventCity
   } = props;
 
   return (
     <div className="createevent-location screen">
       <div className="page-titel_-location montserrat-medium-black-40px">{pagetitel_Location}</div>
       <div className="inputfields_-location">
-        <HostName inputPlaceholder={hostName1Props.inputPlaceholder} childToParent={handleEventLocation} />
-        <HostName inputPlaceholder={hostName2Props.inputPlaceholder} className={hostName2Props.className} childToParent={handleEventStreet} />
+        <HostName inputPlaceholder={hostName1Props.inputPlaceholder} childToParent={handleEventLocation} currentValue={eventLocation} fieldType={"text"} />
+        <HostName inputPlaceholder={hostName2Props.inputPlaceholder} className={hostName2Props.className} childToParent={handleEventStreet} currentValue={eventStreet} fieldType={"text"} />
         <div className="gruppe1">
           <div className="zip border-1px-dove-gray">
             <input
               className="zip_-placeholder montserrat-medium-tower-gray-30px"
               name="zip_placeholder1"
               placeholder={inputPlaceholder1}
-              type={inputType1}
+              type="text"
+              value={eventZip.childdata ? eventZip.childdata : ""}
               onInput={e => handleEventZip(e.target.value)}
               required
             />
@@ -41,7 +46,8 @@ function CreateEventLocation(props) {
               className="city-name_-placeholder montserrat-medium-tower-gray-30px"
               name="cityname_placeholder1"
               placeholder={inputPlaceholder2}
-              type={inputType2}
+              type="text"
+              value={eventCity.childdata ? eventCity.childdata : ""}
               onInput={e => handleEventCity(e.target.value)}
               required
             />
