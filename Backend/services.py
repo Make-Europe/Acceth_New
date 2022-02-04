@@ -1,6 +1,7 @@
+import werkzeug
 from flask_apispec import marshal_with, doc, use_kwargs
 from flask_apispec.views import MethodResource
-from flask_restful import Resource, Api
+from flask_restful import Resource, Api, reqparse
 from schemes import (EventResponseSchema, EventSchema, HostResponseSchema, HostSchema, UserSchema, 
                     UserResponseSchema, Relation_UserHost_Schema, Relation_UserHost_ResponseSchema, Relation_EventHost_Schema, Relation_EventHost_ResponseSchema,
                     Relation_EventTicket_Schema, Relation_EventTicket_ResponseSchema)
@@ -225,3 +226,13 @@ class Relation_EventTicket_Service(MethodResource, Resource):
         db.session.delete(relation)
         db.session.commit()
         return Relation_EventTicket_Schema().dump(relation)
+
+
+class UploadImageService(MethodResource, Resource):
+   @doc(description='Upload Image', tags=['Image'])
+   def post(self):
+     parse = reqparse.RequestParser()
+     parse.add_argument('file', type=werkzeug.datastructures.FileStorage, location='files')
+     args = parse.parse_args()
+     image_file = args['file']
+     image_file.save("your_file_name.jpg")

@@ -6,7 +6,8 @@ from apispec.ext.marshmallow import MarshmallowPlugin
 from flask_apispec.extension import FlaskApiSpec
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
-from services import Relation_EventHost_Service, Relation_EventTicket_Service, UserService, UserListService, HostService, EventService, HostListService, EventListService, Relation_UserHost_Service
+from services import (Relation_EventHost_Service, Relation_EventTicket_Service, UserService, UserListService, HostService, 
+                    EventService, HostListService, EventListService, Relation_UserHost_Service, UploadImageService)
 
 #*______________ App Setup ______________
 app = Flask(__name__)
@@ -61,6 +62,9 @@ docs.register(Relation_EventHost_Service)
 
 api.add_resource(Relation_EventTicket_Service, '/relation/eventticket/<eventticket_id>')
 docs.register(Relation_EventTicket_Service)
+
+api.add_resource(UploadImageService, '/image')
+docs.register(UploadImageService)
 
 #*______________ Application Creation ______________
 if __name__ == '__main__':
