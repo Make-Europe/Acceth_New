@@ -127,7 +127,7 @@ class EventListService(MethodResource, Resource):
     @marshal_with(EventResponseSchema(many=True))
     def get(self):
         events = db.session.query(Event).all()
-        return UserSchema(many=True).dump(events)
+        return EventSchema(many=True).dump(events)
 
 
 #*______________ Relation User-Host Service ______________
