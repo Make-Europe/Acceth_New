@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Selection.css";
 
 function Selection(props) {
-  const { host_Text, place, guest_Text, guestbutton_Text } = props;
+  const { host_Text, place, guest_Text, guestbutton_Text, handleLoadData } = props;
 
   return (
     <div className="selection screen">
@@ -17,9 +17,11 @@ function Selection(props) {
       </div>
       <div className="guest">
         <div className="guest_-text montserrat-medium-white-40px">{guest_Text}</div>
-        <div className="guest-button border-1px-dove-gray">
-          <div className="guest-button_-text montserrat-medium-black-30px">{guestbutton_Text}</div>
-        </div>
+        <Link to="/chainofevents">
+          <div className="guest-button border-1px-dove-gray" onClick={handleLoadData}>
+            <div className="guest-button_-text montserrat-medium-black-30px">{guestbutton_Text}</div>
+          </div>
+        </Link>
       </div>
     </div>
   );
