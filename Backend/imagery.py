@@ -14,5 +14,5 @@ def insertRandomImage(id, table):
     dbEntry = db.session.query(table).get(id)
     dbEntry.image = string
     db.session.commit()
-    #os.remove(path)
+    os.remove(path)
 
