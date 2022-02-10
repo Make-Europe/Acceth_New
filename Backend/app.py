@@ -7,7 +7,7 @@ from flask_apispec.extension import FlaskApiSpec
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from services import (Relation_EventHost_Service, Relation_EventTicket_Service, UserService, UserListService, HostService, 
-                    EventService, HostListService, EventListService, Relation_UserHost_Service, UploadImageService)
+                    EventService, HostListService, EventListService, Relation_UserHost_Service, UploadImageService, CountService, CountListService)
 
 #*______________ App Setup ______________
 app = Flask(__name__)
@@ -65,6 +65,12 @@ docs.register(Relation_EventTicket_Service)
 
 api.add_resource(UploadImageService, '/image')
 docs.register(UploadImageService)
+
+api.add_resource(CountService, '/count/<count_id>')
+docs.register(CountService)
+
+api.add_resource(CountListService, '/list/count')
+docs.register(CountListService)
 
 #*______________ Application Creation ______________
 if __name__ == '__main__':

@@ -1,9 +1,10 @@
 from config import db
-
+import datetime
 
 #*______________ DB Models ______________
 
 class User(db.Model):
+    __tablename__ = "User" 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     image = db.Column(db.String())
@@ -15,6 +16,7 @@ class User(db.Model):
         return '<Post %s>' % self.name
 
 class Event(db.Model):
+    __tablename__ = "Event" 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     start = db.Column(db.String())
@@ -32,6 +34,7 @@ class Event(db.Model):
     date = db.Column(db.String(50))
 
 class Host(db.Model):
+    __tablename__ = "Host" 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     image = db.Column(db.String(50))
@@ -40,21 +43,35 @@ class Host(db.Model):
     #TODO: Likes
 
 class Ticket(db.Model):
+    __tablename__ = "Ticket" 
     id = db.Column(db.Integer, primary_key=True)
     
 
 class Relation_EventTicket(db.Model):
+    __tablename__ = "Relation_EventTicket" 
     id = db.Column(db.Integer, primary_key=True)
-    ticket_id = db.Column(db.Integer, db.ForeignKey("ticket.id"), nullable = False)
-    event_id = db.Column(db.Integer, db.ForeignKey("event.id"), nullable = False)
+    ticket_id = db.Column(db.Integer, db.ForeignKey("Ticket.id"), nullable = False)
+    event_id = db.Column(db.Integer, db.ForeignKey("Event.id"), nullable = False)
 
 class Relation_EventHost(db.Model):
+    __tablename__ = "Relation_EventHost" 
     id = db.Column(db.Integer, primary_key=True)
-    event_id = db.Column(db.Integer, db.ForeignKey("event.id"), nullable = False)
-    host_id = db.Column(db.Integer, db.ForeignKey("host.id"), nullable = False)
+    event_id = db.Column(db.Integer, db.ForeignKey("Event.id"), nullable = False)
+    host_id = db.Column(db.Integer, db.ForeignKey("Host.id"), nullable = False)
     
 class Relation_UserHost(db.Model):
+    __tablename__ = "Relation_UserHost" 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable = False)
-    host_id = db.Column(db.Integer, db.ForeignKey("host.id"), nullable = False)
+    user_id = db.Column(db.Integer, db.ForeignKey("User.id"), nullable = False)
+    host_id = db.Column(db.Integer, db.ForeignKey("Host.id"), nullable = False)
+
+
+
+class Count(db.Model):
+    __tablename__ = "Count" 
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20))
+    value = db.Column(db.Integer)
+    def __repr__(self):
+        return '<Name: %s>' % self.name
 

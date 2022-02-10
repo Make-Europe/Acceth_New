@@ -1,15 +1,16 @@
+from typing import Counter
 import werkzeug
 from flask_apispec import marshal_with, doc, use_kwargs
 from flask_apispec.views import MethodResource
 from flask_restful import Resource, Api, reqparse
 from schemes import (EventResponseSchema, EventSchema, HostResponseSchema, HostSchema, UserSchema, 
                     UserResponseSchema, Relation_UserHost_Schema, Relation_UserHost_ResponseSchema, Relation_EventHost_Schema, Relation_EventHost_ResponseSchema,
-                    Relation_EventTicket_Schema, Relation_EventTicket_ResponseSchema)
+                    Relation_EventTicket_Schema, Relation_EventTicket_ResponseSchema, CountSchema, CountResponseSchema)
 from config import db
-from models import User, Host, Event, Relation_UserHost, Relation_EventTicket, Relation_EventHost
+from models import Count, User, Host, Event, Relation_UserHost, Relation_EventTicket, Relation_EventHost
 
 
-#*______________ User ______________
+#!______________ User ______________
 class UserService(MethodResource, Resource):
     @doc(description='Get User by User_id', tags=['User'])
     @marshal_with(UserResponseSchema)
@@ -50,7 +51,7 @@ class UserListService(MethodResource, Resource):
         return UserSchema(many=True).dump(users)
 
 
-#*______________ Host ______________
+#!______________ Host ______________
 class HostService(MethodResource, Resource):
     @doc(description='Get Host by Host_id', tags=['Host'])
     @marshal_with(HostResponseSchema)
@@ -90,7 +91,7 @@ class HostListService(MethodResource, Resource):
         return HostSchema(many=True).dump(hosts)
 
 
-#*______________ Event ______________
+#!______________ Event ______________
 class EventService(MethodResource, Resource):
     @doc(description='Get Event by Event_id', tags=['Event'])
     @marshal_with(EventResponseSchema)
@@ -130,7 +131,7 @@ class EventListService(MethodResource, Resource):
         return EventSchema(many=True).dump(events)
 
 
-#*______________ Relation User-Host Service ______________
+#!______________ Relation User-Host Service ______________
 class Relation_UserHost_Service(MethodResource, Resource):
     @doc(description='Get User-Host Relation by id', tags=['User-Host'])
     @marshal_with(Relation_UserHost_ResponseSchema())
@@ -163,7 +164,7 @@ class Relation_UserHost_Service(MethodResource, Resource):
         return Relation_UserHost_Schema().dump(relation)
 
 
-#*______________ Relation Event-Host Service ______________
+#!______________ Relation Event-Host Service ______________
 class Relation_EventHost_Service(MethodResource, Resource):
     @doc(description='Get Event-Host Relation by id', tags=['Event-Host'])
     @marshal_with(Relation_EventHost_ResponseSchema())
@@ -195,7 +196,7 @@ class Relation_EventHost_Service(MethodResource, Resource):
         db.session.commit()
         return Relation_EventHost_Schema().dump(relation)
 
-#*______________ Relation Event-Ticket Service ______________
+#!______________ Relation Event-Ticket Service ______________
 class Relation_EventTicket_Service(MethodResource, Resource):
     @doc(description='Get Event-Ticket Relation by id', tags=['Event-Ticket'])
     @marshal_with(Relation_EventTicket_ResponseSchema())
@@ -236,3 +237,47 @@ class UploadImageService(MethodResource, Resource):
      args = parse.parse_args()
      image_file = args['file']
      image_file.save("your_file_name.jpg")
+
+
+
+
+#!______________ Count ______________
+class CountService(MethodResource, Resource):
+    @doc(description='Get Count by Count_id', tags=['Count'])
+    @marshal_with(CountResponseSchema)
+    def get(self, count_id):
+        count = db.session.query(Count).get(count_id)
+        return CountSchema().dump(count)
+
+    @doc(description='Add new Count', tags=['Count'])
+    @use_kwargs(CountSchema, location=('json'))
+    @marshal_with(CountResponseSchema())
+    def post(self, count, count_id):
+        db.session.add(count)
+        db.session.commit()
+        return CountSchema().dump(count)
+    
+    @doc(description='Count Up 1', tags=['Count'])
+    @marshal_with(CountResponseSchema())
+    def put(self, count_id):
+        count = db.session.query(Count).get(count_id)
+        count.value += 1
+        db.session.commit()
+        return CountSchema().dump(count)
+
+    @doc(description='Delete existing Count', tags=['Count'])
+    @use_kwargs(CountSchema, location=('json'))
+    @marshal_with(CountResponseSchema)
+    def delete(self, user_id):
+        user = db.session.query(Count).get(user_id)
+        db.session.delete(user)
+        db.session.commit()
+        return CountSchema().dump(user)
+
+class CountListService(MethodResource, Resource):
+    @doc(description='Get a List of all Counts', tags=['List'])
+    @marshal_with(CountResponseSchema(many=True))
+    def get(self):
+        counts = db.session.query(User).all()
+        return UserSchema(many=True).dump(counts)
+
