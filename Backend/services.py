@@ -271,7 +271,7 @@ class CountListService(MethodResource, Resource):
 
 
 
-
+#!______________ Default Images ______________
 class Imagery_Event(MethodResource, Resource):
     @doc(description='Set Image of Event to a random generated default Image', tags=['Image'])
     def put(self, event_id):

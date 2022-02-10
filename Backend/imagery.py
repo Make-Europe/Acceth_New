@@ -1,8 +1,6 @@
-import matplotlib, uuid, base64, os, requests
-from randimage import get_random_image, show_array
-from io import BytesIO
+import matplotlib, uuid, base64, os
+from randimage import get_random_image
 from config import db
-from models import Event
 
 
 def insertRandomImage(id, table):
