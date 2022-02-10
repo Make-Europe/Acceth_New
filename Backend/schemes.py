@@ -1,4 +1,6 @@
+from datetime import date
 from lib2to3.pytree import Base
+from types import CoroutineType
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from config import db
 from models import User, Event, Host, Relation_EventHost, Relation_EventTicket, Relation_UserHost
@@ -37,6 +39,17 @@ class EventInsertSchema(EventSchema):
 
 class EventResponseSchema(EventSchema):
     name = fields.Str()
+    capacity = fields.Str()
+    city = fields.Str()
+    date = fields.Str()
+    end = fields.Str()
+    hostName = fields.Str()
+    lineup = fields.Str()
+    locationName = fields.Str()
+    price = fields.Str()
+    start = fields.Str()
+    street = fields.Str()
+    zipCode = fields.Str()
 
 #*______________ Host Schemes ______________
 class HostSchema(BaseScheme):
