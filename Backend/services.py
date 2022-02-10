@@ -8,7 +8,7 @@ from schemes import (EventResponseSchema, EventSchema, HostResponseSchema, HostS
                     Relation_EventTicket_Schema, Relation_EventTicket_ResponseSchema, CountSchema, CountResponseSchema)
 from config import db
 from models import Count, User, Host, Event, Relation_UserHost, Relation_EventTicket, Relation_EventHost
-
+from imagery import insertRandomImage
 
 #!______________ User ______________
 class UserService(MethodResource, Resource):
@@ -229,18 +229,6 @@ class Relation_EventTicket_Service(MethodResource, Resource):
         return Relation_EventTicket_Schema().dump(relation)
 
 
-class UploadImageService(MethodResource, Resource):
-   @doc(description='Upload Image', tags=['Image'])
-   def post(self):
-     parse = reqparse.RequestParser()
-     parse.add_argument('file', type=werkzeug.datastructures.FileStorage, location='files')
-     args = parse.parse_args()
-     image_file = args['file']
-     image_file.save("your_file_name.jpg")
-
-
-
-
 #!______________ Count ______________
 class CountService(MethodResource, Resource):
     @doc(description='Get Count by Count_id', tags=['Count'])
@@ -281,3 +269,11 @@ class CountListService(MethodResource, Resource):
         counts = db.session.query(User).all()
         return UserSchema(many=True).dump(counts)
 
+
+
+
+class Imagery_Event(MethodResource, Resource):
+    @doc(description='Set Image of Event to a random generated default Image', tags=['Image'])
+    def put(self, event_id):
+        insertRandomImage(event_id, Event)
+        return 'Image added to Event with id {}'.format(event_id)
