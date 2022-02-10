@@ -11,10 +11,14 @@ import CreateEventGeneralInformation from "./components/CreateEventGeneralInform
 import CreateEventLocation from "./components/CreateEventLocation";
 import CreateEventDetails from "./components/CreateEventDetails";
 import CreateEventImage from "./components/CreateEventImage";
+import ChainOfEvents from "./components/ChainOfEvents";
+import EventDetails from "./components/EventDetails";
 
 import logo from "./static/img/logo.png"
 import about_icon from "./static/img/About_Icon.png"
 import project_icon from "./static/img/Project_Icon.png"
+import default_picture from "./static/img/event-picture.png"
+import details_picture from "./static/img/details-picture.png"
 
 
 function App() {
@@ -32,6 +36,7 @@ function App() {
   const [eventCapacity, setEventCapacity] = useState('')
   const [eventPrice, setEventPrice] = useState('')
   const [eventImage, setEventImage] = useState(null)
+  const [allEvents, setAllEvents] = useState([])
 
   const handleHostName = (childdata) => {
     setHostName({childdata});
@@ -82,7 +87,6 @@ function App() {
     
   }
   const handleSaveData = () => {
-    console.log(eventImage)
     saveEvent();
   }
 
@@ -116,6 +120,21 @@ function App() {
       console.log(result)
     })
   }
+
+  const handleLoadData = () => {
+    loadData()
+  }
+
+  function loadData(){
+    fetch('/list/event').then(res => res.json()).then(data => {
+      setAllEvents(data)
+    })
+  }
+
+  useEffect(() => {
+    console.log("useEffect triggered")
+    handleLoadData()
+  }, [allEvents.length])
   
 
   return (
@@ -130,7 +149,13 @@ function App() {
           </MobileView>
         </Route>
         <Route path="/selection">
-          <Selection host_Text="I’m a" place="HOST" guest_Text="I’m a" guestbutton_Text="GUEST" />
+          <Selection 
+            host_Text="I'm a" 
+            place="HOST" 
+            guest_Text="I'm a" 
+            guestbutton_Text="GUEST"
+            handleLoadData={handleLoadData}
+          />
         </Route>
         <Route path="/createevent-generalinformation">
           <CreateEventGeneralInformation
@@ -195,6 +220,20 @@ function App() {
             handleSaveData={handleSaveData}
           />
         </Route>
+        <Route path="/chainofevents">
+          <ChainOfEvents 
+            {...chainOfEventsData}
+            default_picture={default_picture}
+            handleLoadData={handleLoadData}
+            allEvents={allEvents}
+          />
+        </Route>
+        <Route path="/eventdetails">
+          <EventDetails 
+          {...eventDetailsData}
+          details_picture={details_picture}
+          />
+        </Route>
       </Switch>
     </Router>
   );
@@ -248,7 +287,7 @@ const hostName3Data = {
 
 const hostName4Data = {
   inputPlaceholder: "Event Lineup",
-  className: "event",
+  className: "event-1",
 };
 
 const createEventGeneralInformationData = {
@@ -302,4 +341,64 @@ const createEventDetailsData = {
   hostName1Props: hostName7Data,
   hostName2Props: hostName8Data,
   hostName3Props: hostName9Data,
+};
+
+const gruppe52Data = {
+  className: "gruppe-5",
+};
+
+const gruppe53Data = {
+  className: "gruppe-5",
+};
+
+const gruppe54Data = {
+  className: "gruppe-5",
+};
+
+const gruppe55Data = {
+  className: "gruppe-5",
+};
+
+const chainOfEventsData = {
+  chainofevents_Titel: "Available to you",
+  inputType: "text",
+  inputPlaceholder: "Search",
+  sort_Text: "Sort by Date",
+  gruppe51Props: gruppe52Data,
+  gruppe52Props: gruppe53Data,
+  gruppe53Props: gruppe54Data,
+  gruppe54Props: gruppe55Data,
+};
+
+const eventDetailsData = {
+  details_Titel: "Festival 2022",
+  detailspanel_Host_Titel: "Host:",
+  detailspanel_Host_Text: "Sommerschein",
+  detailspanel_Date_Titel: "Date:",
+  detailspanel_Date_Text: "18.09.2022",
+  detailspanel_Start_Titel: "Start:",
+  detailspanel_Start_Text: "08:00",
+  detailspanel_End_Titel: "End:",
+  detailspanel_End_Text: "23:55",
+  detailspanel_Location_Titel: "Location:",
+  detailspanel_Location_Text: "Sportpark Heide",
+  detailspanel_City_Titel: "City:",
+  detailspanel_City_Ziptext: "65719",
+  detailspanel_City_Text1: "Hofheim am Taunus",
+  detailspanel_Street_Titel: "Street:",
+  detailspanel_City_Text2: "An der Heide 15",
+  lineuppanel_Titel: "Lineup:",
+  lineuppanel_Text: "ParA-DogX, JaJa, The Morning Pints",
+  informationpanel_Titel: "Information:",
+  informationpanel_Text: "Das Sommerschein-Team freut sich dieses Jahr wieder ein Festival für euch zu organisieren.",
+  buyticket_Text: "Buy your ticket directly from the event host",
+  ticketpanel_Category_Titel: "Category:",
+  ticketpanel_Category_Text: "Standard Ticket",
+  ticketpanel_Capacity_Titel: "Capacity:",
+  ticketpanel_Capacity_Current_Text: "1982",
+  ticketpanel_Capacity_Total_Text: "/ 5000",
+  ticketpanel_Expiry_Titel: "Expiry Date:",
+  ticketpanel_Expiry_Text: "18.09.2022 23:55",
+  ticketpanel_Price_Titel: "Price:",
+  ticketpanel_Price_Text: "20 CELO",
 };

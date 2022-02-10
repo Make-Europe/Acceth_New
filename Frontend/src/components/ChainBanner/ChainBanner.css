@@ -1,0 +1,21 @@
+.chain-banner,
+.details-banner {
+  align-items: flex-end;
+  background-color: var(--water-leaf);
+  display: flex;
+  height: 60px;
+  justify-content: flex-end;
+  min-width: 1280px;
+  padding: 7px 242px;
+}
+
+.chain-banner_-text,
+.details-banner_-text {
+  letter-spacing: 0;
+  line-height: 25px;
+  min-height: 35px;
+  min-width: 794px;
+  text-align: center;
+  white-space: nowrap;
+}
+

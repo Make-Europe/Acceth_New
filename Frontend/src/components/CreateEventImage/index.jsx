@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./CreateEventImage.css";
 
 function CreateEventImage(props) {
@@ -9,7 +10,7 @@ function CreateEventImage(props) {
       <div className="page-titel_-image montserrat-medium-black-40px">{pagetitel_Image}</div>
       <div className="upload border-1px-dove-gray">
         <div className="upload-image">
-          <img width={"200px"} src={eventImage}/>
+          <img width={"200px"} height={"100px"} src={eventImage}/>
           <input
             className="upload-file"
             type="file"
@@ -18,9 +19,11 @@ function CreateEventImage(props) {
           />
         </div>
       </div>
-      <div onClick={handleSaveData} className="done-button border-1px-dove-gray">
-        <div className="done-button_-text montserrat-medium-white-30px">{donebutton_Text}</div>
-      </div>
+      <Link to="/chainofevents">
+        <div onClick={handleSaveData} className="done-button border-1px-dove-gray">
+          <div className="done-button_-text montserrat-medium-white-30px">{donebutton_Text}</div>
+        </div>
+      </Link>
     </div>
   );
 }
