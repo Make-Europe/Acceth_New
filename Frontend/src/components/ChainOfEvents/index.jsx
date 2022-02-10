@@ -39,7 +39,7 @@ function ChainOfEvents(props) {
         </div>
         <div className="event">
           {allEvents.map(value => (
-            <Gruppe5 className={gruppe51Props.className} event={value} />
+            <Gruppe5 key={value.id} className={gruppe51Props.className} event={value} />
           ))}
         </div>
       </div>
