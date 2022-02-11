@@ -273,15 +273,10 @@ class CountListService(MethodResource, Resource):
 
 
 #!______________ Default Images ______________
-class Imagery_Event(MethodResource, Resource):
-    @doc(description='Set Image of Event to a random generated default Image', tags=['Image'])
-    def put(self, event_id):
-        insertRandomImage()
-        return 'Image added to Event with id {}'.format(event_id)
-
 
 class ImageService(MethodResource, Resource):
-    @doc(description='Download a \"special\" kind of File', tags=['Download'])
+    @doc(description='Get a random Image', tags=['Download'])
     def get(self):
         newImage = insertRandomImage()
+        print(newImage)
         return send_from_directory('static', newImage, as_attachment=True)
