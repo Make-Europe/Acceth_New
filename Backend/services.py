@@ -274,9 +274,8 @@ class CountListService(MethodResource, Resource):
 
 #!______________ Default Images ______________
 
-class ImageService(MethodResource, Resource):
+class EventImageService(MethodResource, Resource):
     @doc(description='Get a random Image', tags=['Download'])
-    def get(self):
-        newImage = insertRandomImage()
-        print(newImage)
-        return send_from_directory('static', newImage, as_attachment=True)
+    def put(self, event_id):
+        insertRandomImage(Event, event_id)
+        return "image of Even with id {} was changed".format(event_id)
