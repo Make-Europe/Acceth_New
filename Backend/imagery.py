@@ -15,5 +15,5 @@ def insertRandomImage(table, id):
     img_uri = DataURI.from_file(path)
     dbObject = db.session.query(table).get(id)
     dbObject.image = img_uri
-    db.session.commit()        
-
+    db.session.commit()
+    os.remove(path)       
