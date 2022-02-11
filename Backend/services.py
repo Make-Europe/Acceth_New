@@ -1,5 +1,6 @@
 from typing import Counter
 import werkzeug
+from flask import send_from_directory
 from flask_apispec import marshal_with, doc, use_kwargs
 from flask_apispec.views import MethodResource
 from flask_restful import Resource, Api, reqparse
@@ -275,5 +276,12 @@ class CountListService(MethodResource, Resource):
 class Imagery_Event(MethodResource, Resource):
     @doc(description='Set Image of Event to a random generated default Image', tags=['Image'])
     def put(self, event_id):
-        insertRandomImage(event_id, Event)
+        insertRandomImage()
         return 'Image added to Event with id {}'.format(event_id)
+
+
+class ImageService(MethodResource, Resource):
+    @doc(description='Download a \"special\" kind of File', tags=['Download'])
+    def get(self):
+        newImage = insertRandomImage()
+        return send_from_directory('static', newImage, as_attachment=True)
