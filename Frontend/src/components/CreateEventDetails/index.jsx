@@ -30,7 +30,6 @@ function CreateEventDetails(props) {
     <div className="createevent-details screen">
       <div className="page-titel_-detail montserrat-medium-black-40px">{pagetitel_Detail}</div>
       <div className="inputfields_-details">
-        <HostName inputPlaceholder={hostName1Props.inputPlaceholder} childToParent={handleEventDate} currentValue={eventDate} fieldType={"date"} />
         <div className="gruppe2">
           <div className="start-time border-1px-dove-gray">
             <input
@@ -55,6 +54,7 @@ function CreateEventDetails(props) {
             />
           </div>
         </div>
+        <HostName inputPlaceholder={hostName1Props.inputPlaceholder} childToParent={handleEventDate} currentValue={eventDate} fieldType={"date"} />
         <HostName inputPlaceholder={hostName2Props.inputPlaceholder} className={hostName2Props.className} childToParent={handleEventCapacity} currentValue={eventCapacity} fieldType={"number"} />
         <HostName inputPlaceholder={hostName3Props.inputPlaceholder} className={hostName3Props.className} childToParent= {handleEventPrice} currentValue={eventPrice} fieldType={"number"} />
       </div>

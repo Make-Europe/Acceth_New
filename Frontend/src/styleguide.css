@@ -34,6 +34,14 @@
   font-weight: 400;
 }
 
+.montserrat-normal-black-20px {
+  color: var(--black);
+  font-family: var(--font-family-montserrat);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+}
+
 .montserrat-semi-bold-white-50px {
   color: var(--white);
   font-family: var(--font-family-montserrat);
@@ -116,6 +124,9 @@
 
 .border-1px-dove-gray {
   border: 1px solid var(--dove-gray);
+}
+.border-1px-dove-red {
+  border: 1px solid var(--cerise);
 }
 
 .montserrat-medium-black-25px {

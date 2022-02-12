@@ -37,6 +37,9 @@ function App() {
   const [eventPrice, setEventPrice] = useState('')
   const [eventImage, setEventImage] = useState(null)
   const [allEvents, setAllEvents] = useState([])
+  const [searchResult, setSearchResult] = useState('')
+  const [sortBy, setSortBy] = useState('')
+  const [foundEvents, setFoundEvents] = useState([])
 
   const handleHostName = (childdata) => {
     setHostName({childdata});
@@ -116,8 +119,16 @@ function App() {
     .then((response) => response.json()
     )
     .then((result) => {
-      console.log(eventImage)
-      console.log(result)
+      if(eventImage == null){
+        fetch('/image/' + result.id, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => response.json())
+        .then(data => {loadData()})
+      }else{
+        loadData()
+      }
     })
   }
 
@@ -128,12 +139,51 @@ function App() {
   function loadData(){
     fetch('/list/event').then(res => res.json()).then(data => {
       setAllEvents(data)
+      const result = data.sort((a, b) => (a.id < b.id) ? 1 : -1)
+      setFoundEvents(result)
     })
   }
 
+  const handleScrollTop = () => {
+    window.scrollTo(0, 0)
+  }
+
+  const filter = (e) => {
+    const keyword = e.target.value;
+
+    if (keyword !== '') {
+      const results = allEvents.filter((obj) => {
+        return obj.name.toLowerCase().includes(keyword.toLowerCase()) || obj.lineup.toLowerCase().includes(keyword.toLowerCase()) || obj.description.toLowerCase().includes(keyword.toLowerCase());
+      });
+      setFoundEvents(results);
+    } else {
+      setFoundEvents(allEvents);
+    }
+
+    setSearchResult(keyword);
+  };
+
+  const handleSort = (e) => {
+    const sortResult = e.target.value;
+    let result = []
+    setSortBy(sortResult)
+
+    if(sortResult == "newestFirst"){
+      result = foundEvents.sort((a, b) => (a.id < b.id) ? 1 : -1)
+    }
+    else if(sortResult == "oldestFFirst"){
+      result = foundEvents.sort((a, b) => (a.id > b.id) ? 1 : -1)
+    }
+    else if(sortResult == "byName"){
+      result = foundEvents.sort((a, b) => a.name > b.name ? 1 : -1)
+    }
+    setFoundEvents(result)
+  }
+
   useEffect(() => {
-    console.log("useEffect triggered")
     handleLoadData()
+    setSortBy("newestFirst")
+
   }, [allEvents.length])
   
 
@@ -218,6 +268,7 @@ function App() {
             handleEventImage={handleEventImage}
             eventImage={eventImage}
             handleSaveData={handleSaveData}
+            handleLoadData={handleLoadData}
           />
         </Route>
         <Route path="/chainofevents">
@@ -225,7 +276,12 @@ function App() {
             {...chainOfEventsData}
             default_picture={default_picture}
             handleLoadData={handleLoadData}
-            allEvents={allEvents}
+            allEvents={foundEvents}
+            searchResult={searchResult}
+            filter={filter}
+            handleScrollTop={handleScrollTop}
+            sortBy={sortBy}
+            handleSort={handleSort}
           />
         </Route>
         <Route path="/eventdetails">

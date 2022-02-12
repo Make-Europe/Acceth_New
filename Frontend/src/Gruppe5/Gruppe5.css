@@ -1,0 +1,118 @@
+.gruppe-5-1 {
+  align-items: flex-start;
+  background-color: var(--white);
+  display: flex;
+  min-width: 1017px;
+}
+
+.event_-picture {
+  height: 200px;
+  object-fit: cover;
+  width: 200px;
+}
+
+.flex-col {
+  align-items: flex-start;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8.5px;
+  margin-left: 21px;
+  min-height: 148px;
+  width: 435px;
+}
+
+.flex-row-1 {
+  align-items: flex-start;
+  display: flex;
+  min-width: 435px;
+}
+
+.event_-container {
+  align-self: flex-end;
+  height: 62px;
+  position: relative;
+  width: 233px;
+}
+
+.event_-host {
+  left: 0;
+  letter-spacing: 0;
+  line-height: 30px;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.event_-location {
+  left: 0;
+  letter-spacing: 0;
+  line-height: 20px;
+  position: absolute;
+  top: 38px;
+  white-space: nowrap;
+}
+
+.event_-eventname {
+  letter-spacing: 0;
+  line-height: 30px;
+  margin-left: 8px;
+  min-height: 39px;
+  white-space: nowrap;
+}
+
+.event_-container-1 {
+  align-items: flex-start;
+  display: flex;
+  height: 39px;
+  margin-top: 8px;
+  min-width: 365px;
+}
+
+.event_-date {
+  letter-spacing: 0;
+  line-height: 30px;
+  min-height: 39px;
+  min-width: 156px;
+  white-space: nowrap;
+}
+
+.event_-time {
+  letter-spacing: 0;
+  line-height: 30px;
+  margin-left: 18px;
+  min-height: 39px;
+  white-space: nowrap;
+}
+
+.event_-lineup {
+  letter-spacing: 0;
+  line-height: 20px;
+  margin-top: 12px;
+  min-height: 26px;
+  white-space: nowrap;
+}
+
+.overlap-group {
+  align-items: flex-end;
+  background-color: var(--water-leaf);
+  display: flex;
+  height: 200px;
+  margin-left: 78px;
+  min-width: 200px;
+  padding: 32.5px 60px;
+}
+
+.more_-text {
+  letter-spacing: 0;
+  line-height: 30px;
+  min-height: 113px;
+  min-width: 80px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.gruppe-5-1.gruppe-5 {
+  margin-top: 20px;
+}
+
