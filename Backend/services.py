@@ -90,6 +90,14 @@ class CommentListService(MethodResource, Resource):
         comments = db.session.query(Comment).all()
         return Commentschema(many=True).dump(comments)
 
+class ListCommentsByEventService(MethodResource, Resource):
+    @doc(description='Get a List of all Comments of a specific Event', tags=['List'])
+    @marshal_with(CommentResponseSchema(many=True))
+    def get(self, event_id):
+        comments = db.session.query(Comment).filter_by(event_id=event_id).all()
+        return Commentschema(many=True).dump(comments)
+
+
 #!______________ Host ______________
 class HostService(MethodResource, Resource):
     @doc(description='Get Host by Host_id', tags=['Host'])

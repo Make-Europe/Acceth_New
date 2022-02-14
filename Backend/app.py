@@ -7,7 +7,8 @@ from flask_apispec.extension import FlaskApiSpec
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from services import (Relation_EventHost_Service, Relation_EventTicket_Service, UserService, UserListService, HostService, 
-                    EventService, HostListService, EventListService, Relation_UserHost_Service, CountService, CountListService, EventImageService, CommentService, CommentListService)
+                    EventService, HostListService, EventListService, Relation_UserHost_Service, CountService, CountListService, EventImageService, 
+                    CommentService, CommentListService, ListCommentsByEventService)
 
 #*______________ App Setup ______________
 app = Flask(__name__)
@@ -76,6 +77,8 @@ api.add_resource(CommentService, '/comment/<comment_id>')
 docs.register(CommentService)
 api.add_resource(CommentListService, '/list/comment/')
 docs.register(CommentListService)
+api.add_resource(ListCommentsByEventService, '/list/comment/<event_id>')
+docs.register(ListCommentsByEventService)
 #*______________ Application Creation ______________
 if __name__ == '__main__':
     app.run(debug=True)
