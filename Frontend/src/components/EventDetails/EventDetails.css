@@ -378,3 +378,145 @@
   white-space: nowrap;
 }
 
+.make-comments {
+  background-color: var(--white);
+  display: flex;
+  height: 134px;
+  width: 1017px;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+.make-comments_-textfield {
+  background-color: transparent;
+  resize: none;
+  border: none;
+  min-width: 880px;
+  flex: 1;
+  letter-spacing: 0;
+  line-height: 30px;
+  margin-bottom: 12px;
+  margin-left: 20px;
+  margin-right: 18px;
+  margin-top: 14px;
+  padding: 0;
+}
+
+.make-comments_-textfield::placeholder {
+  color: #a9bcc699;
+}
+
+.make-comments {
+  background-color: var(--white);
+  display: flex;
+  height: 134px;
+  justify-content: flex-end;
+  position: relative;
+  width: 1017px;
+}
+
+.place {
+  color: var(--cerise);
+  font-family: var(--font-family-montserrat);
+  font-size: 20px;
+  font-weight: 500;
+  height: 26px;
+  letter-spacing: 0;
+  line-height: 20px;
+  margin-right: 18px;
+  margin-top: 22px;
+  white-space: nowrap;
+  width: 47px;
+}
+
+.comment {
+  align-items: center;
+  display: flex;
+  height: 60px;
+  margin-top: 30px;
+  min-width: 982px;
+}
+
+.comment_-container {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5px;
+  min-height: 54px;
+  width: 124px;
+}
+
+.comment_-titel {
+  letter-spacing: 0;
+  line-height: 25px;
+  min-height: 32px;
+  white-space: nowrap;
+}
+
+.comment_-date {
+  letter-spacing: 0;
+  line-height: 15px;
+  margin-top: 2px;
+  min-height: 21px;
+  white-space: nowrap;
+}
+
+.comment_-text {
+  align-self: flex-end;
+  height: 62px;
+  letter-spacing: 0;
+  line-height: 25px;
+  margin-bottom: -2px;
+  margin-left: 18px;
+  width: 842px;
+}
+
+.comment-1 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  min-height: 242px;
+  position: relative;
+  width: 982px;
+}
+
+.comment-2 {
+  align-items: center;
+  display: flex;
+  height: 60px;
+  min-width: 984px;
+}
+
+.comment_-container-1 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5px;
+  min-height: 54px;
+  width: 124px;
+}
+
+.comment_-titel-1 {
+  letter-spacing: 0;
+  line-height: 25px;
+  min-height: 32px;
+  white-space: nowrap;
+}
+
+.comment_-date-1 {
+  letter-spacing: 0;
+  line-height: 15px;
+  margin-top: 2px;
+  min-height: 21px;
+  white-space: nowrap;
+}
+
+.comment_-text-1 {
+  align-self: flex-end;
+  height: 62px;
+  letter-spacing: 0;
+  line-height: 25px;
+  margin-bottom: -2px;
+  margin-left: 18px;
+  width: 842px;
+}

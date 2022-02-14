@@ -45,6 +45,7 @@ function App() {
   const [searchResult, setSearchResult] = useState('')
   const [sortBy, setSortBy] = useState('')
   const [foundEvents, setFoundEvents] = useState([])
+  const [eventComment, setEventComment] =useState([])
 
   async function handleConnect() {
     try {
@@ -102,6 +103,10 @@ function App() {
     }
     
   }
+  const handleComment = (childdata) => {
+    setEventComment({childdata})
+  }
+
   const handleSaveData = () => {
     saveEvent();
   }
@@ -154,6 +159,32 @@ function App() {
       setAllEvents(data)
       const result = data.sort((a, b) => (a.id < b.id) ? 1 : -1)
       setFoundEvents(result)
+    })
+  }
+
+  const handlePostComment = (childdata) => {
+    console.log("handlePost")
+    postComment(childdata)
+  }
+
+  function postComment(childdata){
+    const day = new Date()
+    fetch('/comment/' + childdata, {
+      method: "POST",
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({ 
+        content: eventComment,
+        date: day.getDay(),
+        event_id: childdata,
+        username: account
+      })
+    })
+    .then((response) => response.json()
+    )
+    .then((result) => {
+      
     })
   }
 
@@ -314,6 +345,9 @@ function App() {
           details_picture={details_picture}
           account={account}
           handleConnect={handleConnect}
+          handlePostComment={handlePostComment}
+          handleComment={handleComment}
+          eventComment={eventComment}
           />
         </Route>
       </Switch>
