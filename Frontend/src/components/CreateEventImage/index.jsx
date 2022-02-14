@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import "./CreateEventImage.css";
 
 function CreateEventImage(props) {
-  const { pagetitel_Image, dropimage_Text, uploadbutton_Text, donebutton_Text, eventImage, handleEventImage, handleSaveData } = props;
+  const { pagetitel_Image, dropimage_Text, uploadbutton_Text, donebutton_Text, eventImage, handleEventImage, handleSaveData, handleLoadData } = props;
 
   return (
     <div className="createevent-image screen">
       <div className="page-titel_-image montserrat-medium-black-40px">{pagetitel_Image}</div>
       <div className="upload border-1px-dove-gray">
         <div className="upload-image">
-          <img width={"200px"} height={"100px"} src={eventImage}/>
+          <img width={"150px"} height={"150px"} src={eventImage}/>
           <input
             className="upload-file"
             type="file"

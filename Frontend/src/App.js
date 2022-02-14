@@ -1,8 +1,11 @@
 import "./App.css";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
+import { Switch, BrowserRouter as Router, Route, useLocation } from "react-router-dom";
 import { BrowserView, MobileView } from 'react-device-detect';
+
+import { useWeb3React } from "@web3-react/core"
+import { injected } from "./components/wallet/Connectors"
 
 import Landing from "./components/Landing";
 import LandingMobile from "./components/LandingMobile";
@@ -22,6 +25,8 @@ import details_picture from "./static/img/details-picture.png"
 
 
 function App() {
+  const { active, account, library, connector, activate, deactivate } = useWeb3React()
+
   const [hostName, setHostName] = useState('')
   const [eventName, setEventName] = useState('')
   const [eventDescription, setEventDescription] = useState('')
@@ -37,6 +42,17 @@ function App() {
   const [eventPrice, setEventPrice] = useState('')
   const [eventImage, setEventImage] = useState(null)
   const [allEvents, setAllEvents] = useState([])
+  const [searchResult, setSearchResult] = useState('')
+  const [sortBy, setSortBy] = useState('')
+  const [foundEvents, setFoundEvents] = useState([])
+
+  async function handleConnect() {
+    try {
+      await activate(injected)
+    } catch (ex) {
+      console.log(ex)
+    }
+  }
 
   const handleHostName = (childdata) => {
     setHostName({childdata});
@@ -116,8 +132,16 @@ function App() {
     .then((response) => response.json()
     )
     .then((result) => {
-      console.log(eventImage)
-      console.log(result)
+      if(eventImage == null){
+        fetch('/image/' + result.id, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => response.json())
+        .then(data => {loadData()})
+      }else{
+        loadData()
+      }
     })
   }
 
@@ -128,21 +152,68 @@ function App() {
   function loadData(){
     fetch('/list/event').then(res => res.json()).then(data => {
       setAllEvents(data)
+      const result = data.sort((a, b) => (a.id < b.id) ? 1 : -1)
+      setFoundEvents(result)
     })
   }
 
-  useEffect(() => {
-    console.log("useEffect triggered")
-    handleLoadData()
-  }, [allEvents.length])
-  
+  const handleScrollTop = () => {
+    window.scrollTo(0, 0)
+  }
 
+  const filter = (e) => {
+    const keyword = e.target.value;
+
+    if (keyword !== '') {
+      const results = allEvents.filter((obj) => {
+        return obj.name.toLowerCase().includes(keyword.toLowerCase()) || obj.lineup.toLowerCase().includes(keyword.toLowerCase()) || obj.description.toLowerCase().includes(keyword.toLowerCase());
+      });
+      setFoundEvents(results);
+    } else {
+      setFoundEvents(allEvents);
+    }
+
+    setSearchResult(keyword);
+  };
+
+  const handleSort = (e) => {
+    const sortResult = e.target.value;
+    let result = []
+    setSortBy(sortResult)
+
+    if(sortResult == "newestFirst"){
+      result = foundEvents.sort((a, b) => (a.id < b.id) ? 1 : -1)
+    }
+    else if(sortResult == "oldestFFirst"){
+      result = foundEvents.sort((a, b) => (a.id > b.id) ? 1 : -1)
+    }
+    else if(sortResult == "byName"){
+      result = foundEvents.sort((a, b) => a.name > b.name ? 1 : -1)
+    }
+    setFoundEvents(result)
+  }
+
+  useEffect(() => {
+    handleLoadData()
+    setSortBy("newestFirst")
+
+  }, [allEvents.length])
+
+  useEffect(() =>{
+    if(window.location.pathname != '/' && account == null){
+      handleConnect()
+    }
+  }, [account])
+  
   return (
     <Router>
       <Switch>
         <Route path="/:path(|landing)">
           <BrowserView>
-            <Landing {...landingData} />
+            <Landing 
+              {...landingData}
+              handleConnect={handleConnect}
+            />
           </BrowserView>
           <MobileView>
             <LandingMobile {...landingMobileData} />
@@ -155,6 +226,7 @@ function App() {
             guest_Text="I'm a" 
             guestbutton_Text="GUEST"
             handleLoadData={handleLoadData}
+            account={account}
           />
         </Route>
         <Route path="/createevent-generalinformation">
@@ -218,6 +290,7 @@ function App() {
             handleEventImage={handleEventImage}
             eventImage={eventImage}
             handleSaveData={handleSaveData}
+            handleLoadData={handleLoadData}
           />
         </Route>
         <Route path="/chainofevents">
@@ -225,13 +298,22 @@ function App() {
             {...chainOfEventsData}
             default_picture={default_picture}
             handleLoadData={handleLoadData}
-            allEvents={allEvents}
+            allEvents={foundEvents}
+            searchResult={searchResult}
+            filter={filter}
+            handleScrollTop={handleScrollTop}
+            sortBy={sortBy}
+            handleSort={handleSort}
+            account={account}
+            handleConnect={handleConnect}
           />
         </Route>
         <Route path="/eventdetails">
           <EventDetails 
           {...eventDetailsData}
           details_picture={details_picture}
+          account={account}
+          handleConnect={handleConnect}
           />
         </Route>
       </Switch>
@@ -241,7 +323,7 @@ function App() {
 
 export default App;
 const landingData = {
-    banner_Text: "Test the Project NOW (click here)",
+    banner_Text: "Test the Project NOW (connect)",
     logo: logo,
     about_Text: "Who we are",
     pfad5: about_icon,
@@ -250,7 +332,7 @@ const landingData = {
     project_Text: "The Project",
     projecttext_Text: "We are launching Acc.eth – reclaiming culture. The Acc.Eth DAO It is a decentralised Application that is there to kickstart the event economy once the battle on the virus is won: We want to allow communities to buy event tickets wholesale and manage the event risk in a secure and fan-friendly way. We hope to inspire a decentralised network of evergrowing user content around the world.",
     cta_Text1: "Want to join the project, test, hack or just give feedback?",
-    cta_Button_Text: "Try NOW",
+    cta_Button_Text: "CONNECT",
     cta_Text2: "Or just mail us:",
     cta_Mail: "roman (ä) make-europe.com",
 };

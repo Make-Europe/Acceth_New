@@ -37,6 +37,15 @@
   width: 126px;
 }
 
+.host-button2 {
+  background-color: gray;
+  cursor: pointer;
+  display: flex;
+  height: 77px;
+  margin-top: 22px;
+  width: 126px;
+}
+
 .place {
   flex: 1;
   letter-spacing: 0;
@@ -91,3 +100,6 @@
   width: 104px;
 }
 
+.info_text {
+  margin-top: 20px;
+}

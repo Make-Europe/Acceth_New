@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import ChainBanner from "../ChainBanner";
 import "./EventDetails.css";
 
@@ -34,63 +35,68 @@ function EventDetails(props) {
     ticketpanel_Expiry_Text,
     ticketpanel_Price_Titel,
     ticketpanel_Price_Text,
-    details_picture
+    details_picture, 
+    account,
+    handleConnect
   } = props;
+
+  const location = useLocation()
+  const { event } = location.state
 
   return (
     <div className="container-center-horizontal">
       <div className="eventdetails screen">
-        <ChainBanner />
-        <div className="details_-titel montserrat-semi-bold-black-50px">{details_Titel}</div>
+        <ChainBanner account={account} handleConnect={handleConnect} />
+        <div className="details_-titel montserrat-semi-bold-black-50px">{location.state.event.name}</div>
         <div className="detail-informations">
-          <img className="details_-picture" src={details_picture} />
+          <img className="details_-picture border-1px-dove-gray" src={location.state.event.image} />
           <div className="details-panel-1 border-1px-dove-gray">
             <div className="detailspanel_host_t-container">
               <div className="details-panel_-host_-titel montserrat-medium-black-25px">{detailspanel_Host_Titel}</div>
-              <div className="details-panel montserrat-normal-black-25px">{detailspanel_Host_Text}</div>
+              <div className="details-panel montserrat-normal-black-25px">{location.state.event.hostName.length >= 30 ? location.state.event.hostName.substring(0,30) + "..." : location.state.event.hostName}</div>
             </div>
             <div className="detailspanel_date_t-container">
               <div className="details-panel_-date_-titel montserrat-medium-black-25px">{detailspanel_Date_Titel}</div>
-              <div className="details-panel montserrat-normal-black-25px">{detailspanel_Date_Text}</div>
+              <div className="details-panel montserrat-normal-black-25px">{location.state.event.date}</div>
             </div>
             <div className="detailspanel_start_t-container">
               <div className="details-panel_-start_-titel montserrat-medium-black-25px">{detailspanel_Start_Titel}</div>
-              <div className="details-panel montserrat-normal-black-25px">{detailspanel_Start_Text}</div>
+              <div className="details-panel montserrat-normal-black-25px">{location.state.event.start}</div>
             </div>
             <div className="detailspanel_end_t-container">
               <div className="details-panel_-end_-titel montserrat-medium-black-25px">{detailspanel_End_Titel}</div>
-              <div className="details-panel montserrat-normal-black-25px">{detailspanel_End_Text}</div>
+              <div className="details-panel montserrat-normal-black-25px">{location.state.event.end}</div>
             </div>
             <div className="detailspanel_location_t-container">
               <div className="details-panel_-location_-titel montserrat-medium-black-25px">
                 {detailspanel_Location_Titel}
               </div>
               <div className="details-panel_-location_-text montserrat-normal-black-25px">
-                {detailspanel_Location_Text}
+                {location.state.event.location}
               </div>
             </div>
             <div className="detailspanel_city_-container">
               <div className="details-panel_-city_-titel montserrat-medium-black-25px">{detailspanel_City_Titel}</div>
               <div className="details-panel_-city_-zip-text montserrat-normal-black-25px">
-                {detailspanel_City_Ziptext}
+                {location.state.event.zipCode}
               </div>
-              <div className="x-panel montserrat-normal-black-25px">{detailspanel_City_Text1}</div>
+              <div className="x-panel montserrat-normal-black-25px">{location.state.event.city}</div>
             </div>
             <div className="detailspanel_-container">
               <div className="details-panel_-street_-titel montserrat-medium-black-25px">
                 {detailspanel_Street_Titel}
               </div>
-              <div className="details-panel montserrat-normal-black-25px">{detailspanel_City_Text2}</div>
+              <div className="details-panel montserrat-normal-black-25px">{location.state.event.street}</div>
             </div>
           </div>
         </div>
         <div className="lineup-panel2 border-1px-dove-gray">
           <div className="lineup-panel_-titel2 montserrat-medium-black-25px">{lineuppanel_Titel}</div>
-          <div className="lineup-panel_-text2 montserrat-normal-black-25px">{lineuppanel_Text}</div>
+          <div className="lineup-panel_-text2 montserrat-normal-black-25px">{location.state.event.lineup}</div>
         </div>
         <div className="information-panel2 border-1px-dove-gray">
           <div className="information-panel_-titel2 montserrat-medium-black-25px">{informationpanel_Titel}</div>
-          <div className="information-panel_-text2 montserrat-normal-black-25px">{informationpanel_Text}</div>
+          <div className="information-panel_-text2 montserrat-normal-black-25px">{location.state.event.description}</div>
         </div>
         <div className="buy-ticket-panel">
           <div className="ticket-container">
@@ -109,19 +115,16 @@ function EventDetails(props) {
                   {ticketpanel_Capacity_Titel}
                 </div>
                 <div className="ticket-panel_-capacity_-current_-text montserrat-normal-black-25px">
-                  {ticketpanel_Capacity_Current_Text}
-                </div>
-                <div className="ticket-panel_-capacity_-total_-text montserrat-normal-black-25px">
-                  {ticketpanel_Capacity_Total_Text}
+                  {ticketpanel_Capacity_Current_Text} / {location.state.event.capacity}
                 </div>
               </div>
               <div className="ticketpanel_-container">
                 <div className="ticket-panel_-expiry_-titel montserrat-medium-black-25px">
                   {ticketpanel_Expiry_Titel}
                 </div>
-                <div className="ticket-panel_-expiry_-text montserrat-normal-black-25px">{ticketpanel_Expiry_Text}</div>
+                <div className="ticket-panel_-expiry_-text montserrat-normal-black-25px">{location.state.event.date} {location.state.event.end} </div>
                 <div className="ticket-panel_-price_-titel montserrat-medium-black-25px">{ticketpanel_Price_Titel}</div>
-                <div className="x-panel montserrat-normal-black-25px">{ticketpanel_Price_Text}</div>
+                <div className="x-panel montserrat-normal-black-25px">{location.state.event.price} CELO</div>
               </div>
             </div>
           </div>
