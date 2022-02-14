@@ -33,6 +33,14 @@ class Event(db.Model):
     locationName = db.Column(db.String(50))
     date = db.Column(db.String(50))
 
+class Comment(db.Model):
+    __tablename__ = "Comment" 
+    id = db.Column(db.Integer, primary_key=True)
+    event_id = db.Column(db.Integer, db.ForeignKey("Event.id"), nullable = False)
+    content = db.Column(db.String())
+    date = db.Column(db.String())
+    username = db.Column(db.String())
+
 class Host(db.Model):
     __tablename__ = "Host" 
     id = db.Column(db.Integer, primary_key=True)
