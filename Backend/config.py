@@ -35,7 +35,7 @@ spec = APISpec(
         #openapi_version="3.0.3",
         openapi_version="2.0.0",
     )
-api_key_scheme = {"type": "apiKey", "in": "header", "name": "key"}
+api_key_scheme = {"type": "apiKey", "in": "header", "name": "X-CSRF-TOKEN"}
 spec.components.security_scheme("ApiKeyAuth", api_key_scheme)
 app.config.update({
     'APISPEC_SPEC': spec,
