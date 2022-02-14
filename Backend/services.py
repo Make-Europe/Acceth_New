@@ -7,10 +7,22 @@ from flask_restful import Resource, Api, reqparse
 from schemes import (EventResponseSchema, EventSchema, HostResponseSchema, HostSchema, UserSchema, 
                     UserResponseSchema, Relation_UserHost_Schema, Relation_UserHost_ResponseSchema, Relation_EventHost_Schema, Relation_EventHost_ResponseSchema,
                     Relation_EventTicket_Schema, Relation_EventTicket_ResponseSchema, CountSchema, CountResponseSchema)
-from config import db
+from config import db, api
 from models import Count, User, Host, Event, Relation_UserHost, Relation_EventTicket, Relation_EventHost
 from imagery import insertRandomImage
+from flask_httpauth import HTTPTokenAuth
 
+auth = HTTPTokenAuth(scheme='Bearer')
+tokens = {
+    "key": "john",
+    "key": "susan"
+}
+
+@auth.verify_token
+def verify_token(token):
+    if token in tokens:
+        return tokens[token]
+        
 #!______________ User ______________
 class UserService(MethodResource, Resource):
     @doc(description='Get User by User_id', tags=['User'])
@@ -45,6 +57,7 @@ class UserService(MethodResource, Resource):
         return UserSchema().dump(user)
 
 class UserListService(MethodResource, Resource):
+    @auth.login_required()
     @doc(description='Get a List of all User', tags=['List'])
     @marshal_with(UserResponseSchema(many=True))
     def get(self):

@@ -8,32 +8,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from services import (Relation_EventHost_Service, Relation_EventTicket_Service, UserService, UserListService, HostService, 
                     EventService, HostListService, EventListService, Relation_UserHost_Service, CountService, CountListService, EventImageService)
+from config import api, docs, app
 
-#*______________ App Setup ______________
-app = Flask(__name__)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#*______________ DB Setup ______________
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///acceth.db'
-db = SQLAlchemy(app)
-
-#*______________ Marshmallow Setup ______________
-ma = Marshmallow(app)
-
-#*______________ API & Swagger Setup ______________
-api = Api(app)
-app.config.update({
-    'APISPEC_SPEC': APISpec(
-        title='Acceth Backend',
-        version='v0.0.1',
-        plugins=[MarshmallowPlugin()],
-        openapi_version='2.0.0'
-    ),
-    'APISPEC_SWAGGER_URL': '/swagger/',
-    'APISPEC_SWAGGER_UI_URL': '/swagger-ui/'
-})
-
-#*______________ Docs Setup ______________
-docs = FlaskApiSpec(app)
+#*______________ App Setup _____________
 
 
 
