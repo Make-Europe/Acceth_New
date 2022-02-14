@@ -1,14 +1,13 @@
 from typing import Counter
-import werkzeug
-from flask import send_from_directory
+from xml.etree.ElementTree import Comment
 from flask_apispec import marshal_with, doc, use_kwargs
 from flask_apispec.views import MethodResource
 from flask_restful import Resource, Api, reqparse
 from schemes import (EventResponseSchema, EventSchema, HostResponseSchema, HostSchema, UserSchema, 
                     UserResponseSchema, Relation_UserHost_Schema, Relation_UserHost_ResponseSchema, Relation_EventHost_Schema, Relation_EventHost_ResponseSchema,
-                    Relation_EventTicket_Schema, Relation_EventTicket_ResponseSchema, CountSchema, CountResponseSchema)
+                    Relation_EventTicket_Schema, Relation_EventTicket_ResponseSchema, CountSchema, CountResponseSchema, Commentschema, CommentResponseSchema)
 from config import db
-from models import Count, User, Host, Event, Relation_UserHost, Relation_EventTicket, Relation_EventHost
+from models import Count, User, Host, Event, Relation_UserHost, Relation_EventTicket, Relation_EventHost, Comment
 from imagery import insertRandomImage
 
 #!______________ User ______________
@@ -50,6 +49,53 @@ class UserListService(MethodResource, Resource):
     def get(self):
         users = db.session.query(User).all()
         return UserSchema(many=True).dump(users)
+
+#!______________ Comment ______________
+class CommentService(MethodResource, Resource):
+    @doc(description='Get Comment by Comment_id', tags=['Comment'])
+    @marshal_with(CommentResponseSchema)
+    def get(self, comment_id):
+        comment = db.session.query(Comment).get(comment_id)
+        return Commentschema().dump(comment)
+
+    @doc(description='Add new Comment', tags=['Comment'])
+    @use_kwargs(Commentschema, location=('json'))
+    @marshal_with(CommentResponseSchema())
+    def post(self, comment, comment_id):
+        db.session.add(comment)
+        db.session.commit()
+        return Commentschema().dump(comment)
+    
+    @doc(description='Update Comment with PUT', tags=['Comment'])
+    @use_kwargs(Commentschema, location=('json'))
+    @marshal_with(CommentResponseSchema())
+    def put(self, comment, comment_id):
+        db.session.add(comment)
+        db.session.commit()
+        return Commentschema().dump(comment)
+
+    @doc(description='Delete existing Comment', tags=['Comment'])
+    @use_kwargs(Commentschema, location=('json'))
+    @marshal_with(CommentResponseSchema())
+    def delete(self, comment, comment_id):
+        comment = db.session.query(Comment).get(comment)
+        db.session.delete(comment)
+        db.session.commit()
+        return Commentschema().dump(comment)
+
+class CommentListService(MethodResource, Resource):
+    @doc(description='Get a List of all Comments', tags=['List'])
+    @marshal_with(CommentResponseSchema(many=True))
+    def get(self):
+        comments = db.session.query(Comment).all()
+        return Commentschema(many=True).dump(comments)
+
+class ListCommentsByEventService(MethodResource, Resource):
+    @doc(description='Get a List of all Comments of a specific Event', tags=['List'])
+    @marshal_with(CommentResponseSchema(many=True))
+    def get(self, event_id):
+        comments = db.session.query(Comment).filter_by(event_id=event_id).all()
+        return Commentschema(many=True).dump(comments)
 
 
 #!______________ Host ______________

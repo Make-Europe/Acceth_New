@@ -3,7 +3,7 @@ from lib2to3.pytree import Base
 from types import CoroutineType
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from config import db
-from models import User, Event, Host, Relation_EventHost, Relation_EventTicket, Relation_UserHost, Count
+from models import User, Event, Host, Relation_EventHost, Relation_EventTicket, Relation_UserHost, Count, Comment
 from marshmallow import Schema, fields
 
 #*______________ Base Schema ______________
@@ -26,6 +26,21 @@ class UserInsertSchema(UserSchema):
     user_id = fields.Int()
 class UserResponseSchema(UserSchema):
     name = fields.Str()
+
+#*______________ Comment Schemes ______________
+class Commentschema(BaseScheme):
+    class Meta(BaseScheme.Meta):
+        model = Comment
+    id = fields.Int()
+    content = fields.Str()
+    date = fields.Str()
+    username = fields.Str()
+class CommentInsertSchema(UserSchema):
+    event_id = fields.Int()
+class CommentResponseSchema(UserSchema):
+    content = fields.Str()
+    date = fields.Str()
+    username = fields.Str()
 
 
 #*______________ Event Schemes ______________

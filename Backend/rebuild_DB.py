@@ -1,4 +1,4 @@
-import os, requests, json, tqdm
+import os
 from config import db
 from termcolor import colored
 from models import User, Event, Host, Relation_EventHost, Relation_EventTicket, Relation_UserHost
