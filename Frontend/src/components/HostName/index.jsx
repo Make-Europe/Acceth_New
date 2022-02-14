@@ -4,7 +4,6 @@ import app from "../../App.js"
 
 function HostName(props) {
   const { inputPlaceholder, className, childToParent, currentValue , fieldType} = props;
-  console.log(currentValue)
   if(currentValue == ''){
     return (
       <div className={`host-name border-1px-dove-red ${className || ""}`}>

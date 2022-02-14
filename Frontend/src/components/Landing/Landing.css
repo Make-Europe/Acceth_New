@@ -1,16 +1,20 @@
 .landing {
-  align-items: flex-start;
+  align-items: center;
+  align-content: center;
   background-color: var(--white);
   display: flex;
   flex-direction: column;
   height: 2777px;
-  width: 1280px;
+  width: 100%;
 }
 
 .overlap-group-logo {
   height: 860px;
   position: relative;
-  width: 1280px;
+  align-self: center;
+  align-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .banner {
@@ -18,12 +22,10 @@
   background-color: var(--cerise);
   display: flex;
   height: 60px;
-  justify-content: flex-end;
-  left: 0;
-  min-width: 1280px;
-  padding: 10.5px 428px;
+  justify-content: center;
+  width: 100%;
+  padding: 10.5px;
   position: absolute;
-  top: 0;
 }
 
 .banner-text {
@@ -34,17 +36,19 @@
   letter-spacing: 0;
   line-height: 25px;
   min-height: 32px;
-  min-width: 422px;
   text-align: center;
   white-space: nowrap;
 }
 
 .overlap-group-image {
+  display: flex;
   height: 827px;
-  left: 0;
   position: absolute;
-  top: 33px;
-  width: 1280px;
+  top: 100px;
+  width: 100%;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .background-image {
@@ -53,22 +57,20 @@
   left: 0;
   position: absolute;
   top: 27px;
-  width: 1280px;
+  width: 100%;
 }
 
 .logo {
+  display: flex;
   height: 780px;
-  left: 230px;
-  object-fit: cover;
   position: absolute;
-  top: 0;
-  width: 800px;
 }
 
 .overlap-group-container {
   height: 1850px;
   position: relative;
   width: 1280px;
+  margin-top: 50px;
 }
 
 .overlap-group-content {
@@ -241,7 +243,7 @@
   display: flex;
   height: 83px;
   margin-top: 64px;
-  width: 200px;
+  width: 220px;
 }
 
 .cta-button-text {

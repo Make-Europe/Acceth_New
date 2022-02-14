@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Landing.css";
 
@@ -16,6 +16,7 @@ function Landing(props) {
     cta_Button_Text,
     cta_Text2,
     cta_Mail,
+    handleConnect
   } = props;
 
   return (
@@ -23,7 +24,7 @@ function Landing(props) {
       <div className="landing screen">
         <div className="overlap-group-logo">
           <Link to="/selection">
-            <div className="banner">
+            <div className="banner" onClick={handleConnect}>
               <div className="banner-text">{banner_Text}</div>
             </div>
           </Link>
@@ -57,7 +58,7 @@ function Landing(props) {
             <div className="cta">
               <div className="cta-titel montserrat-normal-black-35px">{cta_Text1}</div>
               <Link to="/selection">
-                <div className="cta-button">
+                <div className="cta-button" onClick={handleConnect}>
                   <div className="cta-button-text">{cta_Button_Text}</div>
                 </div>
               </Link>

@@ -35,7 +35,9 @@ function EventDetails(props) {
     ticketpanel_Expiry_Text,
     ticketpanel_Price_Titel,
     ticketpanel_Price_Text,
-    details_picture
+    details_picture, 
+    account,
+    handleConnect
   } = props;
 
   const location = useLocation()
@@ -44,14 +46,14 @@ function EventDetails(props) {
   return (
     <div className="container-center-horizontal">
       <div className="eventdetails screen">
-        <ChainBanner />
+        <ChainBanner account={account} handleConnect={handleConnect} />
         <div className="details_-titel montserrat-semi-bold-black-50px">{location.state.event.name}</div>
         <div className="detail-informations">
           <img className="details_-picture border-1px-dove-gray" src={location.state.event.image} />
           <div className="details-panel-1 border-1px-dove-gray">
             <div className="detailspanel_host_t-container">
               <div className="details-panel_-host_-titel montserrat-medium-black-25px">{detailspanel_Host_Titel}</div>
-              <div className="details-panel montserrat-normal-black-25px">{location.state.event.hostName}</div>
+              <div className="details-panel montserrat-normal-black-25px">{location.state.event.hostName.length >= 30 ? location.state.event.hostName.substring(0,30) + "..." : location.state.event.hostName}</div>
             </div>
             <div className="detailspanel_date_t-container">
               <div className="details-panel_-date_-titel montserrat-medium-black-25px">{detailspanel_Date_Titel}</div>

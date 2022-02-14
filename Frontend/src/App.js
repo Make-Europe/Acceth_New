@@ -1,8 +1,11 @@
 import "./App.css";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
+import { Switch, BrowserRouter as Router, Route, useLocation } from "react-router-dom";
 import { BrowserView, MobileView } from 'react-device-detect';
+
+import { useWeb3React } from "@web3-react/core"
+import { injected } from "./components/wallet/Connectors"
 
 import Landing from "./components/Landing";
 import LandingMobile from "./components/LandingMobile";
@@ -22,6 +25,8 @@ import details_picture from "./static/img/details-picture.png"
 
 
 function App() {
+  const { active, account, library, connector, activate, deactivate } = useWeb3React()
+
   const [hostName, setHostName] = useState('')
   const [eventName, setEventName] = useState('')
   const [eventDescription, setEventDescription] = useState('')
@@ -40,6 +45,14 @@ function App() {
   const [searchResult, setSearchResult] = useState('')
   const [sortBy, setSortBy] = useState('')
   const [foundEvents, setFoundEvents] = useState([])
+
+  async function handleConnect() {
+    try {
+      await activate(injected)
+    } catch (ex) {
+      console.log(ex)
+    }
+  }
 
   const handleHostName = (childdata) => {
     setHostName({childdata});
@@ -185,14 +198,22 @@ function App() {
     setSortBy("newestFirst")
 
   }, [allEvents.length])
-  
 
+  useEffect(() =>{
+    if(window.location.pathname != '/' && account == null){
+      handleConnect()
+    }
+  }, [account])
+  
   return (
     <Router>
       <Switch>
         <Route path="/:path(|landing)">
           <BrowserView>
-            <Landing {...landingData} />
+            <Landing 
+              {...landingData}
+              handleConnect={handleConnect}
+            />
           </BrowserView>
           <MobileView>
             <LandingMobile {...landingMobileData} />
@@ -205,6 +226,7 @@ function App() {
             guest_Text="I'm a" 
             guestbutton_Text="GUEST"
             handleLoadData={handleLoadData}
+            account={account}
           />
         </Route>
         <Route path="/createevent-generalinformation">
@@ -282,12 +304,16 @@ function App() {
             handleScrollTop={handleScrollTop}
             sortBy={sortBy}
             handleSort={handleSort}
+            account={account}
+            handleConnect={handleConnect}
           />
         </Route>
         <Route path="/eventdetails">
           <EventDetails 
           {...eventDetailsData}
           details_picture={details_picture}
+          account={account}
+          handleConnect={handleConnect}
           />
         </Route>
       </Switch>
@@ -297,7 +323,7 @@ function App() {
 
 export default App;
 const landingData = {
-    banner_Text: "Test the Project NOW (click here)",
+    banner_Text: "Test the Project NOW (connect)",
     logo: logo,
     about_Text: "Who we are",
     pfad5: about_icon,
@@ -306,7 +332,7 @@ const landingData = {
     project_Text: "The Project",
     projecttext_Text: "We are launching Acc.eth – reclaiming culture. The Acc.Eth DAO It is a decentralised Application that is there to kickstart the event economy once the battle on the virus is won: We want to allow communities to buy event tickets wholesale and manage the event risk in a secure and fan-friendly way. We hope to inspire a decentralised network of evergrowing user content around the world.",
     cta_Text1: "Want to join the project, test, hack or just give feedback?",
-    cta_Button_Text: "Try NOW",
+    cta_Button_Text: "CONNECT",
     cta_Text2: "Or just mail us:",
     cta_Mail: "roman (ä) make-europe.com",
 };

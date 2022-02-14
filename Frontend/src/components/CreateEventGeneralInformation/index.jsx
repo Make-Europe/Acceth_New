@@ -22,7 +22,6 @@ function CreateEventGeneralInformation(props) {
   } = props;
 
   if(hostName == '' || eventName == '' || eventDescription == '' || eventLineup == ''){
-    console.log("no")
     return (
       <div className="createevent-generalinformation screen">
       <div className="page-titel_-general montserrat-medium-black-40px">{pagetitel_General}</div>
@@ -40,7 +39,6 @@ function CreateEventGeneralInformation(props) {
     )
   }
   else{
-    console.log("yes")
     return (
       <div className="createevent-generalinformation screen">
         <div className="page-titel_-general montserrat-medium-black-40px">{pagetitel_General}</div>

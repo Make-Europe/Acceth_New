@@ -6,6 +6,14 @@ function Gruppe5(props) {
   const { className, event } = props;
 
   return (
+    <Link
+        to={{
+          pathname: "/eventdetails",
+          state: {
+            event: (event),
+          },
+        }}
+      >
     <div className={`gruppe-5-1 ${className || ""}`}>
       <img className="event_-picture border-1px-dove-gray" src={event.image} />
       <div className="flex-col">
@@ -21,14 +29,6 @@ function Gruppe5(props) {
         </div>
         <div className="event_-lineup montserrat-medium-black-20px">{event.lineup.length >= 50 ? event.lineup.substring(0, 50) + " ..." : event.lineup}</div>
       </div>
-      <Link
-        to={{
-          pathname: "/eventdetails",
-          state: {
-            event: (event),
-          },
-        }}
-      >
         <div className="overlap-group border-1px-dove-gray">
           <div className="more_-text montserrat-medium-black-30px">
             Find
@@ -38,8 +38,8 @@ function Gruppe5(props) {
             More
           </div>
         </div>
-      </Link>
     </div>
+    </Link>
   );
 }
 

@@ -20,13 +20,15 @@ function ChainOfEvents(props) {
     handleScrollTop,
     handleSort,
     sortBy,
-    allEvents
+    allEvents,
+    account,
+    handleConnect
   } = props;
 
   return (
     <div className="container-center-horizontal">
       <div className="chainofevents screen">
-        <ChainBanner />
+        <ChainBanner account={account} handleConnect={handleConnect} />
         <h1 className="chain-of-events_-titel montserrat-semi-bold-black-50px">{chainofevents_Titel}</h1>
         <div className="flex-row">
           <div className="search border-1px-dove-gray">
