@@ -37,7 +37,10 @@ function EventDetails(props) {
     ticketpanel_Price_Text,
     details_picture, 
     account,
-    handleConnect
+    handleConnect,
+    handleComment,
+    handlePostComment,
+    eventComment
   } = props;
 
   const location = useLocation()
@@ -127,6 +130,29 @@ function EventDetails(props) {
                 <div className="x-panel montserrat-normal-black-25px">{location.state.event.price} CELO</div>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="make-comments border-1px-dove-gray">
+          <textarea
+            className="make-comments_-textfield montserrat-medium-tower-gray-30px"
+            name="makecomments_textfield1"
+            placeholder="Add a comment.."
+            type="text"
+            value={eventComment.childdata ? eventComment.childdata : ''}
+            onInput={e => handleComment(e.target.value)}
+            required
+          ></textarea>
+          <div className="place" onClick={() => handlePostComment(location.state.event.id)} >
+            Post
+          </div>
+        </div>
+        <div className="comment-1">
+          <div className="comment-2">
+            <div className="comment_-container-1">
+              <h1 className="comment_-titel-1 montserrat-medium-black-25px">0x3D4A:</h1>
+              <div className="comment_-date-1 montserrat-medium-tower-gray-15px">05/04/2022 10:13</div>
+            </div>
+            <div className="comment_-text-1 montserrat-normal-black-25px">Das Sommerschein-Team freut sich dieses Jahr wieder ein Festival für euch zu organisieren.</div>
           </div>
         </div>
       </div>
