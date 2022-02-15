@@ -6,8 +6,6 @@ from apispec.ext.marshmallow import MarshmallowPlugin
 from flask_apispec.extension import FlaskApiSpec
 from flask_marshmallow import Marshmallow
 from flask_sqlalchemy import SQLAlchemy
-
-
 #*______________ App Setup ______________
 app = Flask(__name__, static_url_path='/static')
 

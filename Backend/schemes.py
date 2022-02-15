@@ -31,7 +31,6 @@ class UserResponseSchema(UserSchema):
 class Commentschema(BaseScheme):
     class Meta(BaseScheme.Meta):
         model = Comment
-    id = fields.Int()
     content = fields.Str()
     date = fields.Str()
     username = fields.Str()
