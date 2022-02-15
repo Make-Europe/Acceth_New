@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ChainBanner from "../ChainBanner";
 import "./EventDetails.css";
@@ -40,8 +41,17 @@ function EventDetails(props) {
     handleConnect,
     handleComment,
     handlePostComment,
-    eventComment
+    eventComment,
+    handleBuyTicket
   } = props;
+
+  const [comments, setComments] = useState([])
+  useEffect(() =>{
+    fetch('/list/comment/' + location.state.event.id).then(res => res.json()).then(data => {
+      const result = data.sort((a, b) => (a.id < b.id) ? 1 : -1)
+      setComments(result)
+    })
+  }, [])
 
   const location = useLocation()
   const { event } = location.state
@@ -103,7 +113,7 @@ function EventDetails(props) {
         </div>
         <div className="buy-ticket-panel">
           <div className="ticket-container">
-            <div className="buy-ticket border-1px-dove-gray">
+            <div className="buy-ticket border-1px-dove-gray" onClick={() => handleBuyTicket(location.state.event)}>
               <div className="buyticket_-text montserrat-medium-black-30px">{buyticket_Text}</div>
             </div>
             <div className="ticket-panel border-1px-dove-gray">
@@ -140,6 +150,7 @@ function EventDetails(props) {
             type="text"
             value={eventComment.childdata ? eventComment.childdata : ''}
             onInput={e => handleComment(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handlePostComment(location.state.event.id)}
             required
           ></textarea>
           <div className="place" onClick={() => handlePostComment(location.state.event.id)} >
@@ -147,13 +158,16 @@ function EventDetails(props) {
           </div>
         </div>
         <div className="comment-1">
-          <div className="comment-2">
-            <div className="comment_-container-1">
-              <h1 className="comment_-titel-1 montserrat-medium-black-25px">0x3D4A:</h1>
-              <div className="comment_-date-1 montserrat-medium-tower-gray-15px">05/04/2022 10:13</div>
+          {comments.map(value => (
+            <div key={value.id} className="comment-2">
+              <div className="comment_-container-1">
+                <h1 className="comment_-titel-1 montserrat-medium-black-25px">{value.username === null ? "0x0000" : value.username.substring(0, 6)}</h1>
+                <div className="comment_-date-1 montserrat-medium-tower-gray-15px">{value.date.substring(4, 21)}</div>
+              </div>
+              <div className="comment_-text-1 montserrat-normal-black-25px">{value.content}</div>
             </div>
-            <div className="comment_-text-1 montserrat-normal-black-25px">Das Sommerschein-Team freut sich dieses Jahr wieder ein Festival für euch zu organisieren.</div>
-          </div>
+          ))}
+          
         </div>
       </div>
     </div>

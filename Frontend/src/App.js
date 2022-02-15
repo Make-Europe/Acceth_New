@@ -45,7 +45,7 @@ function App() {
   const [searchResult, setSearchResult] = useState('')
   const [sortBy, setSortBy] = useState('')
   const [foundEvents, setFoundEvents] = useState([])
-  const [eventComment, setEventComment] =useState([])
+  const [eventComment, setEventComment] =useState('')
 
   async function handleConnect() {
     try {
@@ -163,8 +163,9 @@ function App() {
   }
 
   const handlePostComment = (childdata) => {
-    console.log("handlePost")
-    postComment(childdata)
+    if(eventComment  !== ''){
+      postComment(childdata)
+    }
   }
 
   function postComment(childdata){
@@ -175,8 +176,8 @@ function App() {
         'Content-type': 'application/json'
       },
       body: JSON.stringify({ 
-        content: eventComment,
-        date: day.getDay(),
+        content: eventComment.childdata,
+        date: day.toString(),
         event_id: childdata,
         username: account
       })
@@ -184,7 +185,7 @@ function App() {
     .then((response) => response.json()
     )
     .then((result) => {
-      
+      window.location.reload(false);
     })
   }
 
@@ -222,6 +223,27 @@ function App() {
       result = foundEvents.sort((a, b) => a.name > b.name ? 1 : -1)
     }
     setFoundEvents(result)
+  }
+
+  const handleBuyTicket = (e) => {
+    console.log("Buy Ticket")
+    fetch('/ticket/' + e.id, {
+      method: "POST",
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({ 
+        content: e.childdata,
+        date: "day.toString()",
+        event_id: e,
+        username: account
+      })
+    })
+    .then((response) => response.json()
+    )
+    .then((result) => {
+      window.location.reload(false);
+    })
   }
 
   useEffect(() => {
@@ -348,6 +370,7 @@ function App() {
           handlePostComment={handlePostComment}
           handleComment={handleComment}
           eventComment={eventComment}
+          handleBuyTicket={handleBuyTicket}
           />
         </Route>
       </Switch>
