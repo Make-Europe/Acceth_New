@@ -21,7 +21,7 @@ function CreateEventGeneralInformation(props) {
     eventLineup
   } = props;
 
-  if(hostName == '' || eventName == '' || eventDescription == '' || eventLineup == ''){
+  if(hostName === '' || eventName === '' || eventDescription === '' || eventLineup === ''){
     return (
       <div className="createevent-generalinformation screen">
       <div className="page-titel_-general montserrat-medium-black-40px">{pagetitel_General}</div>

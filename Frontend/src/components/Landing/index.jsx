@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./Landing.css";
 
@@ -30,7 +30,7 @@ function Landing(props) {
           </Link>
           <div className="overlap-group-image">
             <div className="background-image"></div>
-            <img className="logo" src={logo} />
+            <img alt="" className="logo" src={logo} />
           </div>
         </div>
         <div className="overlap-group-container">
@@ -39,14 +39,14 @@ function Landing(props) {
               <h1 className="about-titel montserrat-semi-bold-white-50px">{about_Text}</h1>
             </div>
             <div className="about-text">
-              <img className="about-icon" src={pfad5} />
+              <img alt="" className="about-icon" src={pfad5} />
               <div className="overlap-group-about">
                 <div className="about-text-text montserrat-normal-black-25px">{abouttext_Text}</div>
               </div>
             </div>
             <div className="project">
               <div className="project-icon">
-                <img className="project-icon-icon" src={pfad4} />
+                <img alt="" className="project-icon-icon" src={pfad4} />
               </div>
               <div className="project-titel montserrat-semi-bold-white-50px">{project_Text}</div>
             </div>

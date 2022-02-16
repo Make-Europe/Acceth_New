@@ -11,7 +11,7 @@ function Selection(props) {
           <div className="host_-text montserrat-medium-black-40px">{host_Text}</div>
           <Link to="/createevent-generalinformation">
             <div className="host-button border-1px-dove-gray">
-              <div className="place montserrat-medium-white-30px">{place}</div>
+              <div className="place2 montserrat-medium-white-30px">{place}</div>
             </div>
           </Link>
         </div>
@@ -32,7 +32,7 @@ function Selection(props) {
         <div className="host">
           <div className="host_-text montserrat-medium-black-40px">{host_Text}</div>
             <div className="host-button2 border-1px-dove-gray">
-              <div className="place montserrat-medium-white-30px">{place}</div>
+              <div className="place2 montserrat-medium-white-30px">{place}</div>
             </div>
             <div className="info_text montserrat-medium-black-20px">Connect wallet to host</div>
         </div>

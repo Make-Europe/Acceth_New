@@ -5,7 +5,8 @@ import "./styleguide.css"
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { Web3ReactProvider } from '@web3-react/core'
+//import { Web3ReactProvider } from '@web3-react/core'
+import { ContractKitProvider } from "@celo-tools/use-contractkit";
 import Web3 from 'web3'
 
 function getLibrary(provider) {
@@ -13,11 +14,18 @@ function getLibrary(provider) {
 }
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Web3ReactProvider getLibrary={getLibrary}>
+  //<React.StrictMode>
+    <ContractKitProvider
+      dapp={{
+        name: "ACC.ETH",
+        description: "Your instant web3 market.",
+        url: "https://acceth.xyz",
+      }}
+    >
       <App />
-    </Web3ReactProvider>
-  </React.StrictMode>,
+    </ContractKitProvider>,
+      
+  //</React.StrictMode>,
   document.getElementById('root')
 );
 

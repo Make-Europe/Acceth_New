@@ -1,10 +1,9 @@
 import React from "react";
 import "./HostName.css";
-import app from "../../App.js"
 
 function HostName(props) {
   const { inputPlaceholder, className, childToParent, currentValue , fieldType} = props;
-  if(currentValue == ''){
+  if(currentValue === ''){
     return (
       <div className={`host-name border-1px-dove-red ${className || ""}`}>
         <input

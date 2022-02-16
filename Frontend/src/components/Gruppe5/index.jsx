@@ -15,7 +15,7 @@ function Gruppe5(props) {
         }}
       >
     <div className={`gruppe-5-1 ${className || ""}`}>
-      <img className="event_-picture border-1px-dove-gray" src={event.image} />
+      <img alt="" className="event_-picture border-1px-dove-gray" src={event.image} />
       <div className="flex-col">
         <div className="flex-row-1">
           <div className="event_-container">
