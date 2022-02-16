@@ -6,8 +6,15 @@ from apispec.ext.marshmallow import MarshmallowPlugin
 from flask_apispec.extension import FlaskApiSpec
 from flask_marshmallow import Marshmallow
 from flask_sqlalchemy import SQLAlchemy
-#*______________ App Setup ______________
+from flask_cors import CORS
+
+#*______________ App Setup _____________    _
 app = Flask(__name__, static_url_path='/static')
+
+api_v1_cors_config = {
+  "origins": ["http://localhost:5000"]
+}
+CORS(app, resources={"/api/*": api_v1_cors_config})
 
 
 #*______________ DB Setup ______________
