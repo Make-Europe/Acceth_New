@@ -25,6 +25,7 @@ class Event(db.Model):
     lineup = db.Column(db.String())
     capacity = db.Column(db.Integer)
     image = db.Column(db.String())
+    imagePath = db.Column(db.String())
     city = db.Column(db.String(50))
     street = db.Column(db.String(50))
     zipCode = db.Column(db.String(50))
@@ -53,6 +54,10 @@ class Host(db.Model):
 class Ticket(db.Model):
     __tablename__ = "Ticket" 
     id = db.Column(db.Integer, primary_key=True)
+    ticket_id = db.Column(db.Integer)
+    event_id = db.Column(db.Integer)
+    image = db.Column(db.String())
+    imagePath = db.Column(db.String())
     
 
 class Relation_EventTicket(db.Model):

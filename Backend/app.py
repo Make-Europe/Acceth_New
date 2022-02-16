@@ -8,7 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from services import (Relation_EventHost_Service, Relation_EventTicket_Service, UserService, UserListService, HostService, 
                     EventService, HostListService, EventListService, Relation_UserHost_Service, CountService, CountListService, EventImageService, 
-                    CommentService, CommentListService, ListCommentsByEventService)
+                    CommentService, CommentListService, ListCommentsByEventService, TicketService)
 
 #*______________ App Setup ______________
 app = Flask(__name__)
@@ -79,6 +79,10 @@ api.add_resource(CommentListService, '/list/comment/')
 docs.register(CommentListService)
 api.add_resource(ListCommentsByEventService, '/list/comment/<event_id>')
 docs.register(ListCommentsByEventService)
+api.add_resource(TicketService, '/ticket/<event_id>/<ticket_id>')
+docs.register(TicketService)
 #*______________ Application Creation ______________
 if __name__ == '__main__':
     app.run(debug=True)
+
+    

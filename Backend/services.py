@@ -3,12 +3,12 @@ from xml.etree.ElementTree import Comment
 from flask_apispec import marshal_with, doc, use_kwargs
 from flask_apispec.views import MethodResource
 from flask_restful import Resource, Api, reqparse
-from schemes import (EventResponseSchema, EventSchema, HostResponseSchema, HostSchema, UserSchema, 
+from schemes import (EventResponseSchema, EventSchema, HostResponseSchema, HostSchema, TicketResponseSchema, TicketSchema, UserSchema, 
                     UserResponseSchema, Relation_UserHost_Schema, Relation_UserHost_ResponseSchema, Relation_EventHost_Schema, Relation_EventHost_ResponseSchema,
                     Relation_EventTicket_Schema, Relation_EventTicket_ResponseSchema, CountSchema, CountResponseSchema, Commentschema, CommentResponseSchema)
 from config import db
 from models import Count, User, Host, Event, Relation_UserHost, Relation_EventTicket, Relation_EventHost, Comment
-from imagery import insertRandomImage
+from imagery import insertRandomImage, createTicket
 
 #!______________ User ______________
 class UserService(MethodResource, Resource):
@@ -49,6 +49,16 @@ class UserListService(MethodResource, Resource):
     def get(self):
         users = db.session.query(User).all()
         return UserSchema(many=True).dump(users)
+
+#!______________ Ticket ______________
+class TicketService(MethodResource, Resource):
+    @doc(description='Add new Ticket', tags=['Ticket'])
+    def post(self, event_id, ticket_id):
+        newTicket = createTicket(event_id, ticket_id)
+        db.session.add(newTicket)
+        db.session.commit()
+        return TicketSchema().dump(newTicket)
+
 
 #!______________ Comment ______________
 class CommentService(MethodResource, Resource):
