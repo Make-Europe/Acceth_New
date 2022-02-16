@@ -291,7 +291,7 @@ acceth.db
 /coverage
 
 # production
-/build
+#/build
 
 # misc
 .DS_Store
