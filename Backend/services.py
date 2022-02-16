@@ -64,7 +64,7 @@ class TicketService(MethodResource, Resource):
     @marshal_with(TicketResponseSchema)
     def get(self, ticket_id):
         ticket = db.session.query(Comment).get(ticket_id)
-        return TicketSchema().dump(ticket)
+        return ticket
 
 
 #!______________ Comment ______________
