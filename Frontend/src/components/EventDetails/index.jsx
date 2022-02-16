@@ -34,11 +34,11 @@ function EventDetails(props) {
   const [comments, setComments] = useState([])
   const [soldTickets, setSoldTickets] = useState(0)
   useEffect(() => {
-    fetch('/list/comment/' + location.state.event.id).then(res => res.json()).then(data => {
+    fetch('/api/list/comment/' + location.state.event.id).then(res => res.json()).then(data => {
       const result = data.sort((a, b) => (a.id < b.id) ? 1 : -1)
       setComments(result)
     })
-    fetch('/count/' + location.state.event.id).then(res => res.json()).then(data => {
+    fetch('/api/count/' + location.state.event.id).then(res => res.json()).then(data => {
       setSoldTickets(data.value)
       handleTicketAmount(data.value)
     })

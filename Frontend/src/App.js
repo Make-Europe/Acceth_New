@@ -122,7 +122,7 @@ function App() {
   }
 
   function saveEvent(){
-    fetch('/event/5', {
+    fetch('/api/event/5', {
       method: "POST",
       headers: {
         'Content-type': 'application/json'
@@ -148,7 +148,7 @@ function App() {
     )
     .then((result) => {
       if(eventImage === null){
-        fetch('/image/' + result.id, {
+        fetch('/api/image/' + result.id, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' }
         })
@@ -158,7 +158,7 @@ function App() {
         loadData()
       }
       console.log(result.id + " " + eventName.childdata + " " + 0)
-      fetch('/count/' + result.id, {
+      fetch('/api/count/' + result.id, {
         method: "POST",
         headers: {
           'Content-type': 'application/json'
@@ -182,7 +182,7 @@ function App() {
   }
 
   function loadData(){
-    fetch('/list/event').then(res => res.json()).then(data => {
+    fetch('/api/list/event').then(res => res.json()).then(data => {
       setAllEvents(data)
       const result = data.sort((a, b) => (a.id < b.id) ? 1 : -1)
       setFoundEvents(result)
@@ -197,7 +197,7 @@ function App() {
 
   function postComment(childdata){
     const day = new Date()
-    fetch('/comment/' + childdata, {
+    fetch('/api/comment/' + childdata, {
       method: "POST",
       headers: {
         'Content-type': 'application/json'
@@ -254,7 +254,7 @@ function App() {
 
   const handleBuyTicket = (e) => {
     console.log("Buy Ticket")
-    fetch('/ticket/' + e.id, {
+    fetch('/api/ticket/' + e.id, {
       method: "POST",
       headers: {
         'Content-type': 'application/json'
@@ -309,7 +309,7 @@ function App() {
               console.log("YOU BOUGHT A TICKET")
               const ticketId = YourContract.methods.awardTicket(address, "https://acceth.xyz/api/ticket/").call().then((value) => {
                 console.log(value, event.id)
-                fetch('/ticket/' + event.id + '/' + value, {
+                fetch('/api/ticket/' + event.id + '/' + value, {
                   method: "POST",
                   headers: {
                     'Content-type': 'application/json'
@@ -317,7 +317,7 @@ function App() {
                 }).then(res => res.json()).then(data => {
                   console.log(data)
                 })
-                fetch('/count/' + event.id, {
+                fetch('/api/count/' + event.id, {
                   method: 'PUT',
                   headers: { 'Content-Type': 'application/json' }
                 })
