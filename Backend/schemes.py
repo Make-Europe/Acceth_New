@@ -68,6 +68,9 @@ class TicketInsertSchema(TicketSchema):
 
 class TicketResponseSchema(TicketSchema):
     name = fields.Str()
+    image = fields.Str()
+    id = fields.Str()
+    ticket_id = fields.Str()
 
 
 #*______________ Host Schemes ______________
