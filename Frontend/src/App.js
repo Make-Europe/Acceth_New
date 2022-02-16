@@ -1,12 +1,14 @@
 import "./App.css";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 import { BrowserView, MobileView } from 'react-device-detect';
 
-import { useWeb3React } from "@web3-react/core"
+//import { useWeb3React } from "@web3-react/core"
 import { injected } from "./components/wallet/Connectors"
 import Web3 from 'web3'
+import { useContractKit } from "@celo-tools/use-contractkit";
+import "@celo-tools/use-contractkit/lib/styles.css";
+import { RampInstantSDK } from '@ramp-network/ramp-instant-sdk';
 
 import Landing from "./components/Landing";
 import LandingMobile from "./components/LandingMobile";
@@ -28,7 +30,8 @@ import ABI from './components/abi/ABI'
 
 
 function App() {
-  const { account, activate } = useWeb3React()
+  //const { account, activate } = useWeb3React()
+  const { address, connect, kit, getConnectedKit } = useContractKit();
 
   const [hostName, setHostName] = useState('')
   const [eventName, setEventName] = useState('')
@@ -49,7 +52,7 @@ function App() {
   const [sortBy, setSortBy] = useState('')
   const [foundEvents, setFoundEvents] = useState([])
   const [eventComment, setEventComment] =useState('')
-
+/*
   async function handleConnect() {
     try {
       await activate(injected)
@@ -57,7 +60,7 @@ function App() {
       console.log(ex)
     }
   }
-
+*/
   const handleHostName = (childdata) => {
     setHostName({childdata});
   }
@@ -182,7 +185,7 @@ function App() {
         content: eventComment.childdata,
         date: day.toString(),
         event_id: childdata,
-        username: account
+        username: address
       })
     })
     .then((response) => response.json()
@@ -239,7 +242,7 @@ function App() {
         content: e.childdata,
         date: "day.toString()",
         event_id: e,
-        username: account
+        username: address
       })
     })
     .then((response) => response.json()
@@ -252,29 +255,68 @@ function App() {
   const awardTicket = async () => {
     const APP_NODE = process.env.REACT_APP_NODE
     const APP_CONTRACT = process.env.REACT_APP_CONTRACT
-
-    const w3 = await new Web3(new Web3.providers.HttpProvider(APP_NODE))
-    const YourContract= await new w3.eth.Contract(ABI, w3.utils.toChecksumAddress(APP_CONTRACT))
-    YourContract.methods.awardTicket({ from: "0x916dd63525c4A5340D6C2C022e5811c9446eC320", value: "test", gas: 10000000 },
-      (err, res) => { 
-        console.log(err)
-        console.log(res)
-       });
+    const web3 = new Web3(APP_NODE);
     
+    if(address != null) {
+      await web3.eth.getBalance(address).then((balance) => {
+        if(balance <= 0){
+          console.log("NO MONEY")
+          new RampInstantSDK({
+            hostAppName: 'ACC.ETH',
+            hostLogoUrl: 'https://yourdapp.com/yourlogo.png',
+            swapAmount: '10000000000000000000', // 150 ETH in wei
+            swapAsset: 'CELO',
+            userAddress: address,
+          }).on('*', event => console.log(event)).show();
+        }else{
+          const YourContract = new web3.eth.Contract(ABI, APP_CONTRACT)
+          const encoded = YourContract.methods.awardTicket(address, "Hallo").encodeABI()
+
+          var tx = {
+            chainId: 42220,
+            gasPrice: web3.utils.toWei("1", "gWei"),
+            gasLimit: 10000000,
+            to: APP_CONTRACT,
+            from: address,
+            data: encoded
+          }
+
+          const sign = window.ethereum.request({ method: 'eth_sendTransaction', params: [tx]})
+        }
+      })
+    }else{
+      connect()
+    }
+    
+    
+/*
+    web3.eth.accounts.signTransaction(tx, APP_PKEY).then(singed => {
+      web3.eth.sendSignedTransaction(singed.rawTransaction).on('receipt', console.log)
+    })
+*/
+
+    //const tx = YourContract.methods.awardTicket(web3.utils.toChecksumAddress(address), "Hallo").send({from: addresss})
+    //let txx = await kit.sendTransactionObject(tx, { from: address });
+    //console.log(txx)
+    /*
+    let txObject = await YourContract.methods.awardTicket("0x916dd63525c4A5340D6C2C022e5811c9446eC320", "test");
+    let tx = await kit.sendTransactionObject(txObject, { from: address });
+    let receipt = await tx.waitReceipt();
+    console.log(receipt);
+    */
   };
 
   useEffect(() => {
     handleLoadData()
     setSortBy("newestFirst")
-
   }, [allEvents.length])
 
   useEffect(() =>{
-    if(window.location.pathname !== '/' && account === null){
-      handleConnect()
+    if(window.location.pathname !== '/' && address === null){
+      connect()
     }
     
-  }, [account])
+  }, [address])
   
   return (
     <Router>
@@ -283,7 +325,7 @@ function App() {
           <BrowserView>
             <Landing 
               {...landingData}
-              handleConnect={handleConnect}
+              handleConnect={connect}
             />
           </BrowserView>
           <MobileView>
@@ -297,7 +339,7 @@ function App() {
             guest_Text="I'm a" 
             guestbutton_Text="GUEST"
             handleLoadData={handleLoadData}
-            account={account}
+            account={address}
           />
         </Route>
         <Route path="/createevent-generalinformation">
@@ -375,16 +417,16 @@ function App() {
             handleScrollTop={handleScrollTop}
             sortBy={sortBy}
             handleSort={handleSort}
-            account={account}
-            handleConnect={handleConnect}
+            account={address}
+            handleConnect={connect}
           />
         </Route>
         <Route path="/eventdetails">
           <EventDetails 
           {...eventDetailsData}
           details_picture={details_picture}
-          account={account}
-          handleConnect={handleConnect}
+          account={address}
+          handleConnect={connect}
           handlePostComment={handlePostComment}
           handleComment={handleComment}
           eventComment={eventComment}
