@@ -85,6 +85,6 @@ api.add_resource(TicketService, '/ticket/<ticket_id>')
 docs.register(TicketService)
 #*______________ Application Creation ______________
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
 
     
