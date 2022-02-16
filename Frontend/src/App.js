@@ -1,11 +1,12 @@
 import "./App.css";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Switch, BrowserRouter as Router, Route, useLocation } from "react-router-dom";
+import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 import { BrowserView, MobileView } from 'react-device-detect';
 
 import { useWeb3React } from "@web3-react/core"
 import { injected } from "./components/wallet/Connectors"
+import Web3 from 'web3'
 
 import Landing from "./components/Landing";
 import LandingMobile from "./components/LandingMobile";
@@ -23,9 +24,11 @@ import project_icon from "./static/img/Project_Icon.png"
 import default_picture from "./static/img/event-picture.png"
 import details_picture from "./static/img/details-picture.png"
 
+import ABI from './components/abi/ABI'
+
 
 function App() {
-  const { active, account, library, connector, activate, deactivate } = useWeb3React()
+  const { account, activate } = useWeb3React()
 
   const [hostName, setHostName] = useState('')
   const [eventName, setEventName] = useState('')
@@ -137,7 +140,7 @@ function App() {
     .then((response) => response.json()
     )
     .then((result) => {
-      if(eventImage == null){
+      if(eventImage === null){
         fetch('/image/' + result.id, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' }
@@ -213,13 +216,13 @@ function App() {
     let result = []
     setSortBy(sortResult)
 
-    if(sortResult == "newestFirst"){
+    if(sortResult === "newestFirst"){
       result = foundEvents.sort((a, b) => (a.id < b.id) ? 1 : -1)
     }
-    else if(sortResult == "oldestFFirst"){
+    else if(sortResult === "oldestFFirst"){
       result = foundEvents.sort((a, b) => (a.id > b.id) ? 1 : -1)
     }
-    else if(sortResult == "byName"){
+    else if(sortResult === "byName"){
       result = foundEvents.sort((a, b) => a.name > b.name ? 1 : -1)
     }
     setFoundEvents(result)
@@ -246,6 +249,20 @@ function App() {
     })
   }
 
+  const awardTicket = async () => {
+    const APP_NODE = process.env.REACT_APP_NODE
+    const APP_CONTRACT = process.env.REACT_APP_CONTRACT
+
+    const w3 = await new Web3(new Web3.providers.HttpProvider(APP_NODE))
+    const YourContract= await new w3.eth.Contract(ABI, w3.utils.toChecksumAddress(APP_CONTRACT))
+    YourContract.methods.awardTicket({ from: "0x916dd63525c4A5340D6C2C022e5811c9446eC320", value: "test", gas: 10000000 },
+      (err, res) => { 
+        console.log(err)
+        console.log(res)
+       });
+    
+  };
+
   useEffect(() => {
     handleLoadData()
     setSortBy("newestFirst")
@@ -253,9 +270,10 @@ function App() {
   }, [allEvents.length])
 
   useEffect(() =>{
-    if(window.location.pathname != '/' && account == null){
+    if(window.location.pathname !== '/' && account === null){
       handleConnect()
     }
+    
   }, [account])
   
   return (
@@ -370,7 +388,7 @@ function App() {
           handlePostComment={handlePostComment}
           handleComment={handleComment}
           eventComment={eventComment}
-          handleBuyTicket={handleBuyTicket}
+          handleBuyTicket={awardTicket}
           />
         </Route>
       </Switch>

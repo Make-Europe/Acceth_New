@@ -6,15 +6,9 @@ import "./ChainOfEvents.css";
 function ChainOfEvents(props) {
   const {
     chainofevents_Titel,
-    inputType,
     inputPlaceholder,
     sort_Text,
     gruppe51Props,
-    gruppe52Props,
-    gruppe53Props,
-    gruppe54Props,
-    default_picture,
-    handleLoadData,
     searchResult,
     filter,
     handleScrollTop,

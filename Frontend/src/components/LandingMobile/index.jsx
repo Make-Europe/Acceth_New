@@ -6,9 +6,6 @@ function LandingMobile(props) {
     banner_Text,
     logo,
     pfad5,
-    pfad6,
-    pfad7,
-    pfad8,
     about_Text,
     abouttext_Text,
     pfad4,
@@ -26,13 +23,13 @@ function LandingMobile(props) {
         <div className="banner_-text_mobile">{banner_Text}</div>
       </div>
       <div className="image_mobile">
-        <img className="logo_mobile" src={logo} />
+        <img alt="" className="logo_mobile" src={logo} />
       </div>
       <div className="about_mobile">
         <div className="about_-icon_mobile">
           <div className="ebene-1_mobile">
             <div className="pfad-container_mobile">
-              <img className="pfad-5_mobile" src={pfad5} />
+              <img alt="" className="pfad-5_mobile" src={pfad5} />
             </div>
           </div>
         </div>
@@ -44,7 +41,7 @@ function LandingMobile(props) {
       <div className="project_mobile">
         <div className="project_-icon_mobile">
           <div className="ebene-1-1_mobile">
-            <img className="pfad-4_mobile" src={pfad4} />
+            <img alt="" className="pfad-4_mobile" src={pfad4} />
           </div>
         </div>
         <div className="project_-text_mobile montserrat-semi-bold-white-28px">{project_Text}</div>
