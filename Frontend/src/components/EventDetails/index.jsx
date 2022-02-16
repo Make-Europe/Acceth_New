@@ -27,14 +27,20 @@ function EventDetails(props) {
     handleComment,
     handlePostComment,
     eventComment,
-    handleBuyTicket
+    handleBuyTicket,
+    handleTicketAmount
   } = props;
 
   const [comments, setComments] = useState([])
+  const [soldTickets, setSoldTickets] = useState(0)
   useEffect(() => {
     fetch('/list/comment/' + location.state.event.id).then(res => res.json()).then(data => {
       const result = data.sort((a, b) => (a.id < b.id) ? 1 : -1)
       setComments(result)
+    })
+    fetch('/count/' + location.state.event.id).then(res => res.json()).then(data => {
+      setSoldTickets(data.value)
+      handleTicketAmount(data.value)
     })
   }, [account])
 
@@ -97,7 +103,7 @@ function EventDetails(props) {
         </div>
         <div className="buy-ticket-panel">
           <div className="ticket-container">
-            <div className="buy-ticket border-1px-dove-gray" onClick={() => handleBuyTicket()}>
+            <div className="buy-ticket border-1px-dove-gray" onClick={() => handleBuyTicket(location.state.event)}>
               <div className="buyticket_-text montserrat-medium-black-30px">{buyticket_Text}</div>
             </div>
             <div className="ticket-panel border-1px-dove-gray">
@@ -112,7 +118,7 @@ function EventDetails(props) {
                   {ticketpanel_Capacity_Titel}
                 </div>
                 <div className="ticket-panel_-capacity_-current_-text montserrat-normal-black-25px">
-                  {ticketpanel_Capacity_Current_Text} / {location.state.event.capacity}
+                  {soldTickets ? soldTickets : 0} / {location.state.event.capacity}
                 </div>
               </div>
               <div className="ticketpanel_-container">

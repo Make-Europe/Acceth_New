@@ -45,13 +45,14 @@ function App() {
   const [eventStartTime, setEventStartTime] = useState('')
   const [eventEndTime, setEventEndTime] = useState('')
   const [eventCapacity, setEventCapacity] = useState('')
-  const [eventPrice, setEventPrice] = useState('')
+  const [eventPrice, setEventPrice] = useState(0)
   const [eventImage, setEventImage] = useState(null)
   const [allEvents, setAllEvents] = useState([])
   const [searchResult, setSearchResult] = useState('')
   const [sortBy, setSortBy] = useState('')
   const [foundEvents, setFoundEvents] = useState([])
-  const [eventComment, setEventComment] =useState('')
+  const [eventComment, setEventComment] = useState('')
+  const [ticketAmount, setTicketAmount] = useState(0)
 /*
   async function handleConnect() {
     try {
@@ -112,6 +113,9 @@ function App() {
   const handleComment = (childdata) => {
     setEventComment({childdata})
   }
+  const handleTicketAmount = (childdata) => {
+    setTicketAmount({childdata})
+  }
 
   const handleSaveData = () => {
     saveEvent();
@@ -153,6 +157,23 @@ function App() {
       }else{
         loadData()
       }
+      console.log(result.id + " " + eventName.childdata + " " + 0)
+      fetch('/count/' + result.id, {
+        method: "POST",
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({ 
+          id: result.id,
+          name: eventName.childdata,
+          value: 0
+        })
+      })
+      .then((response) => response.json()
+      )
+      .then((result) => {
+        window.location.reload(false);
+      })
     })
   }
 
@@ -252,7 +273,7 @@ function App() {
     })
   }
 
-  const awardTicket = async () => {
+  const awardTicket = async (event) => {
     const APP_NODE = process.env.REACT_APP_NODE
     const APP_CONTRACT = process.env.REACT_APP_CONTRACT
     const web3 = new Web3(APP_NODE);
@@ -264,11 +285,13 @@ function App() {
           new RampInstantSDK({
             hostAppName: 'ACC.ETH',
             hostLogoUrl: 'https://yourdapp.com/yourlogo.png',
-            swapAmount: '10000000000000000000', // 150 ETH in wei
             swapAsset: 'CELO',
             userAddress: address,
           }).on('*', event => console.log(event)).show();
-        }else{
+        }else if(ticketAmount.childdata >= event.capacity){
+          console.log("No Tickets Available")
+        }
+        else{
           const YourContract = new web3.eth.Contract(ABI, APP_CONTRACT)
           const encoded = YourContract.methods.awardTicket(address, "Hallo").encodeABI()
 
@@ -281,7 +304,30 @@ function App() {
             data: encoded
           }
 
-          const sign = window.ethereum.request({ method: 'eth_sendTransaction', params: [tx]})
+          const sign = window.ethereum.request({ method: 'eth_sendTransaction', params: [tx]}).then((res) => {
+            if(res){
+              console.log("YOU BOUGHT A TICKET")
+              const ticketId = YourContract.methods.awardTicket(address, "https://acceth.xyz/api/ticket/").call().then((value) => {
+                console.log(value, event.id)
+                fetch('/ticket/' + event.id + '/' + value, {
+                  method: "POST",
+                  headers: {
+                    'Content-type': 'application/json'
+                  }
+                }).then(res => res.json()).then(data => {
+                  console.log(data)
+                })
+                fetch('/count/' + event.id, {
+                  method: 'PUT',
+                  headers: { 'Content-Type': 'application/json' }
+                })
+                .then(response => response.json())
+                .then(data => {window.location.reload(false);})
+              })
+            }else{
+              console.log("MISSION ABORD")
+            }
+          })
         }
       })
     }else{
@@ -431,6 +477,7 @@ function App() {
           handleComment={handleComment}
           eventComment={eventComment}
           handleBuyTicket={awardTicket}
+          handleTicketAmount={handleTicketAmount}
           />
         </Route>
       </Switch>
