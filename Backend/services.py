@@ -51,13 +51,20 @@ class UserListService(MethodResource, Resource):
         return UserSchema(many=True).dump(users)
 
 #!______________ Ticket ______________
-class TicketService(MethodResource, Resource):
+class TicketCreateService(MethodResource, Resource):
     @doc(description='Add new Ticket', tags=['Ticket'])
     def post(self, event_id, ticket_id):
         newTicket = createTicket(event_id, ticket_id)
         db.session.add(newTicket)
         db.session.commit()
         return TicketSchema().dump(newTicket)
+
+class TicketService(MethodResource, Resource):
+    @doc(description='Get Comment by Comment_id', tags=['Ticket'])
+    @marshal_with(TicketResponseSchema)
+    def get(self, ticket_id):
+        ticket = db.session.query(Comment).get(ticket_id)
+        return TicketSchema().dump(ticket)
 
 
 #!______________ Comment ______________
