@@ -62,21 +62,21 @@ class TicketSchema(BaseScheme):
         model = Ticket
     id = fields.Int()
     image = fields.Str()
-    ticket_id = fields.Int()
-    event_id = fields.Int()
+    #ticket_id = fields.Int()
+    #event_id = fields.Int()
 
 class TicketInsertSchema(TicketSchema):
     image = fields.Str()
     id = fields.Int()
-    ticket_id = fields.Int()
-    event_id = fields.Int()
+    #ticket_id = fields.Int()
+    #event_id = fields.Int()
 
 
 class TicketResponseSchema(TicketSchema):
     image = fields.Str()
     id = fields.Int()
-    ticket_id = fields.Int()
-    event_id = fields.Int()
+    #ticket_id = fields.Int()
+    #event_id = fields.Int()
 
 #*______________ Host Schemes ______________
 class HostSchema(BaseScheme):
