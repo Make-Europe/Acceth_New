@@ -314,7 +314,7 @@ function App() {
               console.log("YOU BOUGHT A TICKET")
               const ticketId = YourContract.methods.awardTicket(address, "https://acceth.xyz/api/ticket/").call().then((value) => {
                 console.log(value, event.id)
-                fetch('/api/ticket/' + event.id + '/' + value, {
+                fetch('/api/ticket/create/' + event.id + '/' + value, {
                   method: "POST",
                   headers: {
                     'Content-type': 'application/json'
