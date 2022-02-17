@@ -40,7 +40,7 @@ def createTicket(event_id, ticket_id):
     img.save('static/tickets/{}I{}.png'.format(event_id,ticket_id))
     imgUri = convertToUri(imgPath)
      
-    newTicket = Ticket(ticket_id = ticket_id, image = imgUri, imagePath = imgPath, event_id = event_id )
+    newTicket = Ticket(ticket_id = ticket_id, image = imgUri, event_id = event_id )
     db.session.add(newTicket)
     db.session.commit()
     return newTicket

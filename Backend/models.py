@@ -57,7 +57,6 @@ class Ticket(db.Model):
     ticket_id = db.Column(db.Integer)
     event_id = db.Column(db.Integer)
     image = db.Column(db.String())
-    imagePath = db.Column(db.String())
     
 
 class Relation_EventTicket(db.Model):
