@@ -298,7 +298,7 @@ function App() {
         }
         else{
           const YourContract = new web3.eth.Contract(ABI, APP_CONTRACT)
-          const encoded = YourContract.methods.awardTicket(address, "Hallo").encodeABI()
+          const encoded = YourContract.methods.awardTicket(address, "https://acceth.xyz/api/ticket/").encodeABI()
 
           var tx = {
             chainId: 42220,
@@ -472,7 +472,7 @@ function App() {
             handleConnect={connect}
           />
         </Route>
-        <Route path="/eventdetails/">
+        <Route path="/eventdetails">
           <EventDetails 
           {...eventDetailsData}
           details_picture={details_picture}
@@ -485,50 +485,6 @@ function App() {
           handleTicketAmount={handleTicketAmount}
           />
         </Route>
-        {allEvents.map((event) => {
-          <Route path={"/eventdetails/${event.id}" + event.id}>
-          <EventDetails 
-          details_Titel = {event.name}
-          detailspanel_Host_Titel = "Host:"
-          detailspanel_Host_Text = {event.hostName}
-          detailspanel_Date_Titel = "Date:"
-          detailspanel_Date_Text = {event.date}
-          detailspanel_Start_Titel = "Start:"
-          detailspanel_Start_Text = {event.start}
-          detailspanel_End_Titel = "End:"
-          detailspanel_End_Text = {event.end}
-          detailspanel_Location_Titel = "Location:"
-          detailspanel_Location_Text = {event.locationName}
-          detailspanel_City_Titel = "City:"
-          detailspanel_City_Ziptext = {event.zipCode}
-          detailspanel_City_Text1 = {event.city}
-          detailspanel_Street_Titel = "Street:"
-          detailspanel_City_Text2 = {event.street}
-          lineuppanel_Titel = "Lineup:"
-          lineuppanel_Text = {event.lineup}
-          informationpanel_Titel = "Information:"
-          informationpanel_Text = {event.description}
-          buyticket_Text = "Claim your NFT"
-          ticketpanel_Category_Titel = "Category:"
-          ticketpanel_Category_Text = "Standard Ticket"
-          ticketpanel_Capacity_Titel = "Capacity:"
-          ticketpanel_Capacity_Current_Text = "1982"
-          ticketpanel_Capacity_Total_Text = "/ 5000"
-          ticketpanel_Expiry_Titel = "Expiry Date:"
-          ticketpanel_Expiry_Text = "18.09.2022 23:55"
-          ticketpanel_Price_Titel = "Price:"
-          ticketpanel_Price_Text = "20 CELO"
-          details_picture={details_picture}
-          account={address}
-          handleConnect={connect}
-          handlePostComment={handlePostComment}
-          handleComment={handleComment}
-          eventComment={eventComment}
-          handleBuyTicket={awardTicket}
-          handleTicketAmount={handleTicketAmount}
-          />
-        </Route>
-        })}
       </Switch>
     </Router>
   );
