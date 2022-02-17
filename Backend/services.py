@@ -7,7 +7,7 @@ from schemes import (EventResponseSchema, EventSchema, HostResponseSchema, HostS
                     UserResponseSchema, Relation_UserHost_Schema, Relation_UserHost_ResponseSchema, Relation_EventHost_Schema, Relation_EventHost_ResponseSchema,
                     Relation_EventTicket_Schema, Relation_EventTicket_ResponseSchema, CountSchema, CountResponseSchema, Commentschema, CommentResponseSchema)
 from config import db
-from models import Count, User, Host, Event, Relation_UserHost, Relation_EventTicket, Relation_EventHost, Comment
+from models import Count, Ticket, User, Host, Event, Relation_UserHost, Relation_EventTicket, Relation_EventHost, Comment
 from imagery import insertRandomImage, createTicket
 
 #!______________ User ______________
@@ -55,13 +55,14 @@ class TicketCreateService(MethodResource, Resource):
     @doc(description='Add new Ticket', tags=['Ticket'])
     def post(self, event_id, ticket_id):
         newTicket = createTicket(event_id, ticket_id)
-        return TicketSchema().dump(newTicket)
+        returnTicket = db.session.query(Ticket).get(newTicket)
+        return TicketSchema().dump(returnTicket)
 
 class TicketService(MethodResource, Resource):
     @doc(description='Get Comment by Comment_id', tags=['Ticket'])
     @marshal_with(TicketResponseSchema)
     def get(self, ticket_id):
-        ticket = db.session.query(Comment).get(ticket_id)
+        ticket = db.session.query(Ticket).filter_by(ticket_id = ticket_id).first()
         return ticket
 
 

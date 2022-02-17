@@ -44,3 +44,4 @@ def createTicket(event_id, ticket_id):
     db.session.add(newTicket)
     db.session.commit()
     return newTicket
+
