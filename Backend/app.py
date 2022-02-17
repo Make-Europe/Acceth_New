@@ -9,7 +9,7 @@ from flask_marshmallow import Marshmallow
 from services import (Relation_EventHost_Service, Relation_EventTicket_Service, UserService, UserListService, HostService, 
                     EventService, HostListService, EventListService, Relation_UserHost_Service, CountService, CountListService, EventImageService, 
                     CommentService, CommentListService, ListCommentsByEventService, TicketService, TicketCreateService)
-from config import app, api, docs
+from config import app, api, docs, CORS
 
 
 
@@ -60,6 +60,6 @@ api.add_resource(TicketService, '/api/ticket/<ticket_id>')
 docs.register(TicketService)
 #*______________ Application Creation ______________
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True)
 
     
