@@ -41,5 +41,6 @@ def createTicket(event_id, ticket_id):
     imgUri = convertToUri(imgPath)
      
     newTicket = Ticket(ticket_id = ticket_id, image = imgUri, imagePath = imgPath, event_id = event_id )
-    print(newTicket.id, newTicket.ticket_id, newTicket.imagePath)
+    db.session.add(newTicket)
+    db.session.commit()
     return newTicket

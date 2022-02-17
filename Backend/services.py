@@ -55,8 +55,6 @@ class TicketCreateService(MethodResource, Resource):
     @doc(description='Add new Ticket', tags=['Ticket'])
     def post(self, event_id, ticket_id):
         newTicket = createTicket(event_id, ticket_id)
-        db.session.add(newTicket)
-        db.session.commit()
         return TicketSchema().dump(newTicket)
 
 class TicketService(MethodResource, Resource):
