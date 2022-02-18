@@ -28,7 +28,8 @@ function EventDetails(props) {
     handlePostComment,
     eventComment,
     handleBuyTicket,
-    handleTicketAmount
+    handleTicketAmount,
+    handleAddToken
   } = props;
 
   const [comments, setComments] = useState([])
@@ -49,7 +50,7 @@ function EventDetails(props) {
   return (
     <div className="container-center-horizontal">
       <div className="eventdetails screen">
-        <ChainBanner account={account} handleConnect={handleConnect} />
+        <ChainBanner account={account} handleConnect={handleConnect} handleAddToken={handleAddToken}/>
         <div className="details_-titel montserrat-semi-bold-black-50px">{location.state.event.name}</div>
         <div className="detail-informations">
           <img alt="" className="details_-picture border-1px-dove-gray" src={location.state.event.image} />
@@ -140,10 +141,10 @@ function EventDetails(props) {
             type="text"
             value={eventComment.childdata ? eventComment.childdata : ''}
             onInput={e => handleComment(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handlePostComment(location.state.event.id)}
+            onKeyDown={account ? (e) => e.key === "Enter" && !e.shiftKey && handlePostComment(location.state.event.id) : handleConnect}
             required
           ></textarea>
-          <div className="place" onClick={() => handlePostComment(location.state.event.id)} >
+          <div className="place" onClick={account ? () => handlePostComment(location.state.event.id) : handleConnect} >
             Post
           </div>
         </div>

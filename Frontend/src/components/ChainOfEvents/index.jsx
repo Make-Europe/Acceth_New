@@ -16,13 +16,14 @@ function ChainOfEvents(props) {
     sortBy,
     allEvents,
     account,
-    handleConnect
+    handleConnect,
+    handleAddToken
   } = props;
 
   return (
     <div className="container-center-horizontal">
       <div className="chainofevents screen">
-        <ChainBanner account={account} handleConnect={handleConnect} />
+        <ChainBanner account={account} handleConnect={handleConnect} handleAddToken={handleAddToken}/>
         <h1 className="chain-of-events_-titel montserrat-semi-bold-black-50px">{chainofevents_Titel}</h1>
         <div className="flex-row">
           <div className="search border-1px-dove-gray">

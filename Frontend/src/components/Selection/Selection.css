@@ -38,12 +38,12 @@
 }
 
 .host-button2 {
-  background-color: gray;
+  background-color: var(--cerise);
   cursor: pointer;
   display: flex;
   height: 77px;
   margin-top: 22px;
-  width: 126px;
+  width: 170px;
 }
 
 .place2 {
