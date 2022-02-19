@@ -1,0 +1,22 @@
+.chain-banner-mobile,
+.chain-banner-mobile-1 {
+  align-items: flex-end;
+  background-color: var(--water-leaf);
+  display: flex;
+  height: 60px;
+  justify-content: flex-end;
+  min-width: 100%;
+  padding: 10.5px 80px;
+  cursor: pointer;
+}
+
+.chain-banner-mobile_-text,
+.chain-banner-mobile_-text-1 {
+  letter-spacing: 0;
+  line-height: 25px;
+  min-height: 32px;
+  min-width: 100%;
+  text-align: center;
+  white-space: nowrap;
+}
+

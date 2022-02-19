@@ -1,0 +1,308 @@
+.eventdetails-mobile {
+  align-items: center;
+  background-color: var(--gallery);
+  display: flex;
+  flex-direction: column;
+  height: 2814px;
+  position: relative;
+  width: 100%;
+}
+
+.details-mobile_-titel {
+  color: var(--black);
+  font-family: var(--font-family-montserrat);
+  font-size: var(--font-size-l);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 30px;
+  margin-left: 2.0px;
+  margin-top: 34px;
+  min-height: 39px;
+  min-width: 200px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.detail-informations-mobile {
+  display: flex;
+  flex-direction: column;
+  height: 925px;
+  justify-content: space-between;
+  margin-top: 24px;
+  width: 360px;
+}
+
+.details_-picture-mobile {
+  flex: 1;
+  height: 360px;
+  max-height: 360px;
+  object-fit: cover;
+}
+
+.details-panel-mobile {
+  align-items: flex-start;
+  background-color: var(--white);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  max-height: 565px;
+  min-height: 565px;
+  padding: 15.5px 20px;
+}
+
+.detailspanelmobile_host_t-container {
+  height: 62px;
+  margin-top: 22px;
+  position: relative;
+  width: 193px;
+}
+
+.x-panel-mobile {
+  left: 0;
+  letter-spacing: 0;
+  line-height: 25px;
+  position: absolute;
+  top: 30px;
+  white-space: nowrap;
+}
+
+.x-panel-mobile-1 {
+  left: 0;
+  letter-spacing: 0;
+  line-height: 25px;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.detailspanelmobile_date_t-container {
+  height: 62px;
+  margin-top: 8px;
+  position: relative;
+  width: 128px;
+}
+
+.detailspanelmobile_start_t-container {
+  height: 62px;
+  margin-top: 8px;
+  position: relative;
+  width: 73px;
+}
+
+.detailspanelmobile_end_t-container {
+  height: 62px;
+  margin-top: 8px;
+  position: relative;
+  width: 64px;
+}
+
+.detailspanelmobile_location_t-container {
+  height: 62px;
+  margin-top: 8px;
+  position: relative;
+  width: 208px;
+}
+
+.detailspanelmobile_city_-container {
+  height: 92px;
+  margin-top: 8px;
+  position: relative;
+  width: 257px;
+}
+
+.details-panel-mobile_-city_-text {
+  left: 0;
+  letter-spacing: 0;
+  line-height: 25px;
+  position: absolute;
+  top: 60px;
+  white-space: nowrap;
+}
+
+.detailspanelmobile_-container {
+  height: 62px;
+  margin-top: 8px;
+  position: relative;
+  width: 196px;
+}
+
+.buy-ticket-panel-mobile {
+  display: flex;
+  flex-direction: column;
+  height: 375px;
+  justify-content: flex-end;
+  margin-top: 30px;
+  width: 360px;
+}
+
+.ticket-panel-mobile {
+  align-items: flex-start;
+  background-color: var(--white);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: calc(100.00% - 60px);
+  padding: 15.5px 20px;
+}
+
+.ticketpanelmobile_category_t-container {
+  height: 62px;
+  margin-top: 7px;
+  position: relative;
+  width: 199px;
+}
+
+.ticketpanelmobile_expiry_t-container {
+  height: 62px;
+  margin-top: 8px;
+  position: relative;
+  width: 154px;
+}
+
+.overlap-group4 {
+  height: 67px;
+  margin-top: 8px;
+  position: relative;
+  width: 140px;
+}
+
+.ticketpanelmobile_capacity_t-container {
+  height: 62px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 140px;
+}
+
+.ticket-panel-mobile_ {
+  left: 58px;
+  letter-spacing: 0;
+  line-height: 25px;
+  position: absolute;
+  top: 30px;
+  white-space: nowrap;
+}
+
+.ticket-panel-mobile_-1 {
+  left: 0;
+  letter-spacing: 0;
+  line-height: 25px;
+  position: absolute;
+  top: 35px;
+  white-space: nowrap;
+}
+
+.ticketpanelmobile_price_t-container {
+  height: 62px;
+  margin-top: 8px;
+  position: relative;
+  width: 109px;
+}
+
+.buy-ticket-mobile {
+  align-items: flex-end;
+  background-color: var(--water-leaf);
+  display: flex;
+  flex: 1;
+  height: 60px;
+  max-height: 60px;
+  min-width: 100%;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.buyticket-mobile_-text {
+  letter-spacing: 0;
+  line-height: 25px;
+  min-height: 32px;
+  margin: auto;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.make-comments-mobile {
+  align-items: flex-end;
+  background-color: var(--white);
+  display: flex;
+  height: 192px;
+  justify-content: flex-end;
+  margin-top: 30px;
+  width: 360px;
+}
+
+.make-comments-mobile_-textfield {
+  background-color: transparent;
+  border: 0;
+  color: var(--tower-gray);
+  flex: 1;
+  font-family: var(--font-family-montserrat);
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 25px;
+  margin-bottom: 12px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 14px;
+  padding: 0;
+  width: 100px;
+  height: 150px;
+  resize: none;
+  border: none;
+}
+
+.make-comments-mobile_-textfield::placeholder {
+  color: #a9bcc699;
+}
+
+.place {
+  height: 26px;
+  letter-spacing: 0;
+  line-height: 20px;
+  margin-bottom: 8px;
+  margin-right: 16px;
+  white-space: nowrap;
+  width: 47px;
+}
+
+.comment-mobile {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-right: 5.0px;
+  margin-top: 30px;
+  position: relative;
+  width: 325px;
+}
+
+.commentM {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  width: 327px;
+}
+
+.comment-mobile_-titel {
+  letter-spacing: 0;
+  line-height: 25px;
+  margin-top: 2px;
+  min-height: 32px;
+  white-space: nowrap;
+}
+
+.comment-mobile_-date {
+  letter-spacing: 0;
+  line-height: 15px;
+  margin-top: 2px;
+  min-height: 21px;
+  white-space: nowrap;
+}
+
+.comment-mobile_-text {
+  letter-spacing: 0;
+  line-height: 25px;
+  width: 327px;
+  margin-bottom: 50px;
+  word-break: break-word;
+}
+

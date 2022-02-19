@@ -128,7 +128,7 @@ function EventDetails(props) {
                 </div>
                 <div className="ticket-panel_-expiry_-text montserrat-normal-black-25px">{location.state.event.date} {location.state.event.end} </div>
                 <div className="ticket-panel_-price_-titel montserrat-medium-black-25px">{ticketpanel_Price_Titel}</div>
-                <div className="x-panel montserrat-normal-black-25px">{location.state.event.price} CELO</div>
+                <div className="x-panel montserrat-normal-black-25px">{location.state.event.price === null ? "0" : location.state.event.price} CELO</div>
               </div>
             </div>
           </div>
