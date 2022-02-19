@@ -1,5 +1,6 @@
 .chain-banner,
 .details-banner {
+  cursor: pointer;
   align-items: flex-end;
   background-color: var(--water-leaf);
   display: flex;

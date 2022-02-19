@@ -10,7 +10,7 @@ import { useContractKit } from "@celo-tools/use-contractkit";
 import "@celo-tools/use-contractkit/lib/styles.css";
 import { RampInstantSDK } from '@ramp-network/ramp-instant-sdk';
 
-import Landing from "./components/Landing";
+//import Landing from "./components/Landing";
 import LandingMobile from "./components/LandingMobile";
 import Selection from "./components/Selection";
 import CreateEventGeneralInformation from "./components/CreateEventGeneralInformation"
@@ -18,7 +18,10 @@ import CreateEventLocation from "./components/CreateEventLocation";
 import CreateEventDetails from "./components/CreateEventDetails";
 import CreateEventImage from "./components/CreateEventImage";
 import ChainOfEvents from "./components/ChainOfEvents";
+import ChainOfEventsMobile from './components/ChainOfEventsMobile'
 import EventDetails from "./components/EventDetails";
+import EventDetailsMobile from './components/EventDetailsMobile'
+import InfoMobile from './components/InfoMobile'
 
 import logo from "./static/img/logo.png"
 import about_icon from "./static/img/About_Icon.png"
@@ -115,6 +118,37 @@ function App() {
   }
   const handleTicketAmount = (childdata) => {
     setTicketAmount({childdata})
+  }
+
+  const handleAddToken = () => {
+    addToken()
+  }
+
+  async function addToken(){
+    try {
+      const APP_CONTRACT = process.env.REACT_APP_CONTRACT
+      // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+      const wasAdded = await window.ethereum.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20', // Initially only supports ERC20, but eventually more!
+          options: {
+            address: APP_CONTRACT, // The address that the token is at.
+            symbol: 'TCKT', // A ticker symbol or shorthand, up to 5 chars.
+            decimals: 0, // The number of decimals in the token
+            image: 'https://yourdapp.com/yourlogo.png', // A string url of the token logo
+          },
+        },
+      });
+    
+      if (wasAdded) {
+        console.log('Thanks for your interest!');
+      } else {
+        console.log('Your loss!');
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const handleSaveData = () => {
@@ -308,6 +342,7 @@ function App() {
             from: address,
             data: encoded
           }
+          
 
           const sign = window.ethereum.request({ method: 'eth_sendTransaction', params: [tx]}).then((res) => {
             if(res){
@@ -364,7 +399,7 @@ function App() {
 
   useEffect(() =>{
     if(window.location.pathname !== '/' && address === null){
-      connect()
+      //connect()
     }
     
   }, [address])
@@ -374,13 +409,29 @@ function App() {
       <Switch>
         <Route path="/:path(|landing)">
           <BrowserView>
+          {/* 
             <Landing 
               {...landingData}
               handleConnect={connect}
             />
+            */}
+            <Selection 
+            host_Text="I'm a" 
+            place="HOST" 
+            guest_Text="I'm a" 
+            guestbutton_Text="GUEST"
+            handleLoadData={handleLoadData}
+            account={address}
+            handleConnect={connect}
+          />
           </BrowserView>
           <MobileView>
+            {/* 
             <LandingMobile {...landingMobileData} />
+            */}
+            <InfoMobile 
+                
+              />
           </MobileView>
         </Route>
         <Route path="/selection">
@@ -391,6 +442,7 @@ function App() {
             guestbutton_Text="GUEST"
             handleLoadData={handleLoadData}
             account={address}
+            handleConnect={connect}
           />
         </Route>
         <Route path="/createevent-generalinformation">
@@ -458,32 +510,68 @@ function App() {
           />
         </Route>
         <Route path="/chainofevents">
-          <ChainOfEvents 
-            {...chainOfEventsData}
-            default_picture={default_picture}
-            handleLoadData={handleLoadData}
-            allEvents={foundEvents}
-            searchResult={searchResult}
-            filter={filter}
-            handleScrollTop={handleScrollTop}
-            sortBy={sortBy}
-            handleSort={handleSort}
-            account={address}
-            handleConnect={connect}
-          />
+          <BrowserView>
+            <ChainOfEvents
+              {...chainOfEventsData}
+              default_picture={default_picture}
+              handleLoadData={handleLoadData}
+              allEvents={foundEvents}
+              searchResult={searchResult}
+              filter={filter}
+              handleScrollTop={handleScrollTop}
+              sortBy={sortBy}
+              handleSort={handleSort}
+              account={address}
+              handleConnect={connect}
+              handleAddToken={handleAddToken}
+            />
+          </BrowserView>
+          <MobileView>
+            <ChainOfEventsMobile 
+                {...chainOfEventsData}
+                default_picture={default_picture}
+                handleLoadData={handleLoadData}
+                allEvents={foundEvents}
+                searchResult={searchResult}
+                filter={filter}
+                handleScrollTop={handleScrollTop}
+                sortBy={sortBy}
+                handleSort={handleSort}
+                account={address}
+                handleConnect={connect}
+                handleAddToken={handleAddToken}
+              />
+          </MobileView>
         </Route>
         <Route path="/eventdetails">
-          <EventDetails 
-          {...eventDetailsData}
-          details_picture={details_picture}
-          account={address}
-          handleConnect={connect}
-          handlePostComment={handlePostComment}
-          handleComment={handleComment}
-          eventComment={eventComment}
-          handleBuyTicket={awardTicket}
-          handleTicketAmount={handleTicketAmount}
-          />
+          <BrowserView>
+            <EventDetails 
+            {...eventDetailsData}
+            details_picture={details_picture}
+            account={address}
+            handleConnect={connect}
+            handlePostComment={handlePostComment}
+            handleComment={handleComment}
+            eventComment={eventComment}
+            handleBuyTicket={awardTicket}
+            handleTicketAmount={handleTicketAmount}
+            handleAddToken={handleAddToken}
+            />
+          </BrowserView>
+          <MobileView>
+            <EventDetailsMobile
+            {...eventDetailsData}
+            details_picture={details_picture}
+            account={address}
+            handleConnect={connect}
+            handlePostComment={handlePostComment}
+            handleComment={handleComment}
+            eventComment={eventComment}
+            handleBuyTicket={awardTicket}
+            handleTicketAmount={handleTicketAmount}
+            handleAddToken={handleAddToken}
+            />
+          </MobileView>
         </Route>
       </Switch>
     </Router>
