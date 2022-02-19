@@ -88,17 +88,14 @@ function EventDetailsMobile(props) {
             </div>
           </div>
         </div>
-        {/* 
-        <LineupPanelMobile
-          lineuppanelmobile_Titel={lineupPanelMobile1Props.lineuppanelmobile_Titel}
-          lineuppanelmobile_Text={lineupPanelMobile1Props.lineuppanelmobile_Text}
-        />
-        <LineupPanelMobile
-          lineuppanelmobile_Titel={lineupPanelMobile2Props.lineuppanelmobile_Titel}
-          lineuppanelmobile_Text={lineupPanelMobile2Props.lineuppanelmobile_Text}
-          className={lineupPanelMobile2Props.className}
-        />
-        */}
+        <div className="lineup-panel-mobile border-1px-dove-gray information-panel-mobile">
+          <div className="lineup-panel-mobile_-titel montserrat-medium-black-25px">{lineuppanel_Titel}</div>
+          <div className="lineup-panel-mobile_-text montserrat-normal-black-25px">{location.state.event.lineup}</div>
+        </div>
+        <div className="lineup-panel-mobile border-1px-dove-gray information-panel-mobile">
+          <div className="lineup-panel-mobile_-titel montserrat-medium-black-25px">{informationpanel_Titel}</div>
+          <div className="lineup-panel-mobile_-text montserrat-normal-black-25px">{location.state.event.description}</div>
+        </div>
         <div className="buy-ticket-panel-mobile">
           <div className="ticket-panel-mobile border-1px-dove-gray">
             <div className="ticketpanelmobile_category_t-container">
@@ -134,7 +131,7 @@ function EventDetailsMobile(props) {
             type="text"
             value={eventComment.childdata ? eventComment.childdata : ''}
             onInput={e => handleComment(e.target.value)}
-            onKeyDown={account ? (e) => e.key === "Enter" && !e.shiftKey && handlePostComment(location.state.event.id) : handleConnect}
+            onKeyDown={account ? null : handleConnect}
             required
           ></textarea>
           <div className="place montserrat-medium-cerise-20px" onClick={account ? () => handlePostComment(location.state.event.id) : handleConnect}>Post</div>

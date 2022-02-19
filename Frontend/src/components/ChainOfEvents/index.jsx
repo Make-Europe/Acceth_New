@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import ChainBanner from "../ChainBanner";
 import Gruppe5 from "../Gruppe5";
 import "./ChainOfEvents.css";
@@ -19,6 +19,8 @@ function ChainOfEvents(props) {
     handleConnect,
     handleAddToken
   } = props;
+
+
 
   return (
     <div className="container-center-horizontal">

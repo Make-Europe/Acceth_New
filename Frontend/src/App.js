@@ -21,6 +21,7 @@ import ChainOfEvents from "./components/ChainOfEvents";
 import ChainOfEventsMobile from './components/ChainOfEventsMobile'
 import EventDetails from "./components/EventDetails";
 import EventDetailsMobile from './components/EventDetailsMobile'
+import InfoMobile from './components/InfoMobile'
 
 import logo from "./static/img/logo.png"
 import about_icon from "./static/img/About_Icon.png"
@@ -428,19 +429,8 @@ function App() {
             {/* 
             <LandingMobile {...landingMobileData} />
             */}
-            <ChainOfEventsMobile 
-                {...chainOfEventsData}
-                default_picture={default_picture}
-                handleLoadData={handleLoadData}
-                allEvents={foundEvents}
-                searchResult={searchResult}
-                filter={filter}
-                handleScrollTop={handleScrollTop}
-                sortBy={sortBy}
-                handleSort={handleSort}
-                account={address}
-                handleConnect={connect}
-                handleAddToken={handleAddToken}
+            <InfoMobile 
+                
               />
           </MobileView>
         </Route>

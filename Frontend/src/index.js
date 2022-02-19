@@ -26,7 +26,7 @@ ReactDOM.render(
     </ContractKitProvider>,
       
   //</React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root', 'modal-root')
 );
 
 // If you want to start measuring performance in your app, pass a function
