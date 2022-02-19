@@ -34,8 +34,8 @@ app.config.update({
         plugins=[MarshmallowPlugin()],
         openapi_version='2.0.0'
     ),
-    'APISPEC_SWAGGER_URL': '/api/swagger/',
-    'APISPEC_SWAGGER_UI_URL': '/api/swagger-ui/'
+    'APISPEC_SWAGGER_URL': '/swagger/',
+    'APISPEC_SWAGGER_UI_URL': '/swagger-ui/'
 })
 
 #*______________ Docs Setup ______________
