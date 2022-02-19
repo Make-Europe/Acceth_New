@@ -93,8 +93,8 @@ class CommentService(MethodResource, Resource):
     @doc(description='Delete existing Comment', tags=['Comment'])
     @use_kwargs(Commentschema, location=('json'))
     @marshal_with(CommentResponseSchema())
-    def delete(self, comment, comment_id):
-        comment = db.session.query(Comment).get(comment_id)
+    def delete(self, comment_id):
+        comment = db.session.query(Comment).filter_by(comment_id=comment_id).first()
         db.session.delete(comment)
         db.session.commit()
         return Commentschema().dump(comment)

@@ -9,8 +9,6 @@ abi = '[{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","n
 tckt_add = '0x05798781Bc7cDAef3996B4529E75a3Ad4702C03c'
 alice = '0x5f026494524c24C0e7B54FC2C68fE292b74D8121'
 bob = '0x916dd63525c4A5340D6C2C022e5811c9446eC320'
-celo_test = '9059fded856e5b1895c082de1ea5f316cf498820c0873cbf152ec172b863e3de'
-celo_test_p = '0x7d8cE01D0feCEdd800F146A8eEB2f2769bb9F5c6'
 
 def getContract(address, abi):
     contract = w3.eth.contract(address=w3.toChecksumAddress(address), abi=abi)
