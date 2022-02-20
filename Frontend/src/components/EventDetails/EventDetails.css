@@ -527,3 +527,9 @@ textarea:focus {
   margin-bottom: 60px;
   word-break: break-word;
 }
+
+.socialMedia {
+  position: relative;
+  left: 450px;
+  top: 40px;
+}

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ChainBanner from "../ChainBanner";
 import "./EventDetails.css";
+import { TwitterShareButton, LinkedinShareButton, PinterestShareButton, TelegramShareButton, WhatsappShareButton, TwitterIcon, LinkedinIcon, PinterestIcon, TelegramIcon, WhatsappIcon } from "react-share";
 
 function EventDetails(props) {
   const {
@@ -46,12 +47,24 @@ function EventDetails(props) {
   }, [account])
 
   const location = useLocation()
+  const hashtags = ["BUIDL", "Ethdenver", "NFT", "Web3"]
 
   return (
     <div className="container-center-horizontal">
       <div className="eventdetails screen">
         <ChainBanner account={account} handleConnect={handleConnect} handleAddToken={handleAddToken}/>
         <div className="details_-titel montserrat-semi-bold-black-50px">{location.state.event.name}</div>
+        <div className="container socialMedia">
+            <TwitterShareButton url="https://acceth.xyz/chainofevents" title={"I just got my ticket: " + '"' + location.state.event.name + '"'} hashtags={hashtags} via="make_rhein_main">
+              <TwitterIcon round={true} size="35px"/>
+            </TwitterShareButton>
+            <WhatsappShareButton windowWidth="1000px" windowHeight="1000px" title={"Check out this amazing event: " + location.state.event.name} url="https://acceth.xyz/chainofevents">
+              <WhatsappIcon round={true} size="35px"/>
+            </WhatsappShareButton>
+            <TelegramShareButton windowWidth="1000px" windowHeight="1000px" title={"Check out this amazing event: " + location.state.event.name} url="https://acceth.xyz/chainofevents">
+              <TelegramIcon round={true} size="35px"/>
+            </TelegramShareButton>
+          </div>
         <div className="detail-informations">
           <img alt="" className="details_-picture border-1px-dove-gray" src={location.state.event.image} />
           <div className="details-panel-1 border-1px-dove-gray">
@@ -128,7 +141,7 @@ function EventDetails(props) {
                 </div>
                 <div className="ticket-panel_-expiry_-text montserrat-normal-black-25px">{location.state.event.date} {location.state.event.end} </div>
                 <div className="ticket-panel_-price_-titel montserrat-medium-black-25px">{ticketpanel_Price_Titel}</div>
-                <div className="x-panel montserrat-normal-black-25px">{location.state.event.price === null ? "0" : location.state.event.price} CELO</div>
+                <div className="x-panel montserrat-normal-black-25px">{location.state.event.price === null || location.state.event.price != 0 ? "0" : location.state.event.price} CELO</div>
               </div>
             </div>
           </div>
