@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useEffect, useState, useCallback } from "react";
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 import { BrowserView, MobileView } from 'react-device-detect';
+import { SwapWidget } from '@uniswap/widgets'
 
 //import { useWeb3React } from "@web3-react/core"
 import { injected } from "./components/wallet/Connectors"
@@ -34,7 +35,10 @@ import ABI from './components/abi/ABI'
 
 function App() {
   //const { account, activate } = useWeb3React()
-  const { address, connect, kit, getConnectedKit } = useContractKit();
+  const { address, connect, kit, getConnectedKit, performActions } = useContractKit();
+  const APP_NODE = process.env.REACT_APP_NODE
+  const APP_CONTRACT = process.env.REACT_APP_CONTRACT
+  const contract = new kit.web3.eth.Contract(ABI, APP_CONTRACT)
 
   const [hostName, setHostName] = useState('')
   const [eventName, setEventName] = useState('')
@@ -121,7 +125,8 @@ function App() {
   }
 
   const handleAddToken = () => {
-    addToken()
+    //addToken()
+    connect()
   }
 
   async function addToken(){
@@ -228,6 +233,44 @@ function App() {
       postComment(childdata)
     }
   }
+  
+  const handleDeleteComment = (commentId, eventId) => {
+    deleteComment(commentId, eventId)
+  }
+
+  function deleteComment(commentId, eventId){
+    console.log(eventId)
+    fetch('/api/comment/' + commentId.id, {
+      method: "DELETE",
+      headers: {
+        'Content-type': 'application/json'
+      }
+    })
+    .then((response) => response.json()
+    )
+    .then((result) => {
+      window.location.reload(false);
+    })
+  }
+
+  const handleDeleteEvent = (eventId) => {
+    deleteEvent(eventId)
+  }
+
+  function deleteEvent(eventId){
+    console.log(eventId)
+    fetch('/api/event/' + eventId, {
+      method: "DELETE",
+      headers: {
+        'Content-type': 'application/json'
+      }
+    })
+    .then((response) => response.json()
+    )
+    .then((result) => {
+      window.location.reload(false);
+    })
+  }
 
   function postComment(childdata){
     const day = new Date()
@@ -286,39 +329,17 @@ function App() {
     setFoundEvents(result)
   }
 
-  const handleBuyTicket = (e) => {
-    console.log("Buy Ticket")
-    fetch('/api/ticket/' + e.id, {
-      method: "POST",
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify({ 
-        content: e.childdata,
-        date: "day.toString()",
-        event_id: e,
-        username: address
-      })
-    })
-    .then((response) => response.json()
-    )
-    .then((result) => {
-      window.location.reload(false);
-    })
-  }
-
   const awardTicket = async (event) => {
-    const APP_NODE = process.env.REACT_APP_NODE
-    const APP_CONTRACT = process.env.REACT_APP_CONTRACT
-    const web3 = new Web3(APP_NODE);
+    let accounts = await kit.web3.eth.getAccounts()
+    kit.defaultAccount = accounts[0]
 
     fetch('/api/count/' + event.id).then(res => res.json()).then(data => {
       handleTicketAmount(data.value)
     })
-    
-    if(address != null) {
-      await web3.eth.getBalance(address).then((balance) => {
-        if(balance <= 0){
+
+    if(accounts[0] != null) {
+      await kit.getTotalBalance(accounts[0]).then((balance) => {
+        if(balance.CELO.c[0] <= 0){
           console.log("NO MONEY")
           new RampInstantSDK({
             hostAppName: 'ACC.ETH',
@@ -327,29 +348,17 @@ function App() {
             userAddress: address,
             paymentMethodType: 'CARD_PAYMENT',
           }).on('*', event => console.log(event)).show();
-        }else if(ticketAmount.childdata >= event.capacity){
+        
+        }
+        else if(ticketAmount.childdata >= event.capacity){
           console.log("No Tickets Available")
         }
         else{
-          const YourContract = new web3.eth.Contract(ABI, APP_CONTRACT)
-          const encoded = YourContract.methods.awardTicket(address, "https://acceth.xyz/api/ticket/").encodeABI()
-
-          var tx = {
-            chainId: 42220,
-            gasPrice: web3.utils.toWei("1", "gWei"),
-            gasLimit: 10000000,
-            to: APP_CONTRACT,
-            from: address,
-            data: encoded
-          }
-          
-
-          const sign = window.ethereum.request({ method: 'eth_sendTransaction', params: [tx]}).then((res) => {
-            if(res){
-              console.log("YOU BOUGHT A TICKET")
-              const ticketId = YourContract.methods.awardTicket(address, "https://acceth.xyz/api/ticket/").call().then((value) => {
-                console.log(value, event.id)
-                fetch('/api/ticket/create/' + event.id + '/' + value, {
+          contract.methods.awardTicket(address, "https://acceth.xyz/api/ticket/").send({from: address}).then((res) => {
+            console.log(res)
+            if(res) {
+              contract.methods.awardTicket(address, "https://acceth.xyz/api/ticket/").call().then((id) => {
+                fetch('/api/ticket/create/' + event.id + '/' + (id-1), {
                   method: "POST",
                   headers: {
                     'Content-type': 'application/json'
@@ -357,15 +366,19 @@ function App() {
                 }).then(res => res.json()).then(data => {
                   console.log(data)
                 })
+
                 fetch('/api/count/' + event.id, {
                   method: 'PUT',
                   headers: { 'Content-Type': 'application/json' }
                 })
                 .then(response => response.json())
-                .then(data => {window.location.reload(false);})
+                .then(data => {
+                  console.log("You bought a ticket.")
+                  window.location.reload(false)
+                })
               })
             }else{
-              console.log("MISSION ABORD")
+              console.log("ABORD MISSION")
             }
           })
         }
@@ -373,23 +386,6 @@ function App() {
     }else{
       connect()
     }
-    
-    
-/*
-    web3.eth.accounts.signTransaction(tx, APP_PKEY).then(singed => {
-      web3.eth.sendSignedTransaction(singed.rawTransaction).on('receipt', console.log)
-    })
-*/
-
-    //const tx = YourContract.methods.awardTicket(web3.utils.toChecksumAddress(address), "Hallo").send({from: addresss})
-    //let txx = await kit.sendTransactionObject(tx, { from: address });
-    //console.log(txx)
-    /*
-    let txObject = await YourContract.methods.awardTicket("0x916dd63525c4A5340D6C2C022e5811c9446eC320", "test");
-    let tx = await kit.sendTransactionObject(txObject, { from: address });
-    let receipt = await tx.waitReceipt();
-    console.log(receipt);
-    */
   };
 
   useEffect(() => {
@@ -524,6 +520,7 @@ function App() {
               account={address}
               handleConnect={connect}
               handleAddToken={handleAddToken}
+              handleDeleteEvent={handleDeleteEvent}
             />
           </BrowserView>
           <MobileView>
@@ -556,6 +553,7 @@ function App() {
             handleBuyTicket={awardTicket}
             handleTicketAmount={handleTicketAmount}
             handleAddToken={handleAddToken}
+            handleDeleteComment={handleDeleteComment}
             />
           </BrowserView>
           <MobileView>

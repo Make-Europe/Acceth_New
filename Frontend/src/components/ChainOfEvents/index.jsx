@@ -17,7 +17,8 @@ function ChainOfEvents(props) {
     allEvents,
     account,
     handleConnect,
-    handleAddToken
+    handleAddToken,
+    handleDeleteEvent
   } = props;
 
 
@@ -48,7 +49,7 @@ function ChainOfEvents(props) {
         <div className="event">
           {allEvents
           .map(value => (
-            <Gruppe5 key={value.id} className={gruppe51Props.className} event={value} handleScrollTop={handleScrollTop} />
+            <Gruppe5 key={value.id} className={gruppe51Props.className} event={value} handleScrollTop={handleScrollTop} handleDeleteEvent={handleDeleteEvent}/>
           ))}
         </div>
       </div>
