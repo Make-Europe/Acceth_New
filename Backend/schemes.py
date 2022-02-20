@@ -1,10 +1,7 @@
-from datetime import date
-from lib2to3.pytree import Base
-from types import CoroutineType
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from config import db
 from models import User, Event, Host, Relation_EventHost, Relation_EventTicket, Relation_UserHost, Count, Comment, Ticket
-from marshmallow import Schema, fields
+from marshmallow import fields
 
 #*______________ Base Schema ______________
 class BaseScheme(SQLAlchemyAutoSchema):

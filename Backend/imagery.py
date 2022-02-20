@@ -1,7 +1,4 @@
-from importlib.resources import path
 import matplotlib, uuid, os
-from matplotlib.axis import Tick
-from numpy import insert
 from randimage import get_random_image
 from datauri import DataURI
 from config import db
