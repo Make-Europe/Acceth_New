@@ -1,9 +1,6 @@
-from typing import Counter
-from xml.etree.ElementTree import Comment
-from click import command
 from flask_apispec import marshal_with, doc, use_kwargs
 from flask_apispec.views import MethodResource
-from flask_restful import Resource, Api, reqparse
+from flask_restful import Resource
 from schemes import (EventResponseSchema, EventSchema, HostResponseSchema, HostSchema, TicketResponseSchema, TicketSchema, UserSchema, 
                     UserResponseSchema, Relation_UserHost_Schema, Relation_UserHost_ResponseSchema, Relation_EventHost_Schema, Relation_EventHost_ResponseSchema,
                     Relation_EventTicket_Schema, Relation_EventTicket_ResponseSchema, CountSchema, CountResponseSchema, Commentschema, CommentResponseSchema)
@@ -92,11 +89,12 @@ class CommentService(MethodResource, Resource):
         return Commentschema().dump(comment)
 
     @doc(description='Delete existing Comment', tags=['Comment'])
+    @marshal_with(CommentResponseSchema())
     def delete(self, comment_id):
-        comment = db.session.query(Comment).filter_by(id = comment_id).first()
+        comment = db.session.query(Comment).get(comment_id)
         db.session.delete(comment)
         db.session.commit()
-        return "comment with id {} was deletet from event {}".format(comment_id, comment.id)
+        return Commentschema().dump(comment)
 
 class CommentListService(MethodResource, Resource):
     @doc(description='Get a List of all Comments', tags=['List'])
