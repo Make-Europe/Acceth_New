@@ -125,8 +125,8 @@ function App() {
   }
 
   const handleAddToken = () => {
-    //addToken()
-    connect()
+    addToken()
+    //connect()
   }
 
   async function addToken(){
