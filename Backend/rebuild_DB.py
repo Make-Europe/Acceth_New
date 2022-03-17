@@ -1,11 +1,12 @@
 import os
 from config import db
 from termcolor import colored
+import models
 
 def RebuildDatabase():
-    if os.path.exists('acceth.db'):
+    if os.path.exists('Backend/acceth.db'):
         print(colored('Removing existing DB', 'blue'))
-        os.remove('acceth.db')
+        os.remove('Backend/acceth.db')
     db.create_all()
     db.session.commit()
     print(colored('New DB created.', 'green'))

@@ -13,8 +13,9 @@ class UserService(MethodResource, Resource):
     @doc(description='Get User by User_id', tags=['User'])
     @marshal_with(UserResponseSchema)
     def get(self, user_id):
-        quser = db.session.query(User).get(user_id)
-        return UserSchema().dump(quser)
+        user = db.session.query(User).filter_by(public_address = user_id).first()
+        #quser = db.session.query(User).get(user_id)
+        return UserSchema().dump(user)
 
     @doc(description='Add new User', tags=['User'])
     @use_kwargs(UserSchema, location=('json'))
@@ -22,6 +23,7 @@ class UserService(MethodResource, Resource):
     def post(self, user, user_id):
         db.session.add(user)
         db.session.commit()
+        insertRandomImage(User, user.id)
         return UserSchema().dump(user)
     
     @doc(description='Update User with PUT', tags=['User'])
@@ -53,7 +55,7 @@ class TicketCreateService(MethodResource, Resource):
     @doc(description='Add new Ticket', tags=['Ticket'])
     def post(self, event_id, ticket_id):
         newTicket = createTicket(event_id, ticket_id)
-        returnTicket = db.session.query(Ticket).get(newTicket)
+        returnTicket = db.session.query(Ticket).filter_by(ticket_id = newTicket.id).first()
         return TicketSchema().dump(returnTicket)
 
 class TicketService(MethodResource, Resource):

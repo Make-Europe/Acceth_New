@@ -1,8 +1,12 @@
 from services import (EventService, EventListService, CountService, EventImageService, 
-                    CommentService, ListCommentsByEventService, TicketService, TicketCreateService)
+                    CommentService, ListCommentsByEventService, TicketService, TicketCreateService, UserService, UserListService)
 from config import app, api, docs, CORS
 
 #*______________ Service Registration ______________
+api.add_resource(UserService, '/api/user/<user_id>')
+docs.register(UserService)
+api.add_resource(UserListService, '/api/user/')
+docs.register(UserListService)
 api.add_resource(EventService, '/api/event/<event_id>')
 docs.register(EventService)
 api.add_resource(EventListService, '/api/list/event')
@@ -22,6 +26,6 @@ docs.register(TicketService)
 
 #*______________ Application Creation ______________
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=int("5050"))
 
     
