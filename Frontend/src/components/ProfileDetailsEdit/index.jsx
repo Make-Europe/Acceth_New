@@ -1,45 +1,26 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import ChainBanner from "../ChainBanner";
 import "./EventDetails.css";
 import { TwitterShareButton, LinkedinShareButton, PinterestShareButton, TelegramShareButton, WhatsappShareButton, TwitterIcon, LinkedinIcon, PinterestIcon, TelegramIcon, WhatsappIcon } from "react-share";
 
 function EventDetails(props) {
   const {
-    detailspanel_Host_Titel,
-    detailspanel_Date_Titel,
-    detailspanel_Start_Titel,
-    detailspanel_End_Titel,
-    detailspanel_Location_Titel,
-    detailspanel_City_Titel,
-    detailspanel_Street_Titel,
-    lineuppanel_Titel,
-    informationpanel_Titel,
-    buyticket_Text,
-    ticketpanel_Category_Titel,
-    ticketpanel_Category_Text,
-    ticketpanel_Capacity_Titel,
-    ticketpanel_Capacity_Current_Text,
-    ticketpanel_Expiry_Titel,
-    ticketpanel_Price_Titel,
+    handleChangeNickname,
+    handleChangeStory,
+    nickname,
+    profileDescription,
+    handleUpdateProfile,
     account,
     handleConnect,
-    handleComment,
-    handlePostComment,
-    eventComment,
-    handleBuyTicket,
-    handleTicketAmount,
     handleAddToken,
-    nickname,
-    profile,
-    handleLoadProfile
+    user
   } = props;
 
+  /*
   const [comments, setComments] = useState([])
   const [soldTickets, setSoldTickets] = useState(0)
-  const [owner, setOwner] = useState([])
-  const [user, setUser] = useState([])
   useEffect(() => {
     fetch('/api/list/comment/' + location.state.event.id).then(res => res.json()).then(data => {
       const result = data.sort((a, b) => (a.id < b.id) ? 1 : -1)
@@ -50,23 +31,17 @@ function EventDetails(props) {
       handleTicketAmount(data.value)
     })
   }, [account])
-
-  useEffect(() => {
-    fetch('api/user/' + location.state.event.ownerAddress).then(res => res.json()).then(data => {
-      setOwner(data)
-    })
-    fetch('api/user/').then(res => res.json()).then(data => {
-      setUser(data)
-    })
-  }, [])
-
+  */
   const location = useLocation()
-  const hashtags = ["BUIDL", "Ethdenver", "NFT", "Web3"]
+  console.log(nickname)
+  //const hashtags = ["BUIDL", "Ethdenver", "NFT", "Web3"]
+  
 
   return (
+    /*
     <div className="container-center-horizontal">
       <div className="eventdetails screen">
-        <ChainBanner account={account} handleConnect={handleConnect} handleAddToken={handleAddToken} profile={profile} nickname={nickname} />
+        <ChainBanner account={account} handleConnect={handleConnect} handleAddToken={handleAddToken}/>
         <div className="details_-titel montserrat-semi-bold-black-50px">{location.state.event.name}</div>
         <div className="container socialMedia">
             <TwitterShareButton url="https://acceth.xyz/chainofevents" title={"I just got my ticket: " + '"' + location.state.event.name + '"'} hashtags={hashtags} via="make_rhein_main">
@@ -84,16 +59,7 @@ function EventDetails(props) {
           <div className="details-panel-1 border-1px-dove-gray">
             <div className="detailspanel_host_t-container">
               <div className="details-panel_-host_-titel montserrat-medium-black-25px">{detailspanel_Host_Titel}</div>
-              <Link
-                to={{
-                  pathname: "/profiledetails",
-                  state: {
-                    profile: (owner),
-                  },
-                }}
-              >
-                <div className="details-panel montserrat-normal-black-25px">{owner.name ? owner.name.length >= 28 ? owner.name.substring(0, 28) + "..." : owner.name : ""}</div>
-              </Link>
+              <div className="details-panel montserrat-normal-black-25px">{location.state.event.owner.length >= 28 ? location.state.event.owner.substring(0,28) + "..." : location.state.event.owner}</div>
             </div>
             <div className="detailspanel_date_t-container">
               <div className="details-panel_-date_-titel montserrat-medium-black-25px">{detailspanel_Date_Titel}</div>
@@ -188,16 +154,7 @@ function EventDetails(props) {
           {comments.map(value => (
             <div key={value.id} className="comment-2">
               <div className="comment_-container-1">
-                <Link
-                  to={{
-                    pathname: "/profiledetails",
-                    state: {
-                      profile: (user.find((e) => e.public_address === value.username)),
-                    },
-                  }}
-                >
-                  <h1 className="comment_-titel-1 montserrat-medium-black-15px">{user.length < 1 ? (value.username ? value.username : "") : (user.find((e) => e.public_address === value.username).name === ""  ? value.username.substring(0, 5) + "..." + value.username.substring(38, 42) : user.find((e) => e.public_address === value.username).name.substring(0, 15))}</h1>
-                </Link>
+                <h1 className="comment_-titel-1 montserrat-medium-black-25px">{value.username === null ? "0x0000" : value.username.substring(0, 6)}</h1>
                 <div className="comment_-date-1 montserrat-medium-tower-gray-15px">{value.date.substring(4, 21)}</div>
               </div>
               <div className="comment_-text-1 montserrat-normal-black-25px">{value.content}</div>
@@ -206,8 +163,58 @@ function EventDetails(props) {
           
         </div>
       </div>
+    </div>*/
+    <div className="screen">
+      <div className="profileBannerEdit">
+        <ChainBanner account={account} handleConnect={handleConnect} handleAddToken={handleAddToken} profile={user} nickname={nickname} />
+      </div>
+      
+      <div className="profilecontainerEdit">
+        <div>
+          <img alt="" className="profile-pictureEdit border-1px-dove-gray" src={location.state.profile.image} />
+        </div>
+        
+        <div className="nickSpaceEdit">
+          <input
+            className="nicknameEdit montserrat-medium-tower-gray-30px"
+            name="nickname"
+            placeholder="enter nickname"
+            type="text"
+            value={nickname ? nickname : ""}
+            onInput={e => handleChangeNickname(e.target.value)}
+            required
+          />
+        </div>
+        <div className="storyContainerEdit">
+          <div className="story-panel2Edit border-1px-dove-gray">
+            <div className="story-panel_-titel2Edit montserrat-medium-black-25px">Story</div>
+            <textarea
+              className="story-panel_-text2Edit montserrat-medium-tower-gray-35px"
+              name="story"
+              placeholder="enter your story"
+              type="text"
+              value={profileDescription ? profileDescription : ""}
+              onInput={e => handleChangeStory(e.target.value)}
+              required
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      < div className="storyContainerEdit">
+        <div className="submitProfileEdit montserrat-medium-black-20px border-1px-dove-gray" onClick={handleUpdateProfile}>
+          Edit
+        </div>
+      </div>
     </div>
+    
+    
   );
+  
 }
 
 export default EventDetails;
+
+
+/*
+Hey my name ist alex. I am a host. That is what i do. I host stuff. All the time. For testing purposes. I Try to write text that is slighly to big for this textbox here. Maybe i can break something. :D
+*/

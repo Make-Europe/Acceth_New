@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useEffect, useState, useCallback } from "react";
-import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
+import { Switch, Redirect, BrowserRouter as Router, Route } from "react-router-dom";
 import { BrowserView, MobileView } from 'react-device-detect';
 import { SwapWidget } from '@uniswap/widgets'
 
@@ -23,6 +23,7 @@ import ChainOfEventsMobile from './components/ChainOfEventsMobile'
 import EventDetails from "./components/EventDetails";
 import EventDetailsMobile from './components/EventDetailsMobile'
 import InfoMobile from './components/InfoMobile'
+import ProfileDetailsEdit from "./components/ProfileDetailsEdit"
 import ProfileDetails from "./components/ProfileDetails"
 
 import logo from "./static/img/logo.png"
@@ -44,6 +45,7 @@ function App() {
   const [hostName, setHostName] = useState('')
   const [user, setUser] = useState('')
   const [nickname, setNickname] = useState('')
+  const [profileDescription, setProfileDescription] = useState('')
   const [eventName, setEventName] = useState('')
   const [eventDescription, setEventDescription] = useState('')
   const [eventLineup, setEventLineup] = useState('')
@@ -113,6 +115,10 @@ const handleChangeNickname = (childdata) => {
   setNickname(childdata)
 }
 
+const handleChangeStory = (childdata) => {
+  setProfileDescription(childdata)
+}
+
   const handleEventImage = (childdata) => {
     let reader = new FileReader()
     reader.readAsDataURL(childdata)
@@ -161,18 +167,28 @@ const handleChangeNickname = (childdata) => {
     }
   }
 
-  const handleUpdateNickname = () => {
-    updateNickname()
+  const handleLoadProfile = (owner) => {
+      return <Redirect
+      to={{
+        pathname: "/profiledetails",
+        state: { profile: (owner) }
+      }}
+    />
+    
   }
 
-  function updateNickname(){
+  const handleUpdateProfile = () => {
+    updateProfile()
+  }
+
+  function updateProfile(){
     fetch('/api/user/' + user.public_address, {
       method: "PUT",
       headers: {
         'Content-type': 'application/json'
       },
       body: JSON.stringify({ 
-        description: user.description,
+        description: profileDescription,
         id: user.id,
         image: user.image,
         imagePath: user.imagePath,
@@ -192,8 +208,6 @@ const handleChangeNickname = (childdata) => {
   }
 
   function saveEvent(){
-    console.log(user.name)
-    console.log(user.public_address)
     fetch('/api/event/5', {
       method: "POST",
       headers: {
@@ -437,6 +451,7 @@ const handleChangeNickname = (childdata) => {
         if(data.id !== undefined){
           console.log("known User")
           setNickname(data.name)
+          setProfileDescription(data.description)
           setUser(data)
         }
         else{
@@ -449,7 +464,7 @@ const handleChangeNickname = (childdata) => {
             body: JSON.stringify({ 
               name: "",
               image: "",
-              description: "this is the description",
+              description: "",
               public_address: address
             })
           })
@@ -624,6 +639,44 @@ const handleChangeNickname = (childdata) => {
             handleDeleteComment={handleDeleteComment}
             nickname={nickname}
             profile={user}
+            handleLoadProfile={handleLoadProfile}
+            />
+          </BrowserView>
+          <MobileView>
+            <EventDetailsMobile
+            {...eventDetailsData}
+            details_picture={details_picture}
+            account={address}
+            handleConnect={connect}
+            handlePostComment={handlePostComment}
+            handleComment={handleComment}
+            eventComment={eventComment}
+            handleBuyTicket={awardTicket}
+            handleTicketAmount={handleTicketAmount}
+            handleAddToken={handleAddToken}
+            />
+          </MobileView>
+        </Route>
+        <Route path="/editprofiledetails">
+          <BrowserView>
+            <ProfileDetailsEdit 
+            {...eventDetailsData}
+            details_picture={details_picture}
+            account={address}
+            handleConnect={connect}
+            handlePostComment={handlePostComment}
+            handleComment={handleComment}
+            eventComment={eventComment}
+            handleBuyTicket={awardTicket}
+            handleTicketAmount={handleTicketAmount}
+            handleAddToken={handleAddToken}
+            handleDeleteComment={handleDeleteComment}
+            handleChangeNickname={handleChangeNickname}
+            nickname={nickname}
+            user={user}
+            handleUpdateProfile={handleUpdateProfile}
+            handleChangeStory={handleChangeStory}
+            profileDescription={profileDescription}
             />
           </BrowserView>
           <MobileView>
@@ -657,7 +710,10 @@ const handleChangeNickname = (childdata) => {
             handleDeleteComment={handleDeleteComment}
             handleChangeNickname={handleChangeNickname}
             nickname={nickname}
-            handleUpdateNickname={handleUpdateNickname}
+            user={user}
+            handleUpdateProfile={handleUpdateProfile}
+            handleChangeStory={handleChangeStory}
+            profileDescription={profileDescription}
             />
           </BrowserView>
           <MobileView>

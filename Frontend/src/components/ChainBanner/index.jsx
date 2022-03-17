@@ -21,7 +21,7 @@ function ChainBanner(props) {
         </div>
         <Link
         to={{
-          pathname: "/profiledetails",
+          pathname: "/editprofiledetails",
           state: {
             profile: (profile),
           },
