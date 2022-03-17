@@ -21,12 +21,11 @@ function CreateEventGeneralInformation(props) {
     eventLineup
   } = props;
 
-  if(hostName === '' || eventName === '' || eventDescription === '' || eventLineup === ''){
+  if(eventName === '' || eventDescription === '' || eventLineup === ''){
     return (
       <div className="createevent-generalinformation screen">
       <div className="page-titel_-general montserrat-medium-black-40px">{pagetitel_General}</div>
       <div className="inputfields_-general">
-        <HostName inputPlaceholder={hostName1Props.inputPlaceholder} childToParent={handleHostName} currentValue={hostName} fieldType={"text"} />
         <HostName inputPlaceholder={hostName2Props.inputPlaceholder} className={hostName2Props.className} childToParent={handleEventName} currentValue={eventName} fieldType={"text"} />
         <HostName inputPlaceholder={hostName3Props.inputPlaceholder} className={hostName3Props.className} childToParent={handleEventDescription} currentValue={eventDescription} fieldType={"text"} />
         <HostName inputPlaceholder={hostName4Props.inputPlaceholder} className={hostName4Props.className} childToParent={handleEventLineup} currentValue={eventLineup} fieldType={"text"} />
@@ -43,7 +42,6 @@ function CreateEventGeneralInformation(props) {
       <div className="createevent-generalinformation screen">
         <div className="page-titel_-general montserrat-medium-black-40px">{pagetitel_General}</div>
         <div className="inputfields_-general">
-          <HostName inputPlaceholder={hostName1Props.inputPlaceholder} childToParent={handleHostName} currentValue={hostName} fieldType={"text"} />
           <HostName inputPlaceholder={hostName2Props.inputPlaceholder} className={hostName2Props.className} childToParent={handleEventName} currentValue={eventName} fieldType={"text"} />
           <HostName inputPlaceholder={hostName3Props.inputPlaceholder} className={hostName3Props.className} childToParent={handleEventDescription} currentValue={eventDescription} fieldType={"text"} />
           <HostName inputPlaceholder={hostName4Props.inputPlaceholder} className={hostName4Props.className} childToParent={handleEventLineup} currentValue={eventLineup} fieldType={"text"} />

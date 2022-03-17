@@ -23,6 +23,7 @@ import ChainOfEventsMobile from './components/ChainOfEventsMobile'
 import EventDetails from "./components/EventDetails";
 import EventDetailsMobile from './components/EventDetailsMobile'
 import InfoMobile from './components/InfoMobile'
+import ProfileDetails from "./components/ProfileDetails"
 
 import logo from "./static/img/logo.png"
 import about_icon from "./static/img/About_Icon.png"
@@ -41,6 +42,8 @@ function App() {
   const contract = new kit.web3.eth.Contract(ABI, APP_CONTRACT)
 
   const [hostName, setHostName] = useState('')
+  const [user, setUser] = useState('')
+  const [nickname, setNickname] = useState('')
   const [eventName, setEventName] = useState('')
   const [eventDescription, setEventDescription] = useState('')
   const [eventLineup, setEventLineup] = useState('')
@@ -69,9 +72,6 @@ function App() {
     }
   }
 */
-  const handleHostName = (childdata) => {
-    setHostName({childdata});
-  }
   const handleEventName = (childdata) => {
     setEventName({childdata});
   }
@@ -108,6 +108,11 @@ function App() {
   const handleEventPrice = (childdata) => {
     setEventPrice({childdata});
   }
+
+const handleChangeNickname = (childdata) => {
+  setNickname(childdata)
+}
+
   const handleEventImage = (childdata) => {
     let reader = new FileReader()
     reader.readAsDataURL(childdata)
@@ -156,18 +161,47 @@ function App() {
     }
   }
 
+  const handleUpdateNickname = () => {
+    updateNickname()
+  }
+
+  function updateNickname(){
+    fetch('/api/user/' + user.public_address, {
+      method: "PUT",
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({ 
+        description: user.description,
+        id: user.id,
+        image: user.image,
+        imagePath: user.imagePath,
+        name: nickname,
+        public_address: user.public_address
+      })
+    })
+    .then((response) => response.json()
+    )
+    .then((result) => {
+      window.location.reload(false);
+    })
+  }
+
   const handleSaveData = () => {
     saveEvent();
   }
 
   function saveEvent(){
+    console.log(user.name)
+    console.log(user.public_address)
     fetch('/api/event/5', {
       method: "POST",
       headers: {
         'Content-type': 'application/json'
       },
       body: JSON.stringify({ 
-        hostName: hostName.childdata,
+        ownerName: user.name,
+        ownerAddress: user.public_address,
         name: eventName.childdata,
         description: eventDescription.childdata,
         lineup: eventLineup.childdata,
@@ -396,6 +430,39 @@ function App() {
   useEffect(() =>{
     if(window.location.pathname !== '/' && address === null){
       //connect()
+    }else{
+      console.log(address)
+      fetch('/api/user/' + address).then(res => res.json()).then(data => {
+
+        if(data.id !== undefined){
+          console.log("known User")
+          setNickname(data.name)
+          setUser(data)
+        }
+        else{
+          console.log("new User")
+          fetch('api/user/' + address, {
+            method: "POST",
+            headers: {
+              'Content-type': 'application/json'
+            },
+            body: JSON.stringify({ 
+              name: "",
+              image: "",
+              description: "this is the description",
+              public_address: address
+            })
+          })
+          .then((response) => response.json()
+          )
+          .then((result) => {
+            fetch('/api/user/' + address).then(res => res.json()).then(data => {
+              setNickname(data.name)
+              setUser(data)
+            })
+          })
+        }
+      })
     }
     
   }, [address])
@@ -449,7 +516,6 @@ function App() {
             hostName2Props={createEventGeneralInformationData.hostName2Props}
             hostName3Props={createEventGeneralInformationData.hostName3Props}
             hostName4Props={createEventGeneralInformationData.hostName4Props}
-            handleHostName={handleHostName}
             handleEventName={handleEventName}
             handleEventDescription={handleEventDescription}
             handleEventLineup={handleEventLineup}
@@ -521,6 +587,8 @@ function App() {
               handleConnect={connect}
               handleAddToken={handleAddToken}
               handleDeleteEvent={handleDeleteEvent}
+              profile={user}
+              nickname={nickname}
             />
           </BrowserView>
           <MobileView>
@@ -554,6 +622,42 @@ function App() {
             handleTicketAmount={handleTicketAmount}
             handleAddToken={handleAddToken}
             handleDeleteComment={handleDeleteComment}
+            nickname={nickname}
+            profile={user}
+            />
+          </BrowserView>
+          <MobileView>
+            <EventDetailsMobile
+            {...eventDetailsData}
+            details_picture={details_picture}
+            account={address}
+            handleConnect={connect}
+            handlePostComment={handlePostComment}
+            handleComment={handleComment}
+            eventComment={eventComment}
+            handleBuyTicket={awardTicket}
+            handleTicketAmount={handleTicketAmount}
+            handleAddToken={handleAddToken}
+            />
+          </MobileView>
+        </Route>
+        <Route path="/profiledetails">
+          <BrowserView>
+            <ProfileDetails 
+            {...eventDetailsData}
+            details_picture={details_picture}
+            account={address}
+            handleConnect={connect}
+            handlePostComment={handlePostComment}
+            handleComment={handleComment}
+            eventComment={eventComment}
+            handleBuyTicket={awardTicket}
+            handleTicketAmount={handleTicketAmount}
+            handleAddToken={handleAddToken}
+            handleDeleteComment={handleDeleteComment}
+            handleChangeNickname={handleChangeNickname}
+            nickname={nickname}
+            handleUpdateNickname={handleUpdateNickname}
             />
           </BrowserView>
           <MobileView>
