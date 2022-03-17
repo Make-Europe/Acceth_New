@@ -7,37 +7,18 @@ import { TwitterShareButton, LinkedinShareButton, PinterestShareButton, Telegram
 
 function EventDetails(props) {
   const {
-    detailspanel_Host_Titel,
-    detailspanel_Date_Titel,
-    detailspanel_Start_Titel,
-    detailspanel_End_Titel,
-    detailspanel_Location_Titel,
-    detailspanel_City_Titel,
-    detailspanel_Street_Titel,
-    lineuppanel_Titel,
-    informationpanel_Titel,
-    buyticket_Text,
-    ticketpanel_Category_Titel,
-    ticketpanel_Category_Text,
-    ticketpanel_Capacity_Titel,
-    ticketpanel_Capacity_Current_Text,
-    ticketpanel_Expiry_Titel,
-    ticketpanel_Price_Titel,
+    handleChangeNickname,
+    nickname,
+    handleUpdateNickname,
     account,
     handleConnect,
-    handleComment,
-    handlePostComment,
-    eventComment,
-    handleBuyTicket,
-    handleTicketAmount,
     handleAddToken,
-    nickname,
     profile
   } = props;
 
+  /*
   const [comments, setComments] = useState([])
   const [soldTickets, setSoldTickets] = useState(0)
-  const [owner, setOwner] = useState('')
   useEffect(() => {
     fetch('/api/list/comment/' + location.state.event.id).then(res => res.json()).then(data => {
       const result = data.sort((a, b) => (a.id < b.id) ? 1 : -1)
@@ -48,20 +29,17 @@ function EventDetails(props) {
       handleTicketAmount(data.value)
     })
   }, [account])
-
-  useEffect(() => {
-    fetch('api/user/' + location.state.event.ownerAddress).then(res => res.json()).then(data => {
-      setOwner(data.name)
-    })
-  })
-
+  */
   const location = useLocation()
-  const hashtags = ["BUIDL", "Ethdenver", "NFT", "Web3"]
+  console.log(nickname)
+  //const hashtags = ["BUIDL", "Ethdenver", "NFT", "Web3"]
+  
 
   return (
+    /*
     <div className="container-center-horizontal">
       <div className="eventdetails screen">
-        <ChainBanner account={account} handleConnect={handleConnect} handleAddToken={handleAddToken} profile={profile} nickname={nickname} />
+        <ChainBanner account={account} handleConnect={handleConnect} handleAddToken={handleAddToken}/>
         <div className="details_-titel montserrat-semi-bold-black-50px">{location.state.event.name}</div>
         <div className="container socialMedia">
             <TwitterShareButton url="https://acceth.xyz/chainofevents" title={"I just got my ticket: " + '"' + location.state.event.name + '"'} hashtags={hashtags} via="make_rhein_main">
@@ -79,7 +57,7 @@ function EventDetails(props) {
           <div className="details-panel-1 border-1px-dove-gray">
             <div className="detailspanel_host_t-container">
               <div className="details-panel_-host_-titel montserrat-medium-black-25px">{detailspanel_Host_Titel}</div>
-              <div className="details-panel montserrat-normal-black-25px">{owner.length >= 28 ? owner.substring(0,28) + "..." : owner}</div>
+              <div className="details-panel montserrat-normal-black-25px">{location.state.event.owner.length >= 28 ? location.state.event.owner.substring(0,28) + "..." : location.state.event.owner}</div>
             </div>
             <div className="detailspanel_date_t-container">
               <div className="details-panel_-date_-titel montserrat-medium-black-25px">{detailspanel_Date_Titel}</div>
@@ -183,8 +161,31 @@ function EventDetails(props) {
           
         </div>
       </div>
+    </div>*/
+    <div className="profilecontainer">
+      <div>
+        <img alt="" className="profile-picture border-1px-dove-gray" src={location.state.profile.image} />
+      </div>
+      
+      <div className="nickSpace">
+        <input
+          className="nickname montserrat-medium-tower-gray-30px"
+          name="nickname"
+          placeholder="enter nickname"
+          type="text"
+          value={nickname ? nickname : ""}
+          onInput={e => handleChangeNickname(e.target.value)}
+          required
+        />
+        <div className="submitNickname montserrat-medium-black-20px border-1px-dove-gray" onClick={handleUpdateNickname}>
+          OK
+        </div>
+      </div>
+
     </div>
+    
   );
+  
 }
 
 export default EventDetails;

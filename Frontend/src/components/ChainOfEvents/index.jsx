@@ -18,7 +18,9 @@ function ChainOfEvents(props) {
     account,
     handleConnect,
     handleAddToken,
-    handleDeleteEvent
+    handleDeleteEvent,
+    profile,
+    nickname
   } = props;
 
 
@@ -26,7 +28,7 @@ function ChainOfEvents(props) {
   return (
     <div className="container-center-horizontal">
       <div className="chainofevents screen">
-        <ChainBanner account={account} handleConnect={handleConnect} handleAddToken={handleAddToken}/>
+        <ChainBanner account={account} handleConnect={handleConnect} handleAddToken={handleAddToken} profile={profile} nickname={nickname} />
         <h1 className="chain-of-events_-titel montserrat-semi-bold-black-50px">{chainofevents_Titel}</h1>
         <div className="flex-row">
           <div className="search border-1px-dove-gray">

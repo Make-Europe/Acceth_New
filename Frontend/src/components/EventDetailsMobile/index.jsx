@@ -56,7 +56,7 @@ function EventDetailsMobile(props) {
           <img className="details_-picture-mobile" src={location.state.event.image} />
           <div className="details-panel-mobile border-1px-dove-gray">
             <div className="detailspanelmobile_host_t-container">
-              <div className="x-panel-mobile montserrat-normal-black-25px">{location.state.event.hostName.length >= 30 ? location.state.event.hostName.substring(0,30) + "..." : location.state.event.hostName}</div>
+              <div className="x-panel-mobile montserrat-normal-black-25px">{location.state.event.hostownerName.length >= 28 ? location.state.event.owner.substring(0,28) + "..." : location.state.event.owner}</div>
               <div className="x-panel-mobile-1 montserrat-medium-black-25px">{detailspanel_Host_Titel}</div>
             </div>
             <div className="detailspanelmobile_date_t-container">

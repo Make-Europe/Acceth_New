@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Gruppe5.css";
 
 function Gruppe5(props) {
-  const { className, event } = props;
+  const { className, event, handleDeleteEvent } = props;
 
   return (
     <Link
@@ -29,7 +29,7 @@ function Gruppe5(props) {
         </div>
         <div className="event_-lineup montserrat-medium-black-20px">{event.lineup.length >= 50 ? event.lineup.substring(0, 50) + " ..." : event.lineup}</div>
       </div>
-        <div className="overlap-group border-1px-dove-gray">
+        <div className="overlap-group border-1px-dove-gray" onClick={() => handleDeleteEvent(event.id)}>
           <div className="more_-text montserrat-medium-black-30px">
             Find
             <br />
