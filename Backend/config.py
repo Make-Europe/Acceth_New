@@ -9,7 +9,7 @@ from flask_cors import CORS
 #!______________ App Setup _____________    _
 app = Flask(__name__, static_url_path='/static')
 api_v1_cors_config = {
-  "origins": ["http://localhost:5000"]
+  "origins": ["http://192.168.178.55:5050"]
 }
 
 #!______________ CORS Setup _____________    _

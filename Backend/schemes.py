@@ -19,10 +19,14 @@ class UserSchema(BaseScheme):
         model = User
     id = fields.Int()
     name = fields.Str()
+    public_address = fields.Str()
 class UserInsertSchema(UserSchema):
-    user_id = fields.Int()
+    user_id = fields.Str()
+    public_address = fields.Str()
+
 class UserResponseSchema(UserSchema):
     name = fields.Str()
+    public_address = fields.Str()
 
 #*______________ Comment Schemes ______________
 class Commentschema(BaseScheme):

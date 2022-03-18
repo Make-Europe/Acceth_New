@@ -4,9 +4,12 @@ from config import db
 class User(db.Model):
     __tablename__ = "User" 
     id = db.Column(db.Integer, primary_key=True)
+    public_address = db.Column(db.String())
     name = db.Column(db.String(50))
     image = db.Column(db.String())
+    imagePath = db.Column(db.String())
     description = db.Column(db.String())
+
 
 class Event(db.Model):
     __tablename__ = "Event" 
@@ -23,9 +26,10 @@ class Event(db.Model):
     street = db.Column(db.String(50))
     zipCode = db.Column(db.String(50))
     price = db.Column(db.String(50))
-    hostName = db.Column(db.String(50))
     locationName = db.Column(db.String(50))
     date = db.Column(db.String(50))
+    ownerName = db.Column(db.String, db.ForeignKey("User.name"), nullable = False)
+    ownerAddress = db.Column(db.String, db.ForeignKey("User.public_address"), nullable = False)
 
 class Comment(db.Model):
     __tablename__ = "Comment" 
@@ -48,6 +52,10 @@ class Ticket(db.Model):
     ticket_id = db.Column(db.Integer)
     event_id = db.Column(db.Integer)
     image = db.Column(db.String())
+    imageURI = db.Column(db.String())
+    imagePath = db.Column(db.String())
+    metaData = db.Column(db.String())
+    metaData_Path = db.Column(db.String())
     
 class Relation_EventTicket(db.Model):
     __tablename__ = "Relation_EventTicket" 
