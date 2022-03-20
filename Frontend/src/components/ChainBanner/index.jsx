@@ -17,7 +17,7 @@ function ChainBanner(props) {
       <div className="container-center-horizontal">
         <div className="chain-banner" onClick={handleAddToken}>
           <div className="chain-banner_-text montserrat-medium-black-25px">
-          Click to add Token
+          Add $TCKT here to see Tickets
           </div>
         </div>
         <Link
@@ -47,9 +47,17 @@ function ChainBanner(props) {
   }
   else{
     return (
+      <div className="container-center-horizontal">
       <div className="chain-banner" onClick={handleConnect} >
         <div className="chain-banner_-text montserrat-medium-black-25px">
           Connect Wallet
+        </div>
+      </div>
+      <div className="placeHolder11"></div>
+      <div className="chain-banner3" onClick={handleConnectRally}>
+          <div className="chain-banner_-text montserrat-medium-black-25px">
+          Connect Rally.io
+          </div>
         </div>
       </div>
     );

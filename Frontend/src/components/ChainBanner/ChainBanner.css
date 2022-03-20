@@ -5,7 +5,7 @@
   background-color: var(--cerise);
   display: flex;
   height: 60px;
-  width: 25%;
+  width: 30%;
   padding: 7px;
   justify-content: center;
 }
@@ -17,7 +17,7 @@
   background-color: var(--water-leaf);
   display: flex;
   height: 60px;
-  width: 50%;
+  width: 40%;
   padding: 7px;
   justify-content: center;
 }
@@ -29,7 +29,7 @@
   background-color: var(--cerise);
   display: flex;
   height: 60px;
-  width: 25%;
+  width: 30%;
   padding: 7px;
   justify-content: center;
 }
@@ -52,4 +52,6 @@
   white-space: nowrap;
 }
 
-
+.placeHolder11 {
+  width: 20px;
+}
