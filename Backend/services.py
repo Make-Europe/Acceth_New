@@ -3,9 +3,10 @@ from flask_apispec.views import MethodResource
 from flask_restful import Resource
 from schemes import (EventResponseSchema, EventSchema, HostResponseSchema, HostSchema, TicketResponseSchema, TicketSchema, UserSchema, 
                     UserResponseSchema, Relation_UserHost_Schema, Relation_UserHost_ResponseSchema, Relation_EventHost_Schema, Relation_EventHost_ResponseSchema,
-                    Relation_EventTicket_Schema, Relation_EventTicket_ResponseSchema, CountSchema, CountResponseSchema, Commentschema, CommentResponseSchema)
+                    Relation_EventTicket_Schema, Relation_EventTicket_ResponseSchema, CountSchema, CountResponseSchema, Commentschema, CommentResponseSchema, 
+                    ProfileCommentResponseSchema, ProfileCommentSchema, LikeSchema, LikeResponseSchema)
 from config import db
-from models import Count, Ticket, User, Host, Event, Relation_UserHost, Relation_EventTicket, Relation_EventHost, Comment
+from models import Count, Ticket, User, Host, Event, Relation_UserHost, Relation_EventTicket, Relation_EventHost, Comment, ProfileComment, Like
 from imagery import insertRandomImage, createTicket
 
 #!______________ User ______________
@@ -111,6 +112,52 @@ class ListCommentsByEventService(MethodResource, Resource):
     def get(self, event_id):
         comments = db.session.query(Comment).filter_by(event_id=event_id).all()
         return Commentschema(many=True).dump(comments)
+
+#!______________ Profile Comment ______________
+class ProfileCommentService(MethodResource, Resource):
+    @doc(description='Get Profile Comment by Comment_id', tags=['Comment'])
+    @marshal_with(ProfileCommentResponseSchema)
+    def get(self, comment_id):
+        comment = db.session.query(ProfileComment).get(comment_id)
+        return ProfileCommentSchema().dump(comment)
+
+    @doc(description='Add new Profile Comment', tags=['Comment'])
+    @use_kwargs(ProfileCommentSchema, location=('json'))
+    @marshal_with(ProfileCommentResponseSchema())
+    def post(self, comment, comment_id):
+        db.session.add(comment)
+        db.session.commit()
+        return ProfileCommentSchema().dump(comment)
+    
+    @doc(description='Update Profile Comment with PUT', tags=['Comment'])
+    @use_kwargs(ProfileCommentSchema, location=('json'))
+    @marshal_with(ProfileCommentResponseSchema())
+    def put(self, comment, comment_id):
+        db.session.add(comment)
+        db.session.commit()
+        return ProfileCommentSchema().dump(comment)
+
+    @doc(description='Delete existing Profile Comment', tags=['Comment'])
+    @marshal_with(ProfileCommentResponseSchema())
+    def delete(self, comment_id):
+        comment = db.session.query(ProfileComment).get(comment_id)
+        db.session.delete(comment)
+        db.session.commit()
+        return ProfileCommentSchema().dump(comment)
+
+class ProfileCommentListService(MethodResource, Resource):
+    @doc(description='Get a List of all Profile Comments', tags=['List'])
+    @marshal_with(ProfileCommentResponseSchema(many=True))
+    def get(self):
+        comments = db.session.query(ProfileComment).all()
+        return ProfileCommentSchema(many=True).dump(comments)
+
+class ProfileListCommentsByUserService(MethodResource, Resource):
+    @doc(description='Get a List of all Profile Comments of a specific User', tags=['List'])
+    @marshal_with(ProfileCommentResponseSchema(many=True))
+    def get(self, user_id):
+        comments = db.session.query(ProfileComment).filter_by(user_id=user_id).all()
+        return ProfileCommentSchema(many=True).dump(comments)
 
 
 #!______________ Host ______________
@@ -340,3 +387,48 @@ class EventImageService(MethodResource, Resource):
     def put(self, event_id):
         insertRandomImage(Event, event_id)
         return "image of Even with id {} was changed".format(event_id)
+
+#!______________ Like ______________
+class LikeService(MethodResource, Resource):
+    @doc(description='Get Like by Like_id', tags=['Like'])
+    @marshal_with(LikeResponseSchema)
+    def get(self, like_id):
+        like = db.session.query(Like).get(like_id)
+        return LikeSchema().dump(like)
+
+    @doc(description='Add new Like', tags=['Like'])
+    @use_kwargs(LikeSchema, location=('json'))
+    @marshal_with(LikeResponseSchema())
+    def post(self, like, like_id):
+        db.session.add(like)
+        db.session.commit()
+        return LikeSchema().dump(like)
+
+    @doc(description='Delete existing Like', tags=['Like'])
+    @marshal_with(LikeResponseSchema)
+    def delete(self, like_id):
+        like = db.session.query(Like).get(like_id)
+        db.session.delete(like)
+        db.session.commit()
+        return LikeSchema().dump(like)
+
+class LikeListService(MethodResource, Resource):
+    @doc(description='Get a List of all Likes', tags=['List'])
+    @marshal_with(LikeResponseSchema(many=True))
+    def get(self):
+        likes = db.session.query(Like).all()
+        return LikeSchema(many=True).dump(likes)
+
+class LikeListService_Sender(MethodResource, Resource):
+    @doc(description='Get a List of all Likes by Sender Address', tags=['List'])
+    @marshal_with(LikeResponseSchema(many=True))
+    def get(self, sender_address):
+        likes = db.session.query(Like).filter_by(sender = sender_address).all()
+        return LikeSchema(many=True).dump(likes)
+
+class LikeListService_Reciever(MethodResource, Resource):
+    @doc(description='Get a List of all Likes by Reciever Address', tags=['List'])
+    @marshal_with(LikeResponseSchema(many=True))
+    def get(self, reciever_address):
+        likes = db.session.query(Like).filter_by(reciever = reciever_address).all()
+        return LikeSchema(many=True).dump(likes)

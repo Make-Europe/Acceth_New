@@ -39,6 +39,14 @@ class Comment(db.Model):
     date = db.Column(db.String())
     username = db.Column(db.String())
 
+class ProfileComment(db.Model):
+    __tablename__ = "ProfileComment" 
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("User.id"), nullable = False)
+    content = db.Column(db.String())
+    date = db.Column(db.String())
+    username = db.Column(db.String())
+
 class Host(db.Model):
     __tablename__ = "Host" 
     id = db.Column(db.Integer, primary_key=True)
@@ -80,4 +88,13 @@ class Count(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20))
     value = db.Column(db.Integer)
+
+class Like(db.Model):
+    __tablename__ = "Like" 
+    id = db.Column(db.Integer, primary_key=True)
+    reciever = db.Column(db.String())
+    sender = db.Column(db.String())
+    date = db.Column(db.String())
+    
+    
 
