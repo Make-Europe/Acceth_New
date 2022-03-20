@@ -594,15 +594,24 @@ const handleChangeStory = (childdata) => {
               handleConnect={connect}
             />
             */}
-            <Selection 
-            host_Text="I'm a" 
-            place="HOST" 
-            guest_Text="I'm a" 
-            guestbutton_Text="GUEST"
-            handleLoadData={handleLoadData}
-            account={address}
-            handleConnect={connect}
-          />
+            <ChainOfEvents
+              {...chainOfEventsData}
+              default_picture={default_picture}
+              handleLoadData={handleLoadData}
+              allEvents={foundEvents}
+              searchResult={searchResult}
+              filter={filter}
+              handleScrollTop={handleScrollTop}
+              sortBy={sortBy}
+              handleSort={handleSort}
+              account={address}
+              handleConnect={connect}
+              handleAddToken={handleAddToken}
+              handleDeleteEvent={handleDeleteEvent}
+              profile={user}
+              nickname={nickname}
+              handleConnectRally={handleConnectRally}
+            />
           </BrowserView>
           <MobileView>
             {/* 

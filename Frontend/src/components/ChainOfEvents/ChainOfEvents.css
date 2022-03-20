@@ -82,3 +82,9 @@
   position: relative;
   width: 1017px;
 }
+
+.addEvent {
+  position: absolute;
+  margin-top: 135px;
+  margin-left: 900px;
+}
