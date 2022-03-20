@@ -176,3 +176,19 @@
   font-weight: 500;
   font-style: normal;
 }
+
+.montserrat-medium-tower-gray-35px {
+  color: var(--tower-gray);
+  font-family: var(--font-family-montserrat);
+  font-size: 25px;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.montserrat-medium-black-15px {
+  color: var(--black);
+  font-family: var(--font-family-montserrat);
+  font-size: 15px;
+  font-weight: 500;
+  font-style: normal;
+}

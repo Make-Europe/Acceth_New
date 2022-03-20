@@ -8,12 +8,14 @@ import { TwitterShareButton, LinkedinShareButton, PinterestShareButton, Telegram
 function EventDetails(props) {
   const {
     handleChangeNickname,
+    handleChangeStory,
     nickname,
-    handleUpdateNickname,
+    profileDescription,
+    handleUpdateProfile,
     account,
     handleConnect,
     handleAddToken,
-    profile
+    user
   } = props;
 
   /*
@@ -162,30 +164,35 @@ function EventDetails(props) {
         </div>
       </div>
     </div>*/
-    <div className="profilecontainer">
-      <div>
-        <img alt="" className="profile-picture border-1px-dove-gray" src={location.state.profile.image} />
+    <div className="screen">
+      <div className="profileBanner">
+        <ChainBanner account={account} handleConnect={handleConnect} handleAddToken={handleAddToken} profile={user} nickname={nickname} />
       </div>
       
-      <div className="nickSpace">
-        <input
-          className="nickname montserrat-medium-tower-gray-30px"
-          name="nickname"
-          placeholder="enter nickname"
-          type="text"
-          value={nickname ? nickname : ""}
-          onInput={e => handleChangeNickname(e.target.value)}
-          required
-        />
-        <div className="submitNickname montserrat-medium-black-20px border-1px-dove-gray" onClick={handleUpdateNickname}>
-          OK
+      <div className="profilecontainer">
+        <div>
+          <img alt="" className="profile-picture border-1px-dove-gray" src={location.state.profile.image} />
+        </div>
+        
+        <div className="nickSpace">
+          <div className="nickname montserrat-medium-black-30px">{location.state.profile.name}</div>
+        </div>
+        <div className="storyContainer">
+          <div className="story-panel2 border-1px-dove-gray">
+            <div className="story-panel_-text2 montserrat-medium-black-25px">{location.state.profile.description}</div>
+          </div>
         </div>
       </div>
-
     </div>
+    
     
   );
   
 }
 
 export default EventDetails;
+
+
+/*
+Hey my name ist alex. I am a host. That is what i do. I host stuff. All the time. For testing purposes. I Try to write text that is slighly to big for this textbox here. Maybe i can break something. :D
+*/
