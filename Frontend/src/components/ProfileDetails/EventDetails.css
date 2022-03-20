@@ -609,6 +609,7 @@ textarea:focus {
   margin-top: 25px;
   margin-right: 15px;
   margin-left: 20px;
+  width: 530px;
   word-break: break-word;
 }
 
