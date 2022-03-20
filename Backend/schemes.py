@@ -1,6 +1,6 @@
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from config import db
-from models import User, Event, Host, Relation_EventHost, Relation_EventTicket, Relation_UserHost, Count, Comment, Ticket
+from models import User, Event, Host, Relation_EventHost, Relation_EventTicket, Relation_UserHost, Count, Comment, ProfileComment, Ticket, Like
 from marshmallow import fields
 
 #*______________ Base Schema ______________
@@ -35,12 +35,27 @@ class Commentschema(BaseScheme):
     content = fields.Str()
     date = fields.Str()
     username = fields.Str()
-class CommentInsertSchema(UserSchema):
+class CommentInsertSchema(Commentschema):
     event_id = fields.Int()
-class CommentResponseSchema(UserSchema):
+class CommentResponseSchema(Commentschema):
     content = fields.Str()
     date = fields.Str()
     username = fields.Str()
+
+#*______________ Comment Schemes ______________
+class ProfileCommentSchema(BaseScheme):
+    class Meta(BaseScheme.Meta):
+        model = ProfileComment
+    content = fields.Str()
+    date = fields.Str()
+    username = fields.Str()
+class ProfileCommentInsertSchema(ProfileCommentSchema):
+    event_id = fields.Int()
+class ProfileCommentResponseSchema(ProfileCommentSchema):
+    content = fields.Str()
+    date = fields.Str()
+    username = fields.Str()
+
 
 
 #*______________ Event Schemes ______________
@@ -139,8 +154,19 @@ class CountSchema(BaseScheme):
         model = Count
     id = fields.Int()
     name = fields.Str()
-class CountInsertSchema(UserSchema):
+class CountInsertSchema(CountSchema):
     count_id = fields.Int()
-class CountResponseSchema(UserSchema):
+class CountResponseSchema(CountSchema):
     name = fields.Str()
     value = fields.Int()
+
+
+class LikeSchema(BaseScheme):
+    class Meta(BaseScheme.Meta):
+        model = Like
+    id = fields.Int()
+class LikeInsertSchema(LikeSchema):
+    reciever = fields.Str()
+    sender = fields.Str()
+class LikeResponseSchema(LikeSchema):
+    sender = fields.Str()

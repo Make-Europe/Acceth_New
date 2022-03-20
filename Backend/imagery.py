@@ -20,7 +20,7 @@ def insertRandomImage(table, id):
     img_size = (128,128)
     img = get_random_image(img_size)
     name = str(uuid.uuid4()) + '.png'
-    path = os.getcwd() + '/Backend/static/' + name
+    path = os.getcwd() + '/static/' + name
     print('saving Image')
     matplotlib.image.imsave(path, img)
     print('Creating Path')
@@ -44,8 +44,8 @@ def createTicket(event_id, ticket_id):
     font = ImageFont.load_default()
     draw.rectangle(shape, fill ="#fff", outline ="white")
     draw.text((0.5, 0)," TCKT {}I{}".format(event_id, ticket_id),(0,0,0),font=font)
-    imgPath = os.getcwd() + '/Backend/static/tickets/{}I{}.png'.format(event_id, ticket_id)
-    img.save('Backend/static/tickets/{}I{}.png'.format(event_id,ticket_id))
+    imgPath = os.getcwd() + '/static/tickets/{}I{}.png'.format(event_id, ticket_id)
+    img.save('static/tickets/{}I{}.png'.format(event_id,ticket_id))
     imgUri = convertToUri(imgPath)
     
     imgHash = addToIpfs(imgPath)
@@ -54,7 +54,7 @@ def createTicket(event_id, ticket_id):
     metadata.image = imgHash
     metadata.ticket_id = ticket_id
     metadata.event_id = event_id
-    metaPath = os.getcwd() + '/Backend/static/tickets/{}I{}.json'.format(event_id, ticket_id)
+    metaPath = os.getcwd() + '/static/tickets/{}I{}.json'.format(event_id, ticket_id)
 
     with open(metaPath, 'w', encoding='utf-8') as f:
         json.dump(metadata.__dict__, f, ensure_ascii=False, indent=4)
