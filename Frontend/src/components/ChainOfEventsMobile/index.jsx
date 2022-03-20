@@ -19,13 +19,14 @@ function ChainOfEventsMobile(props) {
     allEvents,
     account,
     handleConnect,
-    handleAddToken
+    handleAddToken,
+    handleConnectRally
   } = props;
 
   return (
     <div className="container-center-horizontal">
       <div className="chainofevents-mobile screen">
-        <ChainBannerMobile account={account} handleConnect={handleConnect} handleAddToken={handleAddToken}/>
+        <ChainBannerMobile account={account} handleConnect={handleConnect} handleAddToken={handleAddToken} handleConnectRally={handleConnectRally} />
         <div className="chain-of-events-mobile_-titel">{chainofevents_Titel}</div>
         <div className="event-chain-mobile">
         {allEvents
