@@ -8,7 +8,8 @@ function ChainBanner(props) {
     handleConnect,
     handleAddToken,
     profile,
-    nickname
+    nickname,
+    handleConnectRally
   } = props;
 
   if(account != null){
@@ -33,6 +34,11 @@ function ChainBanner(props) {
           </div>
         </div>
         </Link>
+        <div className="chain-banner3" onClick={handleConnectRally}>
+          <div className="chain-banner_-text montserrat-medium-black-25px">
+          Connect Rally.io
+          </div>
+        </div>
       </div>
       
       

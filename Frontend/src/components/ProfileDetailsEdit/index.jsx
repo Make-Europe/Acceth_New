@@ -15,7 +15,8 @@ function EventDetails(props) {
     account,
     handleConnect,
     handleAddToken,
-    user
+    user,
+    handleConnectRally
   } = props;
 
   /*
@@ -33,7 +34,6 @@ function EventDetails(props) {
   }, [account])
   */
   const location = useLocation()
-  console.log(nickname)
   //const hashtags = ["BUIDL", "Ethdenver", "NFT", "Web3"]
   
 
@@ -166,7 +166,7 @@ function EventDetails(props) {
     </div>*/
     <div className="screen">
       <div className="profileBannerEdit">
-        <ChainBanner account={account} handleConnect={handleConnect} handleAddToken={handleAddToken} profile={user} nickname={nickname} />
+        <ChainBanner account={account} handleConnect={handleConnect} handleAddToken={handleAddToken} profile={user} nickname={nickname} handleConnectRally={handleConnectRally} />
       </div>
       
       <div className="profilecontainerEdit">

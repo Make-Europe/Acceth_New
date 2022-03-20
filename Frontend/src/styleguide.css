@@ -192,3 +192,11 @@
   font-weight: 500;
   font-style: normal;
 }
+
+.montserrat-medium-cerise-15px {
+  color: var(--cerise);
+  font-family: var(--font-family-montserrat);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+}

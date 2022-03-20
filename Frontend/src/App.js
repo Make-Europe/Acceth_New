@@ -64,7 +64,9 @@ function App() {
   const [sortBy, setSortBy] = useState('')
   const [foundEvents, setFoundEvents] = useState([])
   const [eventComment, setEventComment] = useState('')
+  const [profileComment, setProfileComment] = useState('')
   const [ticketAmount, setTicketAmount] = useState(0)
+  const [likeAmount, setLikeAmount] = useState(0)
 /*
   async function handleConnect() {
     try {
@@ -131,8 +133,86 @@ const handleChangeStory = (childdata) => {
   const handleComment = (childdata) => {
     setEventComment({childdata})
   }
+  const handleProfileComment = (childdata) => {
+    setProfileComment({childdata})
+  }
   const handleTicketAmount = (childdata) => {
     setTicketAmount({childdata})
+  }
+  const handleLikeAmount = (childdata) => {
+    setLikeAmount({childdata})
+  }
+
+  const handleConnectRally = () => {
+    connectRally()
+  }
+
+  function connectRally(){
+    console.log("CONNECT TO RALLY")
+    fetch('https://api.rally.io/v1/oauth/register', {
+      method: "POST",
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({ 
+        password: "DucTfRYp2g5LVBQ!",
+        username: "eddie@make-europe.com"
+      })
+    })
+    .then((response) => response.json()
+    )
+    .then((result) => {
+      console.log(result)
+      fetch('https://api.rally.io/v1/oauth/authorize', {
+        method: "POST",
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({ 
+          callback: "http://localhost:3000",
+          Authorization: "Bearer " + result.access_token
+        })
+      })
+      .then((response) => response.json()
+      )
+      .then((result) => {
+        console.log(result)
+      })
+      //window.location.reload(false);
+    })
+  }
+
+  const handleLike = (publicAddress) => {
+    likeProfile(publicAddress)
+  }
+
+  function likeProfile(public_address){
+    fetch('api/list/likebysender/' + address).then(res => res.json()).then(data => {
+      if(data.find((e) => e.reciever === public_address)){
+        console.log("already liked")
+      }
+      else{
+        console.log("new like")
+        const day = new Date()
+        fetch('/api/like/' + 5, {
+          method: "POST",
+          headers: {
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify({ 
+            //id: result.id,
+            reciever: public_address,
+            sender: address,
+            date: day.toString()
+          })
+        })
+        .then((response) => response.json()
+        )
+        .then((result) => {
+          window.location.reload(false);
+        })
+      }
+    })
   }
 
   const handleAddToken = () => {
@@ -244,7 +324,6 @@ const handleChangeStory = (childdata) => {
       }else{
         loadData()
       }
-      console.log(result.id + " " + eventName.childdata + " " + 0)
       fetch('/api/count/' + result.id, {
         method: "POST",
         headers: {
@@ -281,13 +360,18 @@ const handleChangeStory = (childdata) => {
       postComment(childdata)
     }
   }
+
+  const handlePostProfileComment = (childdata) => {
+    if(profileComment  !== ''){
+      postProfileComment(childdata)
+    }
+  }
   
   const handleDeleteComment = (commentId, eventId) => {
     deleteComment(commentId, eventId)
   }
 
   function deleteComment(commentId, eventId){
-    console.log(eventId)
     fetch('/api/comment/' + commentId.id, {
       method: "DELETE",
       headers: {
@@ -306,7 +390,6 @@ const handleChangeStory = (childdata) => {
   }
 
   function deleteEvent(eventId){
-    console.log(eventId)
     fetch('/api/event/' + eventId, {
       method: "DELETE",
       headers: {
@@ -331,6 +414,27 @@ const handleChangeStory = (childdata) => {
         content: eventComment.childdata,
         date: day.toString(),
         event_id: childdata,
+        username: address
+      })
+    })
+    .then((response) => response.json()
+    )
+    .then((result) => {
+      window.location.reload(false);
+    })
+  }
+
+  function postProfileComment(childdata){
+    const day = new Date()
+    fetch('/api/profilecomment/' + childdata, {
+      method: "POST",
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({ 
+        content: profileComment.childdata,
+        date: day.toString(),
+        user_id: childdata,
         username: address
       })
     })
@@ -403,7 +507,6 @@ const handleChangeStory = (childdata) => {
         }
         else{
           contract.methods.awardTicket(address, "https://acceth.xyz/api/ticket/").send({from: address}).then((res) => {
-            console.log(res)
             if(res) {
               contract.methods.awardTicket(address, "https://acceth.xyz/api/ticket/").call().then((id) => {
                 fetch('/api/ticket/create/' + event.id + '/' + (id-1), {
@@ -412,7 +515,6 @@ const handleChangeStory = (childdata) => {
                     'Content-type': 'application/json'
                   }
                 }).then(res => res.json()).then(data => {
-                  console.log(data)
                 })
 
                 fetch('/api/count/' + event.id, {
@@ -445,7 +547,6 @@ const handleChangeStory = (childdata) => {
     if(window.location.pathname !== '/' && address === null){
       //connect()
     }else{
-      console.log(address)
       fetch('/api/user/' + address).then(res => res.json()).then(data => {
 
         if(data.id !== undefined){
@@ -604,6 +705,7 @@ const handleChangeStory = (childdata) => {
               handleDeleteEvent={handleDeleteEvent}
               profile={user}
               nickname={nickname}
+              handleConnectRally={handleConnectRally}
             />
           </BrowserView>
           <MobileView>
@@ -620,6 +722,7 @@ const handleChangeStory = (childdata) => {
                 account={address}
                 handleConnect={connect}
                 handleAddToken={handleAddToken}
+                handleConnectRally={handleConnectRally}
               />
           </MobileView>
         </Route>
@@ -640,6 +743,7 @@ const handleChangeStory = (childdata) => {
             nickname={nickname}
             profile={user}
             handleLoadProfile={handleLoadProfile}
+            handleConnectRally={handleConnectRally}
             />
           </BrowserView>
           <MobileView>
@@ -654,6 +758,7 @@ const handleChangeStory = (childdata) => {
             handleBuyTicket={awardTicket}
             handleTicketAmount={handleTicketAmount}
             handleAddToken={handleAddToken}
+            handleConnectRally={handleConnectRally}
             />
           </MobileView>
         </Route>
@@ -677,6 +782,7 @@ const handleChangeStory = (childdata) => {
             handleUpdateProfile={handleUpdateProfile}
             handleChangeStory={handleChangeStory}
             profileDescription={profileDescription}
+            handleConnectRally={handleConnectRally}
             />
           </BrowserView>
           <MobileView>
@@ -710,10 +816,16 @@ const handleChangeStory = (childdata) => {
             handleDeleteComment={handleDeleteComment}
             handleChangeNickname={handleChangeNickname}
             nickname={nickname}
-            user={user}
+            profile={user}
             handleUpdateProfile={handleUpdateProfile}
             handleChangeStory={handleChangeStory}
             profileDescription={profileDescription}
+            profileComment={profileComment}
+            handleProfileComment={handleProfileComment}
+            handlePostProfileComment={handlePostProfileComment}
+            handleLike={handleLike}
+            handleLikeAmount={handleLikeAmount}
+            handleConnectRally={handleConnectRally}
             />
           </BrowserView>
           <MobileView>

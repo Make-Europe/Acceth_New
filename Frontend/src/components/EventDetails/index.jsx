@@ -33,7 +33,8 @@ function EventDetails(props) {
     handleAddToken,
     nickname,
     profile,
-    handleLoadProfile
+    handleLoadProfile,
+    handleConnectRally
   } = props;
 
   const [comments, setComments] = useState([])
@@ -66,7 +67,7 @@ function EventDetails(props) {
   return (
     <div className="container-center-horizontal">
       <div className="eventdetails screen">
-        <ChainBanner account={account} handleConnect={handleConnect} handleAddToken={handleAddToken} profile={profile} nickname={nickname} />
+        <ChainBanner account={account} handleConnect={handleConnect} handleAddToken={handleAddToken} profile={profile} nickname={nickname} handleConnectRally={handleConnectRally} />
         <div className="details_-titel montserrat-semi-bold-black-50px">{location.state.event.name}</div>
         <div className="container socialMedia">
             <TwitterShareButton url="https://acceth.xyz/chainofevents" title={"I just got my ticket: " + '"' + location.state.event.name + '"'} hashtags={hashtags} via="make_rhein_main">
@@ -92,7 +93,7 @@ function EventDetails(props) {
                   },
                 }}
               >
-                <div className="details-panel montserrat-normal-black-25px">{owner.name ? owner.name.length >= 28 ? owner.name.substring(0, 28) + "..." : owner.name : ""}</div>
+                <div className="details-panel montserrat-normal-black-25px">{owner.name ? owner.name.length >= 28 ? owner.name.substring(0, 28) + "..." : owner.name : owner.public_address !== undefined ? (owner.public_address.substring(0, 5) + "..." + owner.public_address.substring(38, 42)) : ""}</div>
               </Link>
             </div>
             <div className="detailspanel_date_t-container">

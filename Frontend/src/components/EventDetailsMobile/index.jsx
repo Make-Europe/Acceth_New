@@ -29,7 +29,8 @@ function EventDetailsMobile(props) {
     eventComment,
     handleBuyTicket,
     handleTicketAmount,
-    handleAddToken
+    handleAddToken,
+    handleConnectRally
   } = props;
 
   const [comments, setComments] = useState([])
@@ -50,7 +51,7 @@ function EventDetailsMobile(props) {
   return (
     <div className="container-center-horizontal">
       <div className="eventdetails-mobile screen">
-        <ChainBannerMobile account={account} handleConnect={handleConnect} handleAddToken={handleAddToken}/>
+        <ChainBannerMobile account={account} handleConnect={handleConnect} handleAddToken={handleAddToken} handleConnectRally={handleConnectRally} />
         <div className="details-mobile_-titel">{location.state.event.name}</div>
         <div className="detail-informations-mobile">
           <img className="details_-picture-mobile" src={location.state.event.image} />
