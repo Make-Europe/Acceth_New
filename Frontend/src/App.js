@@ -731,6 +731,9 @@ const handleChangeStory = (childdata) => {
                 account={address}
                 handleConnect={connect}
                 handleAddToken={handleAddToken}
+                handleDeleteEvent={handleDeleteEvent}
+                profile={user}
+                nickname={nickname}
                 handleConnectRally={handleConnectRally}
               />
           </MobileView>
@@ -767,6 +770,9 @@ const handleChangeStory = (childdata) => {
             handleBuyTicket={awardTicket}
             handleTicketAmount={handleTicketAmount}
             handleAddToken={handleAddToken}
+            nickname={nickname}
+            profile={user}
+            handleLoadProfile={handleLoadProfile}
             handleConnectRally={handleConnectRally}
             />
           </MobileView>

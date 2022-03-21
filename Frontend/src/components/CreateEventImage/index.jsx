@@ -10,13 +10,7 @@ function CreateEventImage(props) {
       <div className="page-titel_-image montserrat-medium-black-40px">{pagetitel_Image}</div>
       <div className="upload border-1px-dove-gray">
         <div className="upload-image">
-          <img alt="" width={"150px"} height={"150px"} src={eventImage}/>
-          <input
-            className="upload-file"
-            type="file"
-            name="upload"
-            onChange={e => handleEventImage(e.target.files[0])}
-          />
+          <div className="textForNow montserrat-medium-black-20px">A picture will be generated for testing. Click DONE.</div>
         </div>
       </div>
       <Link to="/chainofevents">

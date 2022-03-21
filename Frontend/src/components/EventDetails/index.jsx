@@ -67,6 +67,13 @@ function EventDetails(props) {
   return (
     <div className="container-center-horizontal">
       <div className="eventdetails screen">
+      <div className="tutorialBox montserrat-medium-black-20px border-1px-dove-gray">
+      Hello, 
+      <br></br><br></br>
+      Here you can see event details, buy tickets, share the event on social media and comment. 
+      <br></br><br></br>
+      Upcoming features include updates by event hosts and individual sharing links.
+                                                          </div>
         <ChainBanner account={account} handleConnect={handleConnect} handleAddToken={handleAddToken} profile={profile} nickname={nickname} handleConnectRally={handleConnectRally} />
         <div className="details_-titel montserrat-semi-bold-black-50px">{location.state.event.name}</div>
         <div className="container socialMedia">
@@ -143,6 +150,9 @@ function EventDetails(props) {
           <div className="ticket-container">
             <div className="buy-ticket border-1px-dove-gray" onClick={() => handleBuyTicket(location.state.event)}>
               <div className="buyticket_-text montserrat-medium-black-30px">{buyticket_Text}</div>
+            </div>
+            <div className="addThisToken border-1px-dove-gray" onClick={() => handleAddToken()}>
+              <div className="addThisToken-text montserrat-medium-black-20px">Add $TCKT to see your tickets</div>
             </div>
             <div className="ticket-panel border-1px-dove-gray">
               <div className="ticketpanel_ca-container">

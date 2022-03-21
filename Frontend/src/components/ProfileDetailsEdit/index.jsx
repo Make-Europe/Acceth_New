@@ -165,6 +165,16 @@ function EventDetails(props) {
       </div>
     </div>*/
     <div className="screen">
+      <div className="tutorialBox montserrat-medium-black-20px border-1px-dove-gray">
+        Hello,
+        <br></br><br></br>
+        This is your profile page. 
+        <br></br><br></br>
+        Here you can choose or edit your nickname and add a description to your profile. 
+        <br></br><br></br>
+        Here you can also see likes and comments from other users. 
+        <br></br><br></br>
+        In the future, you will also be able to upload your profile picture.</div>
       <div className="profileBannerEdit">
         <ChainBanner account={account} handleConnect={handleConnect} handleAddToken={handleAddToken} profile={user} nickname={nickname} handleConnectRally={handleConnectRally} />
       </div>

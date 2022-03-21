@@ -51,7 +51,13 @@ function EventDetails(props) {
       <div className="profileBanner">
         <ChainBanner account={account} handleConnect={handleConnect} handleAddToken={handleAddToken} profile={profile} nickname={nickname} handleConnectRally={handleConnectRally} />
       </div>
-      
+      <div className="tutorialBox montserrat-medium-black-20px border-1px-dove-gray">
+      Hello, 
+      <br></br><br></br>
+      Here you can see other users’ profiles. 
+      <br></br><br></br>
+      You can like them (but only once), and you can comment on them as many times as you want to.
+</div>
       <div className="profilecontainer">
         <div>
           <img alt="" className="profile-picture border-1px-dove-gray" src={location.state.profile.image} />

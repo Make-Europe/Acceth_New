@@ -31,9 +31,19 @@ function ChainOfEvents(props) {
       <div className="container-center-horizontal">
         <div className="chainofevents screen">
           <ChainBanner account={account} handleConnect={handleConnect} handleAddToken={handleAddToken} profile={profile} nickname={nickname} handleConnectRally={handleConnectRally} />
-          <h1 className="chain-of-events_-titel montserrat-semi-bold-black-50px">{chainofevents_Titel}</h1>
+          <div className="infoBox border-1px-dove-gray">
+          <div className="infoBoxTitel montserrat-medium-black-20px">Welcome to ACC.ETH,</div>
+          <div className="infoBoxText montserrat-medium-black-20px">
+            <br></br>
+          Create, Sell, Buy Events Tickets on Celo or Rally
+          <br></br>
+          Connect your wallet (MetaMask, Celo, Ledger and more) to proceed. Our ticketing system requires only your public address and never asks for any additional information, i.e. email or password. 
+          <br></br>
+          Once your wallet is connected, you can edit your profile, create events, like and share them on social media, and comment.</div>
+          </div>
+          <h1 className="chain-of-events_-titel montserrat-semi-bold-black-50px">Chain of Events</h1>
           <Link to="/createevent-generalinformation">
-            <h1 className="addEvent montserrat-medium-cerise-20px">+ Add Event</h1> 
+            <h1 className="addEvent montserrat-medium-cerise-30px border-1px-dove-gray">+ Add Event</h1> 
           </Link>
           <div className="flex-row">
             <div className="search border-1px-dove-gray">
@@ -67,6 +77,16 @@ function ChainOfEvents(props) {
       <div className="container-center-horizontal">
         <div className="chainofevents screen">
           <ChainBanner account={account} handleConnect={handleConnect} handleAddToken={handleAddToken} profile={profile} nickname={nickname} handleConnectRally={handleConnectRally} />
+          <div className="infoBox">
+          <div className="infoBoxTitel montserrat-medium-black-20px">Welcome OxXXX,</div>
+          <div className="infoBoxText montserrat-medium-black-20px">
+                                                                you are now connected!
+                                                                If you buy a Ticket from a host via acc.eth's decentralized platform
+                                                                you receive $TCKT NFTs. We currently support Celo Network and
+                                                                Rally.io, so you have to chose a network.
+                                                                Mind you, add $TCKT to your Wallet clicking the button above
+                                                                Enjoy the show!</div>
+          </div>
           <h1 className="chain-of-events_-titel montserrat-semi-bold-black-50px">{chainofevents_Titel}</h1>
           <div className="flex-row">
             <div className="search border-1px-dove-gray">

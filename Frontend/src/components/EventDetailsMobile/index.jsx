@@ -35,6 +35,8 @@ function EventDetailsMobile(props) {
 
   const [comments, setComments] = useState([])
   const [soldTickets, setSoldTickets] = useState(0)
+  const [owner, setOwner] = useState([])
+  const [user, setUser] = useState([])
   useEffect(() => {
     fetch('/api/list/comment/' + location.state.event.id).then(res => res.json()).then(data => {
       const result = data.sort((a, b) => (a.id < b.id) ? 1 : -1)
@@ -45,6 +47,15 @@ function EventDetailsMobile(props) {
       handleTicketAmount(data.value)
     })
   }, [account])
+
+  useEffect(() => {
+    fetch('api/user/' + location.state.event.ownerAddress).then(res => res.json()).then(data => {
+      setOwner(data)
+    })
+    fetch('api/user/').then(res => res.json()).then(data => {
+      setUser(data)
+    })
+  }, [])
 
   const location = useLocation()
 
@@ -57,7 +68,7 @@ function EventDetailsMobile(props) {
           <img className="details_-picture-mobile" src={location.state.event.image} />
           <div className="details-panel-mobile border-1px-dove-gray">
             <div className="detailspanelmobile_host_t-container">
-              <div className="x-panel-mobile montserrat-normal-black-25px">{location.state.event.hostownerName.length >= 28 ? location.state.event.owner.substring(0,28) + "..." : location.state.event.owner}</div>
+              <div className="x-panel-mobile montserrat-normal-black-25px">{owner.name ? owner.name.length >= 28 ? owner.name.substring(0, 28) + "..." : owner.name : owner.public_address !== undefined ? (owner.public_address.substring(0, 5) + "..." + owner.public_address.substring(38, 42)) : ""}</div>
               <div className="x-panel-mobile-1 montserrat-medium-black-25px">{detailspanel_Host_Titel}</div>
             </div>
             <div className="detailspanelmobile_date_t-container">

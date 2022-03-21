@@ -31,3 +31,12 @@ input:focus {
 * {
   box-sizing: border-box;
 }
+
+.tutorialBox {
+  position: fixed;
+  right: 50px;
+  width: 300px;
+  margin-top: 300px;
+  padding: 20px 10px;
+  background-color: var(--tower-gray);
+}

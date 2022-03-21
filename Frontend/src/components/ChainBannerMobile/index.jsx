@@ -5,7 +5,9 @@ function ChainBannerMobile(props) {
   const {
     account,
     handleConnect,
-    handleAddToken
+    handleAddToken,
+    profile,
+    nickname
   } = props;
 
   if(account != null){

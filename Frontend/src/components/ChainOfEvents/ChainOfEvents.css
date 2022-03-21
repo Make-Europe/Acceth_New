@@ -85,6 +85,16 @@
 
 .addEvent {
   position: absolute;
-  margin-top: 135px;
-  margin-left: 900px;
+  margin-top: 410px;
+  margin-left: 850px;
+  padding: 10px;
+}
+
+.infoBox {
+  width: 800px;
+  margin-top: 50px;
+  background-color: var(--water-leaf);
+  padding: 25px;
+  line-height: 25px;
+  word-break: break-word;
 }

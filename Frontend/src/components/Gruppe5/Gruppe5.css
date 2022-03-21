@@ -38,12 +38,18 @@
 }
 
 .event_-host {
+  padding: 4px;
+  padding-left: 15px;
   left: 0;
   letter-spacing: 0;
   line-height: 30px;
   position: absolute;
   top: 0;
   white-space: nowrap;
+  background-color: var(--firefly);
+  width: 580px;
+  height: 40px;
+  color: white;
 }
 
 .event_-location {
@@ -51,7 +57,7 @@
   letter-spacing: 0;
   line-height: 20px;
   position: absolute;
-  top: 36px;
+  top: 48px;
   white-space: nowrap;
 }
 
@@ -67,7 +73,7 @@
   align-items: flex-start;
   display: flex;
   height: 39px;
-  margin-top: 8px;
+  margin-top: 15px;
   min-width: 365px;
 }
 
@@ -77,6 +83,7 @@
   min-height: 39px;
   min-width: 156px;
   white-space: nowrap;
+  margin-top: 1px;
 }
 
 .event_-time {

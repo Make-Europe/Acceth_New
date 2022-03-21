@@ -30,17 +30,16 @@ function ChainBanner(props) {
       >
         <div className="chain-banner2">
           <div className="chain-banner_-text2 montserrat-medium-black-25px">
-            {"Connected as: "} {nickname ? nickname : account.substring(0, 6) + "..." + account.substring(38 ,42)}
+            {"Manage Profile: "} {nickname ? nickname : account.substring(0, 6) + "..." + account.substring(38 ,42)}
           </div>
         </div>
         </Link>
         <div className="chain-banner3" onClick={handleConnectRally}>
-          <div className="chain-banner_-text montserrat-medium-black-25px">
+          <div className="chain-banner_-text3 montserrat-medium-black-25px">
           Connect Rally.io
           </div>
         </div>
       </div>
-      
       
       
     );
@@ -50,7 +49,7 @@ function ChainBanner(props) {
       <div className="container-center-horizontal">
       <div className="chain-banner" onClick={handleConnect} >
         <div className="chain-banner_-text montserrat-medium-black-25px">
-          Connect Wallet
+          Connect any Wallet
         </div>
       </div>
       <div className="placeHolder11"></div>

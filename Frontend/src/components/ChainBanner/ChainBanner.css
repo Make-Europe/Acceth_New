@@ -5,8 +5,9 @@
   background-color: var(--cerise);
   display: flex;
   height: 60px;
-  width: 30%;
+  width: 27.5%;
   padding: 7px;
+  margin-right: 5%;
   justify-content: center;
 }
 
@@ -17,7 +18,7 @@
   background-color: var(--water-leaf);
   display: flex;
   height: 60px;
-  width: 40%;
+  width: 35%;
   padding: 7px;
   justify-content: center;
 }
@@ -26,10 +27,11 @@
 .details-banner3 {
   cursor: pointer;
   align-items: flex-end;
-  background-color: var(--cerise);
+  background-color: #052435;
   display: flex;
   height: 60px;
-  width: 30%;
+  width: 27.5%;
+  margin-left: 5%;
   padding: 7px;
   justify-content: center;
 }
@@ -45,6 +47,16 @@
 
 .chain-banner_-text2,
 .details-banner_-text2 {
+  letter-spacing: 0;
+  line-height: 25px;
+  min-height: 35px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.chain-banner_-text3,
+.details-banner_-text3 {
+  color: var(--gallery);
   letter-spacing: 0;
   line-height: 25px;
   min-height: 35px;

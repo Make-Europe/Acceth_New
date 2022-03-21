@@ -20,6 +20,8 @@ function ChainOfEventsMobile(props) {
     account,
     handleConnect,
     handleAddToken,
+    profile,
+    nickname,
     handleConnectRally
   } = props;
 

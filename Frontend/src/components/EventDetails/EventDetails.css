@@ -272,6 +272,28 @@
   cursor: pointer;
 }
 
+.addThisToken {
+    align-items: flex-end;
+    background-color: var(--gallery);
+    display: flex;
+    height: 40px;
+    left: 0;
+    width: 1016px;
+    padding: 6.5px 175px;
+    position: absolute;
+    top: 168px;
+    cursor: pointer;
+}
+
+.addThisToken-text {
+  letter-spacing: 0;
+  line-height: 20px;
+  min-height: 22px;
+  min-width: 666px;
+  text-align: center;
+  white-space: nowrap;
+}
+
 .buyticket_-text {
   letter-spacing: 0;
   line-height: 30px;
