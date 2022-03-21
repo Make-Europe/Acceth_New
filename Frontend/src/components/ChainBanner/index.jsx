@@ -54,7 +54,7 @@ function ChainBanner(props) {
       </div>
       <div className="placeHolder11"></div>
       <div className="chain-banner3" onClick={handleConnectRally}>
-          <div className="chain-banner_-text montserrat-medium-black-25px">
+          <div className="chain-banner_-text3 montserrat-medium-black-25px">
           Connect Rally.io
           </div>
         </div>
